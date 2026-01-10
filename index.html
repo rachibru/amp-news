@@ -36,7 +36,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 </style>
 </noscript>
 
-  <!-- STILE PERSONALIZZATO -->
+  <!-- Stile personalizzato -->
   <style amp-custom>
     body {
       font-family: Arial, sans-serif;
@@ -46,24 +46,51 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
       color: #111;
       background: #fff;
     }
-    header { text-align:center; margin-bottom:20px; }
-    .logo { margin:0 auto 10px; }
-    h1 { font-size:1.8em; margin:10px 0 20px; }
-    article { margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid #e0e0e0; }
-    h2 { font-size:1.3em; margin:8px 0; }
-    .date { font-size:0.85em; color:#666; }
-    a.read-more { 
-      display:inline-block; 
-      margin-top:8px; 
-      padding:10px 14px; 
-      background:#6598b7; 
-      color:#fff; 
-      border-radius:5px; 
-      text-decoration:none; 
-      font-weight:bold;
+    header {
+      text-align: center;
+      margin-bottom: 20px;
     }
-    amp-img { margin-bottom:10px; border-radius:6px; }
-    .ad { margin:25px 0; }
+    .logo {
+      margin: 0 auto 10px;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin: 10px 0 20px;
+    }
+    article {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    h2 {
+      font-size: 1.3em;
+      margin: 8px 0;
+    }
+    .date {
+      font-size: 0.85em;
+      color: #666;
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .read-more {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 14px;
+      background: #6598b7;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    amp-img {
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+    .ad {
+      margin: 25px 0;
+    }
   </style>
 </head>
 
@@ -94,7 +121,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   </amp-ad>
 </div>
 
-<!-- LISTA ARTICOLI -->
+<!-- LISTA ARTICOLI DAL FEED JSON -->
 <amp-list
   width="auto"
   height="2000"
@@ -106,7 +133,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
     <article>
       <!-- Immagine fissa per tutti gli articoli -->
       <amp-img
-        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png"
+        src="https://blogger.googleusercontent.com/img/b/R29vXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png"
         width="1200"
         height="675"
         layout="responsive"
@@ -117,7 +144,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
       <p class="date">{{pubDate}}</p>
 
       <a class="read-more" href="{{link}}">
-        Leggi l’articolo completo →
+        Leggi l’articolo completo → 
       </a>
     </article>
   </template>
