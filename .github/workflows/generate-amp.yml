@@ -1,7 +1,8 @@
-name: Generate AMP feed
+name: Genera AMP
+
 on:
   schedule:
-    - cron: "0 * * * *"  # ogni ora
+    - cron: '0 * * * *'   # ogni ora
   push:
     branches:
       - main
@@ -9,20 +10,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-      - name: Install dependencies
-        run: pip install feedparser
-      - name: Generate feed.json
-        run: python generate_feed.py
-      - name: Commit feed.json
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add feed.json
-          git commit -m "Aggiorna feed.json"
-          git push
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Installa dipendenze
+      run: pip install feedparser
+
+    - name: Genera feed e articoli AMP
+      run: python generate_feed.py
+
+    - name: Commit & push
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add articles/ feed.json
+        git commit -m "Aggiornati articoli AMP"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
