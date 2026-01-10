@@ -35,7 +35,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   <style amp-custom>
     body { font-family: Arial,sans-serif; max-width:800px; margin:auto; padding:20px; color:#111; }
     h1 { text-align:center; font-size:2em; margin-bottom:20px; }
-    .logo { display:block; margin: 0 auto 20px; width:120px; height:120px; }
+    .logo { display:block; margin:0 auto 20px; width:120px; height:120px; }
     article { margin-bottom:30px; border-bottom:1px solid #ddd; padding-bottom:15px; }
     h2 { font-size:1.4em; margin:0 0 8px; }
     a { color:#1a73e8; text-decoration:none; }
@@ -45,12 +45,13 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   </style>
 </head>
 <body>
+  <!-- Logo -->
   <img class="logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" alt="Logo Bruno Rachiele">
 
   <h1>Ultime Notizie</h1>
 
   <!-- Lista articoli dinamica -->
-  <amp-list width="auto" height="1200" layout="fixed-height" src="feed.json" items="items">
+  <amp-list width="auto" height="1600" layout="fixed-height" src="feed.json" items="items">
     <template type="amp-mustache">
       <article>
         {{#thumbnail}}
