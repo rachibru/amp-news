@@ -1,19 +1,74 @@
 {
   "items": [
     {
-      "title": "Titolo articolo 1",
-      "link": "amp/titolo-articolo-1.html",
-      "pubDate": "Sat, 10 Jan 2026 18:00:00 GMT",
-      "contentSnippet": "Breve descrizione o anteprima dell'articolo...",
-      "thumbnail": "https://blogger.googleusercontent.com/immagine-grande.jpg"
+      "title": "Sondaggi Politici 2026: cosa potrebbe cambiare in Italia secondo gli analisti",
+      "link": "amp/sondaggi-politici-2026-cosa-potrebbe-cambiare-in-italia-secondo-gli-analisti.html",
+      "pubDate": "Fri, 09 Jan 2026 23:00:00 +0000",
+      "contentSnippet": "Politica 2026: analisi delle case demoscopiche e possibili scenari\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPolitica 2026: analisi delle case demoscopiche e possibili scenari\nLe analisi demoscopiche come strumento di pre...",
+      "thumbnail": null
     },
     {
-      "title": "Titolo articolo 2",
-      "link": "amp/titolo-articolo-2.html",
-      "pubDate": "Fri, 09 Jan 2026 12:00:00 GMT",
-      "contentSnippet": "Breve descrizione o anteprima dell'articolo...",
-      "thumbnail": "https://blogger.googleusercontent.com/immagine-grande-2.jpg"
+      "title": "Gradimento dei Leader supermedia del 05 gennaio 2026 - Bruno Rachiele ",
+      "link": "amp/gradimento-dei-leader-supermedia-del-05-gennaio-2026-bruno-rachiele.html",
+      "pubDate": "Sun, 04 Jan 2026 23:00:00 +0000",
+      "contentSnippet": "Gradimento dei Leader supermedia del 05 gennaio 2026 - Bruno Rachiele\n\n  \n  \n  \n  \n  \n\n  \n  \n  \n  \n  \n  \n\n  \n  \n\n\n\n\n\n\n  \nLeader\n          05/01/2026\n          Trend\n        \nGiorgia Meloni\n          4...",
+      "thumbnail": null
+    },
+    {
+      "title": "Messaggio di fine anno di Mattarella 2025 | Analisi Parole - Bruno Rachiele",
+      "link": "amp/messaggio-di-fine-anno-di-mattarella-2025-or-analisi-parole-bruno-rachiele.html",
+      "pubDate": "Wed, 31 Dec 2025 19:26:00 +0000",
+      "contentSnippet": "Messaggio di fine anno di Mattarella 2025 | Diretta e Analisi\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"NewsArticle\",\n  \"headline\": \"Messaggio di fine anno del President...",
+      "thumbnail": null
+    },
+    {
+      "title": "Sondaggi Politici  2025 – Bruno Rachiele",
+      "link": "amp/sondaggi-politici-2025-bruno-rachiele.html",
+      "pubDate": "Mon, 29 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Sintesi dei Sondaggi 2025\nValori espressi in %. Intenzioni di voto elaborate con il metodo della supermedia dei sondaggi pubblicati sul sito e prelevati dalle principali agenzie di statistica italiane...",
+      "thumbnail": null
+    },
+    {
+      "title": "Gradimento dei leader: la classifica definitiva del 2025 - Bruno Rachiele",
+      "link": "amp/gradimento-dei-leader-la-classifica-definitiva-del-2025-bruno-rachiele.html",
+      "pubDate": "Sun, 28 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Bruno Rachiele....",
+      "thumbnail": null
+    },
+    {
+      "title": "Sondaggio Politico 27 dicembre 2025 – Supermedia Bruno Rachiele",
+      "link": "amp/sondaggio-politico-27-dicembre-2025-supermedia-bruno-rachiele.html",
+      "pubDate": "Fri, 26 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Partito\n        %\n        Trend\n      \nFratelli d’Italia31,20▲ +0,15\nPartito Democratico21,95▼ -0,05\nMovimento 5 Stelle12,30• 0,00\nForza Italia9,40▼ -0,05\nLega8,30▼ -0,15\nAlleanza Verdi-Sinistra6,55▲ ...",
+      "thumbnail": null
+    },
+    {
+      "title": "Ultimi 30 giorni Politici del 26 dicembre 2025 - Bruno Rachiele",
+      "link": "amp/ultimi-30-giorni-politici-del-26-dicembre-2025-bruno-rachiele.html",
+      "pubDate": "Thu, 25 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Partito\n        \n        Media\n      \nFratelli d’Italia\n        \n          \n        \n        30,85\n      \nPartito Democratico\n        \n          \n        \n        21,93\n      \nMovimento 5 Stelle\n     ...",
+      "thumbnail": null
+    },
+    {
+      "title": "Dalle urne ai numeri del 23 dicembre 2025 - Bruno Rachiele",
+      "link": "amp/dalle-urne-ai-numeri-del-23-dicembre-2025-bruno-rachiele.html",
+      "pubDate": "Mon, 22 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "",
+      "thumbnail": null
+    },
+    {
+      "title": "Gradimento dei Leader supermedia del 22 dicembre 2025 - Bruno Rachiele ",
+      "link": "amp/gradimento-dei-leader-supermedia-del-22-dicembre-2025-bruno-rachiele.html",
+      "pubDate": "Sun, 21 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Leader\n        Indice\n        Settimana -1\n        Trend\n      \nGiorgia Meloni46,646,0▲ +0,35\nMatteo Salvini27,227,125▼ -0,02\nAntonio Tajani39,537,45▼ -0,05\nGiuseppe Conte30,830,675▲ +0,10\nElly Schlei...",
+      "thumbnail": null
+    },
+    {
+      "title": "Sondaggio Politico 20 dicembre 2025 – Supermedia Bruno Rachiele",
+      "link": "amp/sondaggio-politico-20-dicembre-2025-supermedia-bruno-rachiele.html",
+      "pubDate": "Fri, 19 Dec 2025 23:00:00 +0000",
+      "contentSnippet": "Partito\n        %\n        Trend\n      \nFratelli d’Italia31,05▼ -0,05\nPartito Democratico22,00▲ +0,10\nMovimento 5 Stelle12,30• 0,00\nForza Italia9,50▲ +0,05\nLega8,45▲ +0,15\nAlleanza Verdi-Sinistra6,50▲ ...",
+      "thumbnail": null
     }
-    // altri articoli...
   ]
 }
