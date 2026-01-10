@@ -1,10 +1,10 @@
 name: Genera pagine AMP
 
-# Trigger: ogni ora + esecuzione manuale
+# Trigger automatico ogni ora + possibilità di eseguire manualmente
 on:
   schedule:
     - cron: '0 * * * *'   # ogni ora
-  workflow_dispatch:       # per esecuzione manuale
+  workflow_dispatch:       # permette l'esecuzione manuale
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Aggiungi tutti i file generati nella cartella amp, index.html e feed.json
+          # Aggiungi tutti i file generati
           git add amp/*.html index.html feed.json || true
           git commit -m "Aggiornamento automatico AMP $(date +'%Y-%m-%d %H:%M')" || true
           git push
