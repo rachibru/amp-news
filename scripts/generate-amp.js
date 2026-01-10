@@ -1,32 +1,58 @@
 const Parser = require('rss-parser');
 const fs = require('fs-extra');
 const slugify = require('slugify');
+
 const parser = new Parser();
 
-(async () => {
-  const feed = await parser.parseURL('https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss');
-  fs.ensureDirSync('amp');
-  let indexItems = [];
+async function generateAMP() {
+  try {
+    console.log("🚀 Avvio generazione pagine AMP...");
 
-  for (let i = 0; i < feed.items.length; i++) {
-    const post = feed.items[i];
-    const slug = slugify(post.title, { lower: true, strict: true });
+    // Scarica il feed RSS
+    console.log("📡 Scarico feed RSS dal blog...");
+    const feed = await parser.parseURL('https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss');
 
-    let thumbnail = null;
-    const imgMatch = post['content:encoded']?.match(/<img[^>]+src="([^">]+)"/i);
-    if (imgMatch) thumbnail = imgMatch[1];
+    if (!feed.items || feed.items.length === 0) {
+      console.warn("⚠️ Nessun articolo trovato nel feed RSS!");
+      return;
+    }
 
-    const snippet = post.contentSnippet?.replace(/<[^>]*>?/gm,'').substring(0,200) + '...';
+    console.log(`✅ Trovati ${feed.items.length} articoli`);
 
-    indexItems.push({
-      title: post.title,
-      link: `amp/${slug}.html`,
-      pubDate: post.pubDate,
-      contentSnippet: snippet,
-      thumbnail: thumbnail
-    });
+    // Crea cartella amp se non esiste
+    fs.ensureDirSync('amp');
 
-    const articleHtml = `
+    let indexItems = [];
+
+    for (let i = 0; i < feed.items.length; i++) {
+      const post = feed.items[i];
+      const slug = slugify(post.title, { lower: true, strict: true });
+      console.log(`📝 Creo pagina AMP: amp/${slug}.html`);
+
+      let thumbnail = null;
+      const imgMatch = post['content:encoded']?.match(/<img[^>]+src="([^">]+)"/i);
+      if (imgMatch) thumbnail = imgMatch[1];
+
+      const snippet = post.contentSnippet
+        ? post.contentSnippet.replace(/<[^>]*>?/gm, '').substring(0, 200) + '...'
+        : '';
+
+      indexItems.push({
+        title: post.title,
+        link: `amp/${slug}.html`,
+        pubDate: post.pubDate || '',
+        contentSnippet: snippet,
+        thumbnail: thumbnail
+      });
+
+      // Controllo che il contenuto abbia almeno titolo
+      if (!post.title) {
+        console.warn(`⚠️ Articolo senza titolo, skip: ${post.link}`);
+        continue;
+      }
+
+      // HTML pagina singolo articolo
+      const articleHtml = `
 <!doctype html>
 <html ⚡ lang="it">
 <head>
@@ -53,13 +79,27 @@ ${thumbnail ? `<amp-img src="${thumbnail}" width="600" height="400" layout="resp
 <p>${snippet}</p>
 <a class="read-more" href="${post.link}" target="_blank">Leggi tutto sul sito</a>
 </body>
-</html>
-    `;
-    fs.writeFileSync(`amp/${slug}.html`, articleHtml.trim());
-  }
+</html>`;
 
-  // Index
-  const indexHtml = `
+      // Scrive la pagina AMP
+      try {
+        fs.writeFileSync(`amp/${slug}.html`, articleHtml.trim());
+      } catch (writeErr) {
+        console.error(`❌ Errore scrittura file amp/${slug}.html:`, writeErr.message);
+      }
+    }
+
+    // Genera feed.json
+    const feedJson = { items: indexItems.slice(0, 10) };
+    try {
+      fs.writeFileSync('feed.json', JSON.stringify(feedJson, null, 2));
+      console.log("✅ feed.json aggiornato");
+    } catch (jsonErr) {
+      console.error("❌ Errore scrittura feed.json:", jsonErr.message);
+    }
+
+    // Genera index.html
+    const indexHtml = `
 <!doctype html>
 <html ⚡ lang="it">
 <head>
@@ -102,8 +142,14 @@ amp-img { margin-bottom:10px; }
 </amp-list>
 </body>
 </html>
-  `;
+    `;
+    fs.writeFileSync('index.html', indexHtml.trim());
+    console.log("✅ index.html generato");
 
-  fs.writeFileSync('index.html', indexHtml.trim());
-  fs.writeFileSync('feed.json', JSON.stringify({ items: indexItems.slice(0,10) }, null, 2));
-})();
+    console.log("🎉 Generazione completata con successo!");
+  } catch (err) {
+    console.error("❌ Errore durante la generazione AMP:", err.message);
+  }
+}
+
+generateAMP();
