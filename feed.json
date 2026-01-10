@@ -1,30 +1,11 @@
-import feedparser
-import json
-
-# RSS feed di Blogger
-RSS_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
-
-# Immagine fissa per tutti gli articoli
-FIXED_IMAGE = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png"
-
-# Numero massimo di articoli
-MAX_ARTICLES = 10
-
-feed = feedparser.parse(RSS_URL)
-
-items = []
-
-for entry in feed.entries[:MAX_ARTICLES]:
-    item = {
-        "title": entry.title,
-        "link": entry.link,
-        "pubDate": entry.published if 'published' in entry else "",
-        "description": entry.summary if 'summary' in entry else "",
-        "thumbnail": FIXED_IMAGE
+{
+  "items": [
+    {
+      "title": "Articolo di esempio",
+      "link": "https://www.brunorachiele.it/articolo-di-esempio",
+      "pubDate": "2026-01-10",
+      "description": "Questo è un articolo di esempio per testare la pagina AMP.",
+      "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png"
     }
-    items.append(item)
-
-with open("feed.json", "w", encoding="utf-8") as f:
-    json.dump({"items": items}, f, ensure_ascii=False, indent=2)
-
-print("feed.json aggiornato con successo!")
+  ]
+}
