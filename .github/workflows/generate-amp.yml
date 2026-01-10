@@ -3,7 +3,7 @@ name: Genera pagine AMP
 on:
   schedule:
     - cron: '0 * * * *' # ogni ora
-  workflow_dispatch:
+  workflow_dispatch:    # per eseguirlo manualmente
 
 jobs:
   build:
