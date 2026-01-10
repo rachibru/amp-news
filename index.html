@@ -15,7 +15,7 @@
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-  <!-- AMP boilerplate -->
+  <!-- AMP BOILERPLATE -->
   <style amp-boilerplate>
 body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
 -moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
@@ -33,7 +33,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 </style>
 </noscript>
 
-  <!-- Stile personalizzato -->
+  <!-- STILE PERSONALIZZATO -->
   <style amp-custom>
     body {
       font-family: Arial, sans-serif;
@@ -69,7 +69,6 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
     }
     a {
       text-decoration: none;
-      font-weight: bold;
     }
     .read-more {
       display: inline-block;
@@ -79,6 +78,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
       color: #fff;
       border-radius: 5px;
       text-decoration: none;
+      font-weight: bold;
     }
     amp-img {
       margin-bottom: 10px;
@@ -95,7 +95,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 <header>
   <amp-img
     class="logo"
-    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
+    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90.png"
     width="90"
     height="90"
     layout="fixed"
@@ -105,7 +105,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   <h1>Ultime Notizie</h1>
 </header>
 
-<!-- Pubblicità -->
+<!-- PUBBLICITÀ IN TESTA -->
 <div class="ad">
   <amp-ad width="100vw" height="320"
     type="adsense"
@@ -117,12 +117,12 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   </amp-ad>
 </div>
 
-<!-- Lista articoli -->
+<!-- LISTA ARTICOLI DINAMICA -->
 <amp-list
   width="auto"
   height="2000"
   layout="fixed-height"
-  src="feed.json"
+  src="https://api.rss2json.com/v1/api.json?rss_url=https://www.brunorachiele.it/feeds/posts/default?alt=rss&count=10"
   items="items">
 
   <template type="amp-mustache">
@@ -139,8 +139,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
       <h2>{{title}}</h2>
       <p class="date">{{pubDate}}</p>
 
-      <!-- Link AMP diretto -->
-      <a class="read-more" href="amp/{{slug}}.html">
+      <a class="read-more" href="{{link}}">
         Leggi l’articolo completo su brunorachiele.it →
       </a>
     </article>
