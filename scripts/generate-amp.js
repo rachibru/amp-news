@@ -1,4 +1,3 @@
-// scripts/generate-amp.js
 const Parser = require('rss-parser');
 const fs = require('fs-extra');
 const slugify = require('slugify');
@@ -6,17 +5,17 @@ const parser = new Parser();
 
 (async () => {
   const feed = await parser.parseURL('https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss');
-  
   fs.ensureDirSync('amp');
-
   let indexItems = [];
 
   for (let i = 0; i < feed.items.length; i++) {
     const post = feed.items[i];
     const slug = slugify(post.title, { lower: true, strict: true });
+
     let thumbnail = null;
     const imgMatch = post['content:encoded']?.match(/<img[^>]+src="([^">]+)"/i);
     if (imgMatch) thumbnail = imgMatch[1];
+
     const snippet = post.contentSnippet?.replace(/<[^>]*>?/gm,'').substring(0,200) + '...';
 
     indexItems.push({
@@ -27,7 +26,8 @@ const parser = new Parser();
       thumbnail: thumbnail
     });
 
-    const articleHtml = `<!doctype html>
+    const articleHtml = `
+<!doctype html>
 <html ⚡ lang="it">
 <head>
 <meta charset="utf-8">
@@ -53,13 +53,14 @@ ${thumbnail ? `<amp-img src="${thumbnail}" width="600" height="400" layout="resp
 <p>${snippet}</p>
 <a class="read-more" href="${post.link}" target="_blank">Leggi tutto sul sito</a>
 </body>
-</html>`;
-
-    fs.writeFileSync(`amp/${slug}.html`, articleHtml);
+</html>
+    `;
+    fs.writeFileSync(`amp/${slug}.html`, articleHtml.trim());
   }
 
-  // Genera index.html
-  const indexHtml = `<!doctype html>
+  // Index
+  const indexHtml = `
+<!doctype html>
 <html ⚡ lang="it">
 <head>
 <meta charset="utf-8">
@@ -100,11 +101,9 @@ amp-img { margin-bottom:10px; }
 </template>
 </amp-list>
 </body>
-</html>`;
+</html>
+  `;
 
-  fs.writeFileSync('index.html', indexHtml);
-
-  const feedJson = { items: indexItems.slice(0,10) };
-  fs.writeFileSync('feed.json', JSON.stringify(feedJson, null, 2));
-
+  fs.writeFileSync('index.html', indexHtml.trim());
+  fs.writeFileSync('feed.json', JSON.stringify({ items: indexItems.slice(0,10) }, null, 2));
 })();
