@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "title": "Titolo articolo 1",
+      "link": "amp/titolo-articolo-1.html",
+      "pubDate": "Sat, 10 Jan 2026 18:00:00 GMT",
+      "contentSnippet": "Breve descrizione o anteprima dell'articolo...",
+      "thumbnail": "https://blogger.googleusercontent.com/immagine-grande.jpg"
+    },
+    {
+      "title": "Titolo articolo 2",
+      "link": "amp/titolo-articolo-2.html",
+      "pubDate": "Fri, 09 Jan 2026 12:00:00 GMT",
+      "contentSnippet": "Breve descrizione o anteprima dell'articolo...",
+      "thumbnail": "https://blogger.googleusercontent.com/immagine-grande-2.jpg"
+    }
+    // altri articoli...
+  ]
+}
