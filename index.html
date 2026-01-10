@@ -18,7 +18,7 @@
   <script async custom-element="amp-ad"
     src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-  <!-- AMP BOILERPLATE UFFICIALE -->
+  <!-- AMP BOILERPLATE -->
   <style amp-boilerplate>
 body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
 -moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
@@ -36,7 +36,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 </style>
 </noscript>
 
-  <!-- STILE PERSONALIZZATO -->
+  <!-- Stile personalizzato -->
   <style amp-custom>
     body {
       font-family: Arial, sans-serif;
@@ -78,6 +78,11 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
     .read-more {
       display: inline-block;
       margin-top: 8px;
+      padding: 10px 14px;
+      background: #6598b7;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
     }
     amp-img {
       margin-bottom: 10px;
@@ -94,9 +99,9 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 <header>
   <amp-img
     class="logo"
-    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90.png"
-    width="120"
-    height="120"
+    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
+    width="90"
+    height="90"
     layout="fixed"
     alt="Bruno Rachiele">
   </amp-img>
@@ -104,7 +109,7 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   <h1>Ultime Notizie</h1>
 </header>
 
-<!-- ANNUNCIO AMP -->
+<!-- PUBBLICITÀ IN TESTA -->
 <div class="ad">
   <amp-ad width="100vw" height="320"
     type="adsense"
@@ -119,22 +124,21 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 <!-- LISTA ARTICOLI -->
 <amp-list
   width="auto"
-  height="1600"
+  height="2000"
   layout="fixed-height"
   src="feed.json"
   items="items">
 
   <template type="amp-mustache">
     <article>
-      {{#thumbnail}}
+      <!-- Immagine fissa per tutti gli articoli -->
       <amp-img
-        src="{{thumbnail}}"
-        width="600"
-        height="400"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png"
+        width="1200"
+        height="675"
         layout="responsive"
         alt="{{title}}">
       </amp-img>
-      {{/thumbnail}}
 
       <h2>{{title}}</h2>
       <p class="date">{{pubDate}}</p>
