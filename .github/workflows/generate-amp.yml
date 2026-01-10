@@ -59,6 +59,7 @@ jobs:
                   .replace(/{{image}}/g, image)
                   .replace(/{{description}}/g, description);
 
+                // Sovrascrive il file AMP esistente (overwrite)
                 fs.writeFileSync(`amp/${slug}.html`, html);
               });
             });
