@@ -8,9 +8,11 @@ async function generateAMP() {
   try {
     console.log("🚀 Avvio generazione pagine AMP...");
 
-    // Scarica il feed RSS
-    console.log("📡 Scarico feed RSS dal blog...");
-    const feed = await parser.parseURL('https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss');
+    // Feed diretto di Blogger
+    const feedURL = 'https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss';
+    console.log("📡 Scarico feed RSS da:", feedURL);
+
+    const feed = await parser.parseURL(feedURL);
 
     if (!feed.items || feed.items.length === 0) {
       console.warn("⚠️ Nessun articolo trovato nel feed RSS!");
@@ -19,7 +21,7 @@ async function generateAMP() {
 
     console.log(`✅ Trovati ${feed.items.length} articoli`);
 
-    // Crea cartella amp se non esiste
+    // Assicurati che la cartella amp esista
     fs.ensureDirSync('amp');
 
     let indexItems = [];
@@ -29,9 +31,20 @@ async function generateAMP() {
       const slug = slugify(post.title, { lower: true, strict: true });
       console.log(`📝 Creo pagina AMP: amp/${slug}.html`);
 
+      // Trova la prima immagine grande dal contenuto HTML del post
       let thumbnail = null;
-      const imgMatch = post['content:encoded']?.match(/<img[^>]+src="([^">]+)"/i);
-      if (imgMatch) thumbnail = imgMatch[1];
+      const htmlContent = post['content:encoded'] || '';
+      const imgMatches = [...htmlContent.matchAll(/<img[^>]+src="([^">]+)"/gi)];
+
+      if (imgMatches.length > 0) {
+        // Prendi la prima immagine che abbia larghezza almeno 300px (se specificata nell'HTML)
+        for (let match of imgMatches) {
+          let src = match[1];
+          if (!src) continue;
+          thumbnail = src;
+          break; // prima immagine trovata
+        }
+      }
 
       const snippet = post.contentSnippet
         ? post.contentSnippet.replace(/<[^>]*>?/gm, '').substring(0, 200) + '...'
@@ -45,13 +58,11 @@ async function generateAMP() {
         thumbnail: thumbnail
       });
 
-      // Controllo che il contenuto abbia almeno titolo
       if (!post.title) {
         console.warn(`⚠️ Articolo senza titolo, skip: ${post.link}`);
         continue;
       }
 
-      // HTML pagina singolo articolo
       const articleHtml = `
 <!doctype html>
 <html ⚡ lang="it">
@@ -79,9 +90,8 @@ ${thumbnail ? `<amp-img src="${thumbnail}" width="600" height="400" layout="resp
 <p>${snippet}</p>
 <a class="read-more" href="${post.link}" target="_blank">Leggi tutto sul sito</a>
 </body>
-</html>`;
-
-      // Scrive la pagina AMP
+</html>
+      `;
       try {
         fs.writeFileSync(`amp/${slug}.html`, articleHtml.trim());
       } catch (writeErr) {
@@ -89,7 +99,7 @@ ${thumbnail ? `<amp-img src="${thumbnail}" width="600" height="400" layout="resp
       }
     }
 
-    // Genera feed.json
+    // Genera feed.json con ultimi 10 articoli
     const feedJson = { items: indexItems.slice(0, 10) };
     try {
       fs.writeFileSync('feed.json', JSON.stringify(feedJson, null, 2));
