@@ -1,75 +1,36 @@
-name: Generate AMP articles
+name: Genera Feed AMP
 
 on:
   schedule:
-    - cron: "0 * * * *"   # ogni ora
-  workflow_dispatch:
+    - cron: '0 * * * *'  # ogni ora
+  workflow_dispatch: {}   # permette di avviare manualmente
 
 jobs:
-  build:
+  build-feed:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          node-version: "18"
+          python-version: '3.x'
 
-      - name: Generate AMP pages
+      - name: Install dependencies
         run: |
-          mkdir -p amp
-          node <<'EOF'
-          const fs = require('fs');
-          const https = require('https');
+          python -m pip install --upgrade pip
+          pip install feedparser jinja2
 
-          const FEED_URL = 'https://www.brunorachiele.it/feeds/posts/default?alt=rss';
-          const TEMPLATE = fs.readFileSync('article.html', 'utf8');
-
-          https.get(FEED_URL, res => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-
-              const items = [...data.matchAll(/<item>([\s\S]*?)<\/item>/g)];
-
-              items.forEach(item => {
-                const get = (tag) => {
-                  const m = item[1].match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`));
-                  return m ? m[1].replace(/<!\[CDATA\[|\]\]>/g, '').trim() : '';
-                };
-
-                const title = get('title');
-                const link = get('link');
-                const pubDate = get('pubDate');
-
-                const imgMatch = item[1].match(/<img[^>]+src="([^"]+)"/);
-                const image = imgMatch ? imgMatch[1].replace(/\/s\d+\//, '/s1200/') : '';
-
-                const description = get('description').replace(/<[^>]+>/g, '').substring(0, 160);
-
-                const slug = link.split('/').pop().replace(/\.html$/, '');
-
-                let html = TEMPLATE
-                  .replace(/{{title}}/g, title)
-                  .replace(/{{link}}/g, link)
-                  .replace(/{{pubDate}}/g, pubDate)
-                  .replace(/{{image}}/g, image)
-                  .replace(/{{description}}/g, description);
-
-                // Sovrascrive il file AMP esistente (overwrite)
-                fs.writeFileSync(`amp/${slug}.html`, html);
-              });
-            });
-          });
-          EOF
-
-      - name: Commit and push
+      - name: Generate feed.json
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add amp
-          git commit -m "Generate AMP articles" || echo "No changes"
-          git push
+          python generate_feed.py
+
+      - name: Commit e push feed.json
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add feed.json
+          git commit -m "Aggiorna feed AMP"
+          git push || echo "Nessun cambiamento da pushare"
