@@ -9,7 +9,7 @@ async function generateAMP() {
     console.log("🚀 Avvio generazione pagine AMP...");
 
     // Feed diretto di Blogger
-    const feedURL = 'https://brunorachiele.blogspot.com/feeds/posts/default?alt=rss';
+    const feedURL = 'https://www.brunorachiele.it/feeds/posts/default?alt=rss';
     console.log("📡 Scarico feed RSS da:", feedURL);
 
     const feed = await parser.parseURL(feedURL);
