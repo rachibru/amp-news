@@ -3,35 +3,34 @@ name: Genera AMP
 on:
   schedule:
     - cron: '0 * * * *'  # ogni ora
-  push:
-    branches:
-      - main
+  workflow_dispatch:      # permette l'esecuzione manuale
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
 
-    - name: Installa dipendenze
-      run: pip install feedparser
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install feedparser
 
-    - name: Genera pagine AMP
+    - name: Esegui script generate_amp.py
       run: |
         python generate_amp.py
 
-    - name: Commit & push
+    - name: Commit e push modifiche AMP
       run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
+        git config --global user.name "github-actions"
+        git config --global user.email "actions@github.com"
         git add amp/
-        git commit -m "Aggiornate pagine AMP"
+        git commit -m "Aggiornamento automatico pagine AMP [ci skip]" || echo "Nessuna modifica da commit"
         git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
