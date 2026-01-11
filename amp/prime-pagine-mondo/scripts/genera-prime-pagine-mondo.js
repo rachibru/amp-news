@@ -20,8 +20,9 @@ async function main() {
     const url = `https://api.worldnewsapi.com/retrieve-front-page?source-country=${t.country}&api-key=${API_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
-
-    if (!data.front_page_image) continue;
+    
+const img = data.front_page_image || data.image || data.top_image;
+if (!img) continue;
 
     boxes += `
       <div class="box">
