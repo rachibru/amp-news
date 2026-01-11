@@ -22,17 +22,22 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Aggiorna amp/sitemap.xml da zero
+      - name: Aggiorna amp/sitemap.xml da zero con titoli e lastmod
         run: |
-          npm install glob xmlbuilder
+          # Installa pacchetti necessari
+          npm install glob xmlbuilder cheerio
+
+          # Esegui il codice Node.js
           node <<'EOF'
           const fs = require('fs');
           const glob = require('glob');
           const builder = require('xmlbuilder');
+          const cheerio = require('cheerio');
 
           const baseUrl = 'https://amp.brunorachiele.it';
           const sitemapPath = 'amp/sitemap.xml';
 
+          // Trova tutte le pagine AMP nella cartella amp/, ignorando sitemap.xml
           const files = glob.sync('amp/**/*.html', { ignore: ['amp/sitemap.xml'] });
 
           const urlset = builder.create('urlset', { encoding: 'UTF-8' });
@@ -40,12 +45,25 @@ jobs:
 
           files.forEach(file => {
             const path = file.replace(/\\/g, '/').replace('amp/', '');
-            urlset.ele('url').ele('loc', {}, `${baseUrl}/${path}`);
+            const content = fs.readFileSync(file, 'utf8');
+
+            // Legge il titolo dall'HTML
+            const $ = cheerio.load(content);
+            const title = $('title').text() || 'Articolo AMP';
+
+            // Legge la data di ultima modifica
+            const stats = fs.statSync(file);
+            const lastmod = stats.mtime.toISOString();
+
+            urlset.ele('url')
+              .ele('loc', {}, `${baseUrl}/${path}`).up()
+              .ele('lastmod', {}, lastmod).up()
+              .ele('title', {}, title);
           });
 
           const xml = urlset.end({ pretty: true });
           fs.writeFileSync(sitemapPath, xml);
-          console.log('amp/sitemap.xml completamente riscritto con tutte le pagine AMP!');
+          console.log('amp/sitemap.xml completamente riscritto con titoli e lastmod!');
           EOF
 
       - name: Commit e push sitemap.xml
@@ -53,7 +71,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add amp/sitemap.xml
-          git commit -m "Sovrascritta amp/sitemap.xml con nuove pagine AMP" || echo "Nessuna modifica da commit"
+          git commit -m "Aggiornata amp/sitemap.xml con titoli e lastmod" || echo "Nessuna modifica da commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
