@@ -17,7 +17,6 @@ async function main() {
     const xml = await res.text();
     const parser = new xml2js.Parser();
     const result = await parser.parseStringPromise(xml);
-
     const items = result.rss.channel[0].item;
 
     const posts = items.map(item => {
@@ -37,7 +36,6 @@ async function main() {
 
       const filePath = path.join(folderPath, `${post.slug}.html`);
 
-      // Template completo article.html con sostituzione dei placeholder
       const html = `<!doctype html>
 <html ⚡ lang="it">
 <head>
