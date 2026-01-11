@@ -26,7 +26,7 @@ if (!img) continue;
 
     boxes += `
       <div class="box">
-        <amp-img src="${data.front_page_image}"
+        <amp-img src="${img}"
           width="300"
           height="400"
           layout="responsive"
