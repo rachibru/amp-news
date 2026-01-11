@@ -1,9 +1,9 @@
 name: Genera Pagine AMP + Sitemap
 
 on:
-  workflow_dispatch:       # esecuzione manuale
+  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'   # ogni ora
+    - cron: '0 * * * *'
   push:
     branches:
       - main
@@ -22,17 +22,17 @@ jobs:
           node-version: '20'
 
       - name: Installa dipendenze
-        run: npm install fs-extra dayjs xml2js node-fetch xmlbuilder
+        run: npm install
 
       - name: Genera pagine AMP e sitemap
         run: |
           node -e "
-          const fs = require('fs-extra');
-          const path = require('path');
-          const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-          const xml2js = require('xml2js');
-          const dayjs = require('dayjs');
-          const builder = require('xmlbuilder');
+          import fs from 'fs-extra';
+          import path from 'path';
+          import fetch from 'node-fetch';
+          import xml2js from 'xml2js';
+          import dayjs from 'dayjs';
+          import builder from 'xmlbuilder';
 
           const ampDir = 'amp';
           fs.ensureDirSync(ampDir);
@@ -41,14 +41,12 @@ jobs:
 
           (async () => {
             try {
-              // Legge il feed RSS
               const res = await fetch(RSS_URL);
               const xml = await res.text();
               const parser = new xml2js.Parser();
               const data = await parser.parseStringPromise(xml);
               const items = data.rss.channel[0].item;
 
-              // Mappa gli articoli
               const posts = items.map(item => {
                 const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
                 const title = item.title[0];
@@ -59,7 +57,7 @@ jobs:
               });
 
               // Genera le pagine AMP
-              posts.forEach(post => {
+              for (const post of posts) {
                 const folder = path.join(ampDir, post.date.format('YYYY'), post.date.format('MM'));
                 fs.ensureDirSync(folder);
                 const filePath = path.join(folder, post.slug+'.html');
@@ -72,7 +70,7 @@ jobs:
 
                 fs.writeFileSync(filePath, htmlTemplate,'utf8');
                 console.log('Generata pagina AMP:', filePath);
-              });
+              }
 
               // Genera sitemap.xml
               const sitemap = builder.create('urlset',{encoding:'UTF-8'});
@@ -80,19 +78,18 @@ jobs:
 
               posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
 
-              posts.forEach(post=>{
-                // <-- QUI regex corretta
+              for (const post of posts) {
                 const loc = path.join(post.date.format('YYYY'), post.date.format('MM'), post.slug+'.html').replace(/\\/g,'/');
                 sitemap.ele('url')
                   .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
                   .ele('lastmod', {}, post.isoDate);
-              });
+              }
 
               fs.writeFileSync(path.join(ampDir,'sitemap.xml'), sitemap.end({pretty:true}));
               console.log('Sitemap generata correttamente!');
-            } catch(e) { 
-              console.error('Errore nella generazione AMP o sitemap:', e); 
-              process.exit(1); 
+            } catch(e) {
+              console.error('Errore nella generazione AMP o sitemap:', e);
+              process.exit(1);
             }
           })();
           "
