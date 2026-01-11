@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const RSS_URL = "https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV";
 const AMP_DOMAIN = "https://amp.brunorachiele.it";
 const AMP_BASE = "amp";
-const TEMPLATE_PATH = path.join(__dirname, "../articolo.html");
+const TEMPLATE_PATH = path.join(__dirname, "../article.html");
 const OUTPUT_BASE = path.join(__dirname, "..", AMP_BASE);
 const SITEMAP_PATH = path.join(OUTPUT_BASE, "sitemap.xml");
 
