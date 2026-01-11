@@ -1,3 +1,4 @@
+cat > scripts/genera-amp.js << 'EOF'
 const fs = require('fs-extra');
 const path = require('path');
 const dayjs = require('dayjs');
@@ -9,7 +10,6 @@ try {
   const ampDir = 'amp';
   fs.ensureDirSync(ampDir);
 
-  // --- Esempio dati articoli ---
   const posts = [
     {
       slug: 'ultimi-30-giorni-politici-del-26-dicembre-2025---bruno-rachiele',
@@ -81,3 +81,4 @@ try {
   console.error('Errore durante la generazione AMP o sitemap:', err);
   process.exit(1);
 }
+EOF
