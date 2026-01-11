@@ -1,13 +1,12 @@
 name: Genera Pagine AMP
 
 on:
-  workflow_dispatch:
-    # esecuzione manuale
-  schedule:
-    - cron: '0 * * * *'
+  workflow_dispatch:   # esecuzione manuale
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   build-amp:
@@ -31,7 +30,6 @@ jobs:
           const { parseString } = require('xml2js');
 
           const ampDir = 'amp';
-          if (!fs.existsSync(ampDir)) fs.mkdirSync(ampDir, { recursive: true });
 
           const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 
@@ -52,9 +50,11 @@ jobs:
                 if (err) throw err;
                 const items = result.rss.channel[0].item;
                 for (const item of items) {
+                  // Genera slug dal link
                   const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
                   const filePath = path.join(ampDir, slug+'.html');
 
+                  // Leggi template
                   let html = fs.readFileSync('article.html', 'utf8');
                   html = html.replace(/{{title}}/g, item.title[0])
                              .replace(/{{link}}/g, item.link[0])
