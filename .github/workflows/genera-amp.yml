@@ -53,20 +53,13 @@ jobs:
                 const items = result.rss.channel[0].item;
                 for (const item of items) {
                   const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
-                  const title = item.title[0];
-                  const pubDate = new Date(item.pubDate[0]);
-                  const yyyy = pubDate.getFullYear().toString();
-                  const mm = ('0'+(pubDate.getMonth()+1)).slice(-2);
+                  const filePath = path.join(ampDir, slug+'.html');
 
-                  const folder = path.join(ampDir, yyyy, mm);
-                  if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
-
-                  const filePath = path.join(folder, slug+'.html');
                   let html = fs.readFileSync('article.html', 'utf8');
-                  html = html.replace(/{{title}}/g, title)
+                  html = html.replace(/{{title}}/g, item.title[0])
                              .replace(/{{link}}/g, item.link[0])
-                             .replace(/{{pubDate}}/g, pubDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }))
-                             .replace(/{{isoDate}}/g, pubDate.toISOString().slice(0,10));
+                             .replace(/{{pubDate}}/g, '')
+                             .replace(/{{isoDate}}/g, '');
 
                   fs.writeFileSync(filePath, html, 'utf8');
                   console.log('Generata pagina AMP:', filePath);
