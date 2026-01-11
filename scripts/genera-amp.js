@@ -2,13 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// CONFIG
+// CONFIGURAZIONE
 const AMP_DIR = 'amp';
 const OUT_DIR = 'output';
 const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 const TEMPLATE_FILE = 'article.html';
+const MAX_ARTICOLI = 10;
 
-// CREA CARTELLE SE NON ESISTONO
+// CREA CARTELLE PRINCIPALI SE NON ESISTONO
 [AMP_DIR, OUT_DIR].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
@@ -37,17 +38,19 @@ function fetchRSS(url) {
     console.log('Lettura feed RSS in corso...');
     const xml = await fetchRSS(RSS_URL);
 
-    // Estrae gli item
+    // ESTRAE GLI ITEM DAL FEED
     const items = [];
     xml.replace(/<item>([\s\S]*?)<\/item>/g, (_, block) => {
-      const title = /<title>(.*?)<\/title>/.exec(block);
-      const link = /<link>(.*?)<\/link>/.exec(block);
-      const pubDate = /<pubDate>(.*?)<\/pubDate>/.exec(block);
-      if (title && link && pubDate) items.push({
-        title: title[1],
-        link: link[1],
-        pubDate: pubDate[1]
-      });
+      const title = /<title>([\s\S]*?)<\/title>/.exec(block);
+      const link = /<link>([\s\S]*?)<\/link>/.exec(block);
+      const pubDate = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(block);
+      if (title && link && pubDate) {
+        items.push({
+          title: title[1],
+          link: link[1],
+          pubDate: pubDate[1]
+        });
+      }
     });
 
     if (items.length === 0) {
@@ -55,16 +58,22 @@ function fetchRSS(url) {
       return;
     }
 
-    // Prendi solo ultimi 10 articoli
-    const latest = items.slice(0, 10);
+    // PRENDE SOLO GLI ULTIMI 10 ARTICOLI
+    const latest = items.slice(0, MAX_ARTICOLI);
 
     // CREA PAGINE AMP
     latest.forEach(item => {
       let slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g, ''); // rimuove dominio e slash finali
-      if (slug.endsWith('.html')) slug = slug.slice(0, -5);         // rimuove eventuale .html
+      if (slug.endsWith('.html')) slug = slug.slice(0, -5);          // rimuove .html se presente
+
       const filePath = path.join(AMP_DIR, slug + '.html');
 
-      let html = template
+      // CREA CARTELLE INTERMEDIE SE NON ESISTONO
+      const dir = path.dirname(filePath);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+      // Sostituisce i segnaposto nel template
+      const html = template
         .replace(/{{title}}/g, item.title)
         .replace(/{{link}}/g, item.link)
         .replace(/{{pubDate}}/g, item.pubDate)
@@ -87,7 +96,7 @@ function fetchRSS(url) {
     fs.writeFileSync(path.join(OUT_DIR, 'sitemap.xml'), sitemap, 'utf8');
     console.log('Generata sitemap.xml');
 
-    // CREA MINI-INDEX HTML
+    // CREA MINI-INDEX HTML PER GLI ULTIMI ARTICOLI
     let indexHtml = '<ul>\n';
     latest.forEach(item => {
       let slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g, '');
