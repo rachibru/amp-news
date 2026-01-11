@@ -1,4 +1,3 @@
-cat > scripts/genera-amp.js << 'EOF'
 const fs = require('fs-extra');
 const path = require('path');
 const dayjs = require('dayjs');
@@ -25,7 +24,7 @@ try {
     }
   ];
 
-  // --- Genera file AMP ---
+  // Genera file AMP
   posts.forEach(post => {
     const html = `<!doctype html>
 <html amp lang="it">
@@ -49,7 +48,7 @@ try {
     console.log(`Generata pagina AMP: ${filePath}`);
   });
 
-  // --- Genera sitemap ---
+  // Genera sitemap
   const files = glob.sync('amp/**/*.html', { ignore: ['amp/sitemap.xml'] });
 
   const pages = files.map(file => {
@@ -60,7 +59,7 @@ try {
     return { file, title, pubdate };
   });
 
-  // Ordina per data pubblicazione decrescente
+  // Ordina per data decrescente
   pages.sort((a,b) => new Date(b.pubdate) - new Date(a.pubdate));
 
   const urlset = builder.create('urlset', { encoding: 'UTF-8' });
@@ -81,4 +80,3 @@ try {
   console.error('Errore durante la generazione AMP o sitemap:', err);
   process.exit(1);
 }
-EOF
