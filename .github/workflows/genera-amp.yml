@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Esegui script genera-amp.js
+      - name: Esegui genera-amp.js
         run: node scripts/genera-amp.js
 
       - name: Commit e push
