@@ -1,9 +1,30 @@
+name: Aggiorna Sitemap AMP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'amp/**/*.html'
+      - 'amp/sitemap.xml'
+  workflow_dispatch:
+
+jobs:
+  update-sitemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Aggiorna amp/sitemap.xml da zero
         run: |
-          # Installa temporaneamente i pacchetti necessari
           npm install glob xmlbuilder
-
-          # Esegui il codice Node.js che genera la sitemap
           node <<'EOF'
           const fs = require('fs');
           const glob = require('glob');
@@ -12,7 +33,6 @@
           const baseUrl = 'https://amp.brunorachiele.it';
           const sitemapPath = 'amp/sitemap.xml';
 
-          // Trova tutte le pagine AMP nella cartella amp/, ignorando sitemap.xml
           const files = glob.sync('amp/**/*.html', { ignore: ['amp/sitemap.xml'] });
 
           const urlset = builder.create('urlset', { encoding: 'UTF-8' });
@@ -27,3 +47,13 @@
           fs.writeFileSync(sitemapPath, xml);
           console.log('amp/sitemap.xml completamente riscritto con tutte le pagine AMP!');
           EOF
+
+      - name: Commit e push sitemap.xml
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add amp/sitemap.xml
+          git commit -m "Sovrascritta amp/sitemap.xml con nuove pagine AMP" || echo "Nessuna modifica da commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
