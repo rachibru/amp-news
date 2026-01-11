@@ -1,9 +1,9 @@
 name: Genera Pagine AMP + Sitemap
 
 on:
-  workflow_dispatch:  # puoi eseguirlo manualmente
+  workflow_dispatch:       # puoi eseguirlo manualmente
   schedule:
-    - cron: '0 * * * *'  # ogni ora
+    - cron: '0 * * * *'   # ogni ora
   push:
     branches:
       - main
@@ -21,72 +21,71 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Installa dipendenze necessarie
+      - name: Installa dipendenze
         run: npm install fs-extra dayjs xml2js node-fetch xmlbuilder
 
       - name: Genera pagine AMP e sitemap
         run: |
           node -e "
-            const fs = require('fs-extra');
-            const path = require('path');
-            const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-            const xml2js = require('xml2js');
-            const dayjs = require('dayjs');
-            const builder = require('xmlbuilder');
+          const fs = require('fs-extra');
+          const path = require('path');
+          const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+          const xml2js = require('xml2js');
+          const dayjs = require('dayjs');
+          const builder = require('xmlbuilder');
 
-            const ampDir = 'amp';
-            fs.ensureDirSync(ampDir);
+          const ampDir = 'amp';
+          fs.ensureDirSync(ampDir);
 
-            const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
+          const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 
-            (async () => {
-              try {
-                const res = await fetch(RSS_URL);
-                const xml = await res.text();
-                const parser = new xml2js.Parser();
-                const data = await parser.parseStringPromise(xml);
-                const items = data.rss.channel[0].item;
+          (async () => {
+            try {
+              const res = await fetch(RSS_URL);
+              const xml = await res.text();
+              const parser = new xml2js.Parser();
+              const data = await parser.parseStringPromise(xml);
+              const items = data.rss.channel[0].item;
 
-                const posts = items.map(item => {
-                  const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
-                  const title = item.title[0];
-                  const date = dayjs(item.pubDate[0]);
-                  const isoDate = date.format('YYYY-MM-DD');
-                  const link = item.link[0];
-                  return { slug, title, date, isoDate, link };
-                });
+              const posts = items.map(item => {
+                const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
+                const title = item.title[0];
+                const date = dayjs(item.pubDate[0]);
+                const isoDate = date.format('YYYY-MM-DD');
+                const link = item.link[0];
+                return { slug, title, date, isoDate, link };
+              });
 
-                posts.forEach(post => {
-                  const folder = path.join(ampDir, post.date.format('YYYY'), post.date.format('MM'));
-                  fs.ensureDirSync(folder);
-                  const filePath = path.join(folder, post.slug+'.html');
+              posts.forEach(post => {
+                const folder = path.join(ampDir, post.date.format('YYYY'), post.date.format('MM'));
+                fs.ensureDirSync(folder);
+                const filePath = path.join(folder, post.slug+'.html');
 
-                  const htmlTemplate = fs.readFileSync('article.html','utf8')
-                    .replace(/{{title}}/g, post.title)
-                    .replace(/{{link}}/g, post.link)
-                    .replace(/{{pubDate}}/g, post.date.format('D MMMM YYYY'))
-                    .replace(/{{isoDate}}/g, post.isoDate);
+                const htmlTemplate = fs.readFileSync('article.html','utf8')
+                  .replace(/{{title}}/g, post.title)
+                  .replace(/{{link}}/g, post.link)
+                  .replace(/{{pubDate}}/g, post.date.format('D MMMM YYYY'))
+                  .replace(/{{isoDate}}/g, post.isoDate);
 
-                  fs.writeFileSync(filePath, htmlTemplate,'utf8');
-                  console.log('Generata pagina AMP:', filePath);
-                });
+                fs.writeFileSync(filePath, htmlTemplate,'utf8');
+                console.log('Generata pagina AMP:', filePath);
+              });
 
-                // sitemap.xml
-                const sitemap = builder.create('urlset',{encoding:'UTF-8'});
-                sitemap.att('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9');
-                posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
-                posts.forEach(post=>{
-                  const folder = path.join(post.date.format('YYYY'), post.date.format('MM'));
-                  const loc = path.join(folder, post.slug+'.html').replace(/\\/g,'/');
-                  sitemap.ele('url')
-                    .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
-                    .ele('lastmod', {}, post.isoDate)
-                    .up();
-                });
-                fs.writeFileSync(path.join(ampDir,'sitemap.xml'), sitemap.end({pretty:true}));
-                console.log('Sitemap generata correttamente!');
-              } catch(e) { console.error('Errore:', e); process.exit(1); }
-            })();
+              // sitemap.xml
+              const sitemap = builder.create('urlset',{encoding:'UTF-8'});
+              sitemap.att('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9');
+              posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
+              posts.forEach(post=>{
+                const folder = path.join(post.date.format('YYYY'), post.date.format('MM'));
+                const loc = path.join(folder, post.slug+'.html').replace(/\\/g,'/');
+                sitemap.ele('url')
+                  .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
+                  .ele('lastmod', {}, post.isoDate);
+              });
+              fs.writeFileSync(path.join(ampDir,'sitemap.xml'), sitemap.end({pretty:true}));
+              console.log('Sitemap generata correttamente!');
+            } catch(e) { console.error('Errore:', e); process.exit(1); }
+          })();
           "
 
       - name: Commit e push
