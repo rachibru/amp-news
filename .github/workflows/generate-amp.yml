@@ -1,12 +1,12 @@
 name: Genera Pagine AMP + Sitemap
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # permette di eseguire manualmente dal web
   schedule:
-    - cron: '0 * * * *'   # ogni ora, puoi cambiare la frequenza
+    - cron: '0 * * * *'   # ogni ora, puoi modificare la frequenza
   push:
     branches:
-      - main
+      - main  # si esegue quando fai push su main
 
 jobs:
   amp-sitemap:
@@ -22,7 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install fs-extra dayjs xml2js node-fetch xmlbuilder cheerio
+        run: npm install fs-extra dayjs xml2js node-fetch xmlbuilder
 
       - name: Genera pagine AMP e sitemap
         run: node scripts/genera-amp.js
