@@ -3,16 +3,13 @@ const path = require('path');
 const https = require('https');
 
 // CONFIGURAZIONE
-const AMP_DIR = 'amp';
-const OUT_DIR = 'output';
+const AMP_DIR = 'amp';                 // Cartella pubblica delle pagine AMP
 const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 const TEMPLATE_FILE = 'article.html';
 const MAX_ARTICOLI = 10;
 
-// CREA CARTELLE PRINCIPALI SE NON ESISTONO
-[AMP_DIR, OUT_DIR].forEach(dir => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-});
+// CREA CARTELLA AMP SE NON ESISTE
+if (!fs.existsSync(AMP_DIR)) fs.mkdirSync(AMP_DIR, { recursive: true });
 
 // LEGGE IL TEMPLATE
 if (!fs.existsSync(TEMPLATE_FILE)) {
@@ -68,7 +65,7 @@ function fetchRSS(url) {
 
       const filePath = path.join(AMP_DIR, slug + '.html');
 
-      // CREA CARTELLE INTERMEDIE SE NON ESISTONO
+      // CREA CARTELLE INTERMEDIE SE NECESSARIO
       const dir = path.dirname(filePath);
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
@@ -83,7 +80,7 @@ function fetchRSS(url) {
       console.log('Generata pagina AMP:', filePath);
     });
 
-    // CREA SITEMAP.XML
+    // CREA SITEMAP.XML DIRETTAMENTE IN AMP_DIR
     let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
     latest.forEach(item => {
@@ -93,8 +90,8 @@ function fetchRSS(url) {
       sitemap += `    <lastmod>${new Date(item.pubDate).toISOString()}</lastmod>\n  </url>\n`;
     });
     sitemap += '</urlset>';
-    fs.writeFileSync(path.join(OUT_DIR, 'sitemap.xml'), sitemap, 'utf8');
-    console.log('Generata sitemap.xml');
+    fs.writeFileSync(path.join(AMP_DIR, 'sitemap.xml'), sitemap, 'utf8');
+    console.log('Generata sitemap.xml in amp/');
 
     // CREA MINI-INDEX HTML PER GLI ULTIMI ARTICOLI
     let indexHtml = '<ul>\n';
@@ -104,8 +101,8 @@ function fetchRSS(url) {
       indexHtml += `  <li><a href="https://amp.brunorachiele.it/${slug}.html">${item.title}</a></li>\n`;
     });
     indexHtml += '</ul>';
-    fs.writeFileSync(path.join(OUT_DIR, 'ultimi.html'), indexHtml, 'utf8');
-    console.log('Generato mini-index ultimi articoli');
+    fs.writeFileSync(path.join(AMP_DIR, 'ultimi.html'), indexHtml, 'utf8');
+    console.log('Generato mini-index ultimi articoli in amp/');
 
   } catch (err) {
     console.error('Errore nella generazione AMP o sitemap:', err);
