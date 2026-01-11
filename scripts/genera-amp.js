@@ -8,19 +8,23 @@ const __dirname = path.dirname(__filename);
 const RSS_URL = "https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV";
 const AMP_DOMAIN = "https://amp.brunorachiele.it";
 const AMP_BASE = "amp";
+
 const TEMPLATE_PATH = path.join(__dirname, "../article.html");
 const OUTPUT_BASE = path.join(__dirname, "..", AMP_BASE);
 const SITEMAP_PATH = path.join(OUTPUT_BASE, "sitemap.xml");
 
 async function main() {
-  console.log("Lettura feed RSS in corso...");
+  console.log("📡 Lettura feed RSS in corso...");
 
   const res = await fetch(RSS_URL);
   const xml = await res.text();
 
+  // Prende SOLO gli ultimi 10 post
   const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)]
     .slice(0, 10)
     .map(m => m[1]);
+
+  console.log("🧩 Articoli trovati:", items.length);
 
   const template = fs.readFileSync(TEMPLATE_PATH, "utf8");
 
@@ -28,7 +32,12 @@ async function main() {
   sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
   for (const item of items) {
-    const title = item.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1];
+
+    // TITLE robusto (con e senza CDATA)
+    const title =
+      item.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1] ||
+      item.match(/<title>(.*?)<\/title>/)?.[1];
+
     const link = item.match(/<link>(.*?)<\/link>/)?.[1];
     const pubDateRaw = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1];
 
@@ -40,6 +49,7 @@ async function main() {
 
     const slug = link.split("/").pop().replace(".html", "");
     const relPath = `${year}/${month}/${slug}.html`;
+
     const outDir = path.join(OUTPUT_BASE, year, month);
     const outFile = path.join(outDir, `${slug}.html`);
 
@@ -62,7 +72,7 @@ async function main() {
   sitemap += `</urlset>`;
   fs.writeFileSync(SITEMAP_PATH, sitemap, "utf8");
 
-  console.log("✅ AMP e sitemap generati correttamente");
+  console.log("✅ AMP + sitemap generate correttamente");
 }
 
 main().catch(err => {
