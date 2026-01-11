@@ -3,7 +3,7 @@ name: Genera Pagine AMP + Sitemap
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'   # ogni ora, puoi cambiarlo
+    - cron: '0 * * * *'   # ogni ora, puoi cambiare la frequenza
   push:
     branches:
       - main
