@@ -1,20 +1,19 @@
 name: Genera Pagine AMP + Sitemap
 
 on:
-  workflow_dispatch:  # permette di eseguire manualmente dal web
+  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'   # ogni ora, puoi modificare la frequenza
+    - cron: '0 * * * *'
   push:
     branches:
-      - main  # si esegue quando fai push su main
+      - main
 
 jobs:
   amp-sitemap:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -27,7 +26,7 @@ jobs:
       - name: Genera pagine AMP e sitemap
         run: node scripts/genera-amp.js
 
-      - name: Commit e push pagine AMP e sitemap
+      - name: Commit e push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
