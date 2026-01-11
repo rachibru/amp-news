@@ -1,12 +1,11 @@
 name: Genera Pagine AMP
 
 on:
-  workflow_dispatch:   # esecuzione manuale
+  workflow_dispatch:
+    # esecuzione manuale
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 * * * *'
 
 jobs:
   build-amp:
@@ -23,14 +22,12 @@ jobs:
 
       - name: Genera pagine AMP
         run: |
-          node -e "
+          node <<'EOF'
           const fs = require('fs');
           const path = require('path');
           const https = require('https');
-          const { parseString } = require('xml2js');
 
           const ampDir = 'amp';
-
           const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 
           function fetchRSS(url) {
@@ -43,34 +40,48 @@ jobs:
             });
           }
 
+          function parseRSS(xml) {
+            // Estrae solo link e title con regex semplice
+            const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+            const titleRegex = /<title>(.*?)<\/title>/;
+            const linkRegex = /<link>(.*?)<\/link>/;
+            const items = [];
+            let match;
+            while(match = itemRegex.exec(xml)) {
+              const block = match[1];
+              const titleMatch = titleRegex.exec(block);
+              const linkMatch = linkRegex.exec(block);
+              if(titleMatch && linkMatch) {
+                items.push({ title: titleMatch[1], link: linkMatch[1] });
+              }
+            }
+            return items;
+          }
+
           (async () => {
             try {
+              if(!fs.existsSync(ampDir)) throw new Error('Cartella amp/ non trovata. Creala manualmente prima.');
               const xml = await fetchRSS(RSS_URL);
-              parseString(xml, (err, result) => {
-                if (err) throw err;
-                const items = result.rss.channel[0].item;
-                for (const item of items) {
-                  // Genera slug dal link
-                  const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
-                  const filePath = path.join(ampDir, slug+'.html');
+              const items = parseRSS(xml);
 
-                  // Leggi template
-                  let html = fs.readFileSync('article.html', 'utf8');
-                  html = html.replace(/{{title}}/g, item.title[0])
-                             .replace(/{{link}}/g, item.link[0])
-                             .replace(/{{pubDate}}/g, '')
-                             .replace(/{{isoDate}}/g, '');
+              for(const item of items) {
+                const slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
+                const filePath = path.join(ampDir, slug+'.html');
+                let html = fs.readFileSync('article.html', 'utf8');
+                html = html.replace(/{{title}}/g, item.title)
+                           .replace(/{{link}}/g, item.link)
+                           .replace(/{{pubDate}}/g, '')
+                           .replace(/{{isoDate}}/g, '');
+                fs.writeFileSync(filePath, html, 'utf8');
+                console.log('Generata pagina AMP:', filePath);
+              }
 
-                  fs.writeFileSync(filePath, html, 'utf8');
-                  console.log('Generata pagina AMP:', filePath);
-                }
-              });
             } catch(e) {
               console.error('Errore nella generazione AMP:', e);
               process.exit(1);
             }
           })();
-          "
+          EOF
 
       - name: Commit e push
         run: |
