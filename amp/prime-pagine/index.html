@@ -11,8 +11,7 @@
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 
   <!-- AMP ADS -->
-  <script async custom-element="amp-ad"
-    src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
   <!-- AMP BOILERPLATE CORRETTO -->
   <style amp-boilerplate>
@@ -35,32 +34,12 @@
 
   <!-- STILI PERSONALIZZATI -->
   <style amp-custom>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 16px;
-      text-align: center;
-      background: #fafafa;
-    }
-    h1 {
-      font-size: 1.6em;
-      margin-bottom: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    td {
-      padding: 16px 0;
-      border-bottom: 1px solid #ddd;
-    }
-    amp-img {
-      border-radius: 8px;
-      margin: 10px auto;
-    }
-    small {
-      color: #555;
-      font-size: 0.9em;
-    }
+    body { font-family: Arial, sans-serif; margin: 16px; text-align: center; background: #fafafa; }
+    h1 { font-size: 1.6em; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 16px 0; border-bottom: 1px solid #ddd; }
+    amp-img { border-radius: 8px; margin: 10px auto; }
+    small { color: #555; font-size: 0.9em; }
   </style>
 </head>
 
@@ -75,7 +54,7 @@
     alt="Prime Pagine">
   </amp-img>
 
-  <!-- ANNUNCIO AMP -->
+  <!-- ANNUNCIO PRINCIPALE -->
   <amp-ad width="100vw" height="320"
     type="adsense"
     data-ad-client="ca-pub-9225028785900171"
@@ -83,27 +62,18 @@
     data-auto-format="rspv"
     data-full-width="">
     <div overflow=""></div>
-     </amp-ad>
-
+  </amp-ad>
 
   <h1>Prime Pagine dei Giornali</h1>
 
-  
-  
-  
   <table>
-
     <tr><td>
       Corriere della Sera 🇮🇹<br>
       <amp-img src="https://static2.rcsobjects.it/images/corrierefc_nazionale_web-Big.jpg"
         width="400" height="550" layout="responsive"></amp-img>
       <small>Aggiornato oggi</small>
     </td></tr>
-    
-       
-   
-    
-    
+
     <tr><td>
       Il Secolo XIX 🇮🇹<br>
       <amp-img src="https://www.gelestatic.it/storage/quotidiani-locali/testate/copertina_ilsecoloxix_genova_w510.jpeg"
@@ -111,9 +81,18 @@
       <small>Aggiornato oggi</small>
     </td></tr>
 
-           
-     
-    
+    <!-- ANNUNCIO SECONDARIO -->
+    <tr><td>
+      <amp-ad width="100vw" height="320"
+        type="adsense"
+        data-ad-client="ca-pub-9225028785900171"
+        data-ad-slot="2980836148"
+        data-auto-format="rspv"
+        data-full-width="">
+        <div overflow=""></div>
+      </amp-ad>
+    </td></tr>
+
     <tr><td>
       La Ragione 🇮🇹<br>
       <amp-img src="https://servizidue.laragione.eu/giornale/ultima-copertina"
@@ -121,9 +100,6 @@
       <small>Aggiornato oggi</small>
     </td></tr>
 
-           
-   
-    
     <tr><td>
       Il Dubbio 🇮🇹<br>
       <amp-img src="https://images.ildubbio.news/primapagina/20251025.jpeg"
@@ -131,9 +107,6 @@
       <small>Aggiornato oggi</small>
     </td></tr>
 
-           
-    
-    
     <tr><td>
       Il Foglio 🇮🇹<br>
       <amp-img src="https://eu01.newsmemory.com/?pSetup=ilfoglio&getprima&editionname=Il%20Foglio"
@@ -141,9 +114,6 @@
       <small>Aggiornato oggi</small>
     </td></tr>
 
-        
-    
-    
     <tr><td>
       La Repubblica 🇮🇹<br>
       <amp-img src="https://sfoglio.repubblica.it/repubblica/api/cover.php?newspaper=REP&edition=nazionale&width=390&height=510"
@@ -151,16 +121,12 @@
       <small>Aggiornato oggi</small>
     </td></tr>
 
-           
-       
-    
     <tr><td>
       La Stampa 🇮🇹<br>
       <amp-img src="https://www.lastampa.it/edicola/api/cover.php?newspaper=LASTAMPA&edition=TORINO&width=330&height=450"
         width="400" height="550" layout="responsive"></amp-img>
       <small>Aggiornato oggi</small>
     </td></tr>
-
   </table>
 
 </body>
