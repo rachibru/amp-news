@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
-const fetch = require('node-fetch'); // per leggere il feed RSS
+// fetch compatibile Node 20 / GitHub Actions
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const xml2js = require('xml2js');
 const dayjs = require('dayjs');
 const builder = require('xmlbuilder');
@@ -9,10 +10,12 @@ const cheerio = require('cheerio');
 const ampDir = 'amp';
 fs.ensureDirSync(ampDir);
 
-const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV'; // Il tuo feed RSS
+// Il tuo feed RSS
+const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 
 async function main() {
   try {
+    console.log('Lettura feed RSS in corso...');
     const res = await fetch(RSS_URL);
     const xml = await res.text();
     const parser = new xml2js.Parser();
@@ -21,6 +24,7 @@ async function main() {
     const items = result.rss.channel[0].item;
 
     const posts = items.map(item => {
+      // crea uno slug dall'URL
       const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g, '');
       const title = item.title[0];
       const date = dayjs(item.pubDate[0]).format('YYYY-MM-DD');
@@ -59,6 +63,7 @@ async function main() {
       pubdate: post.date
     }));
 
+    // Ordina per data decrescente
     pages.sort((a,b) => new Date(b.pubdate) - new Date(a.pubdate));
 
     const urlset = builder.create('urlset', { encoding: 'UTF-8' });
