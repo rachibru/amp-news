@@ -22,48 +22,56 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Installa dipendenze
-        run: npm install fs-extra dayjs xml2js node-fetch
-
       - name: Genera pagine AMP
         run: |
           node -e "
-          import fs from 'fs-extra';
-          import path from 'path';
-          import fetch from 'node-fetch';
-          import xml2js from 'xml2js';
-          import dayjs from 'dayjs';
+          const fs = require('fs');
+          const path = require('path');
+          const https = require('https');
+          const { parseString } = require('xml2js');
 
           const ampDir = 'amp';
-          fs.ensureDirSync(ampDir);
+          if (!fs.existsSync(ampDir)) fs.mkdirSync(ampDir, { recursive: true });
 
           const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
 
+          function fetchRSS(url) {
+            return new Promise((resolve, reject) => {
+              https.get(url, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => resolve(data));
+              }).on('error', err => reject(err));
+            });
+          }
+
           (async () => {
             try {
-              const res = await fetch(RSS_URL);
-              const xml = await res.text();
-              const parser = new xml2js.Parser();
-              const data = await parser.parseStringPromise(xml);
-              const items = data.rss.channel[0].item;
+              const xml = await fetchRSS(RSS_URL);
+              parseString(xml, (err, result) => {
+                if (err) throw err;
+                const items = result.rss.channel[0].item;
+                for (const item of items) {
+                  const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
+                  const title = item.title[0];
+                  const pubDate = new Date(item.pubDate[0]);
+                  const yyyy = pubDate.getFullYear().toString();
+                  const mm = ('0'+(pubDate.getMonth()+1)).slice(-2);
 
-              for (const item of items) {
-                const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
-                const title = item.title[0];
-                const date = dayjs(item.pubDate[0]);
-                const folder = path.join(ampDir, date.format('YYYY'), date.format('MM'));
-                fs.ensureDirSync(folder);
+                  const folder = path.join(ampDir, yyyy, mm);
+                  if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 
-                const filePath = path.join(folder, slug+'.html');
-                const html = fs.readFileSync('article.html','utf8')
-                  .replace(/{{title}}/g, title)
-                  .replace(/{{link}}/g, item.link[0])
-                  .replace(/{{pubDate}}/g, date.format('D MMMM YYYY'))
-                  .replace(/{{isoDate}}/g, date.format('YYYY-MM-DD'));
+                  const filePath = path.join(folder, slug+'.html');
+                  let html = fs.readFileSync('article.html', 'utf8');
+                  html = html.replace(/{{title}}/g, title)
+                             .replace(/{{link}}/g, item.link[0])
+                             .replace(/{{pubDate}}/g, pubDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }))
+                             .replace(/{{isoDate}}/g, pubDate.toISOString().slice(0,10));
 
-                fs.writeFileSync(filePath, html,'utf8');
-                console.log('Generata pagina AMP:', filePath);
-              }
+                  fs.writeFileSync(filePath, html, 'utf8');
+                  console.log('Generata pagina AMP:', filePath);
+                }
+              });
             } catch(e) {
               console.error('Errore nella generazione AMP:', e);
               process.exit(1);
