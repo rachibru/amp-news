@@ -1,7 +1,8 @@
-name: Genera Pagine AMP + Sitemap
+name: Genera Pagine AMP
 
 on:
   workflow_dispatch:
+    # esecuzione manuale
   schedule:
     - cron: '0 * * * *'
   push:
@@ -22,9 +23,9 @@ jobs:
           node-version: '20'
 
       - name: Installa dipendenze
-        run: npm install
+        run: npm install fs-extra dayjs xml2js node-fetch
 
-      - name: Genera pagine AMP e sitemap
+      - name: Genera pagine AMP
         run: |
           node -e "
           import fs from 'fs-extra';
@@ -32,7 +33,6 @@ jobs:
           import fetch from 'node-fetch';
           import xml2js from 'xml2js';
           import dayjs from 'dayjs';
-          import builder from 'xmlbuilder';
 
           const ampDir = 'amp';
           fs.ensureDirSync(ampDir);
@@ -47,48 +47,25 @@ jobs:
               const data = await parser.parseStringPromise(xml);
               const items = data.rss.channel[0].item;
 
-              const posts = items.map(item => {
+              for (const item of items) {
                 const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
                 const title = item.title[0];
                 const date = dayjs(item.pubDate[0]);
-                const isoDate = date.format('YYYY-MM-DD');
-                const link = item.link[0];
-                return { slug, title, date, isoDate, link };
-              });
-
-              // Genera le pagine AMP
-              for (const post of posts) {
-                const folder = path.join(ampDir, post.date.format('YYYY'), post.date.format('MM'));
+                const folder = path.join(ampDir, date.format('YYYY'), date.format('MM'));
                 fs.ensureDirSync(folder);
-                const filePath = path.join(folder, post.slug+'.html');
 
-                const htmlTemplate = fs.readFileSync('article.html','utf8')
-                  .replace(/{{title}}/g, post.title)
-                  .replace(/{{link}}/g, post.link)
-                  .replace(/{{pubDate}}/g, post.date.format('D MMMM YYYY'))
-                  .replace(/{{isoDate}}/g, post.isoDate);
+                const filePath = path.join(folder, slug+'.html');
+                const html = fs.readFileSync('article.html','utf8')
+                  .replace(/{{title}}/g, title)
+                  .replace(/{{link}}/g, item.link[0])
+                  .replace(/{{pubDate}}/g, date.format('D MMMM YYYY'))
+                  .replace(/{{isoDate}}/g, date.format('YYYY-MM-DD'));
 
-                fs.writeFileSync(filePath, htmlTemplate,'utf8');
+                fs.writeFileSync(filePath, html,'utf8');
                 console.log('Generata pagina AMP:', filePath);
               }
-
-              // Genera sitemap.xml
-              const sitemap = builder.create('urlset',{encoding:'UTF-8'});
-              sitemap.att('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9');
-
-              posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
-
-              for (const post of posts) {
-                const loc = path.join(post.date.format('YYYY'), post.date.format('MM'), post.slug+'.html').replace(/\\/g,'/');
-                sitemap.ele('url')
-                  .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
-                  .ele('lastmod', {}, post.isoDate);
-              }
-
-              fs.writeFileSync(path.join(ampDir,'sitemap.xml'), sitemap.end({pretty:true}));
-              console.log('Sitemap generata correttamente!');
             } catch(e) {
-              console.error('Errore nella generazione AMP o sitemap:', e);
+              console.error('Errore nella generazione AMP:', e);
               process.exit(1);
             }
           })();
@@ -99,7 +76,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add amp/
-          git commit -m 'Aggiornamento automatico pagine AMP e sitemap' || echo 'Nessuna modifica'
+          git commit -m 'Aggiornamento automatico pagine AMP' || echo 'Nessuna modifica'
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
