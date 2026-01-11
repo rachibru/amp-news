@@ -1,109 +1,108 @@
 import fs from "fs";
 import path from "path";
-import fetch from "node-fetch";
+import { fileURLToPath } from "url";
 
-const API_KEY = "f3f8b886e0284caeb974ba755fe2e8a4"; // tua chiave API
-const AMP_BASE = path.join(process.cwd(), "amp/prime-pagine");
-const INDEX_PATH = path.join(AMP_BASE, "index.html");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Lista testate: italiane e internazionali
-const testate = [
-  "Corriere della Sera",
-  "La Repubblica",
-  "La Stampa",
-  "Il Sole 24 Ore",
-  "Il Messaggero",
-  "Frankfurter Allgemeine",
-  "Süddeutsche Zeitung",
-  "Le Monde",
-  "The Guardian",
-  "The New York Times",
-  "Washington Post"
+const API_KEY = "f3f8b886e0284caeb974ba755fe2e8a4";
+const OUTPUT_DIR = path.join(__dirname, ".."); // amp/prime-pagine
+const OUTPUT_FILE = path.join(OUTPUT_DIR, "index.html");
+
+// Lista dei giornali da mostrare (italiani + alcuni internazionali)
+const journals = [
+  { country: "it", name: "corriere-della-sera" },
+  { country: "it", name: "la-repubblica" },
+  { country: "it", name: "il-sole-24-ore" },
+  { country: "de", name: "frankfurter-allgemeine" },
+  { country: "us", name: "new-york-times" },
+  { country: "uk", name: "the-guardian" }
 ];
 
 async function main() {
-  fs.mkdirSync(AMP_BASE, { recursive: true });
+  console.log("✅ Generazione prime pagine AMP in corso...");
 
-  const cards = [];
+  let cardsHtml = "";
 
-  for (const testata of testate.sort()) { // ordine alfabetico
+  for (const j of journals) {
     try {
-      const url = `https://api.worldnewsapi.com/retrieve-front-page?api-key=${API_KEY}&source-name=${encodeURIComponent(testata)}&source-country=it`;
+      const today = new Date().toISOString().split("T")[0];
+      const url = `https://api.worldnewsapi.com/retrieve-front-page?api-key=${API_KEY}&source-name=${j.name}&source-country=${j.country}&date=${today}`;
+
       const res = await fetch(url);
       const data = await res.json();
 
-      if (!data.front_page || !data.front_page.image) continue;
+      if (!data || !data.front_page || !data.front_page.image || !data.front_page.url) continue;
 
-      cards.push({
-        nome: data.front_page.name,
-        immagine: data.front_page.image,
-        link: data.front_page.url || "#"
-      });
-    } catch (e) {
-      console.error("Errore API testata:", testata, e.message);
+      const img = data.front_page.image;
+      const link = data.front_page.url;
+      const title = j.name.replace(/-/g, " ");
+
+      cardsHtml += `
+        <div class="card">
+          <a href="${link}" target="_blank">
+            <amp-img src="${img}" width="600" height="800" layout="responsive" alt="${title}"></amp-img>
+            <div class="title">${title}</div>
+          </a>
+        </div>
+      `;
+    } catch (err) {
+      console.error("⚠️ Errore caricamento giornale:", j.name, err.message);
     }
   }
 
-  // Costruzione pagina AMP con Ads integrata
-  let html = `<!doctype html>
-<html ⚡ lang="it">
-<head>
-<meta charset="utf-8">
-<title>Prime Pagine | Bruno Rachiele</title>
-<link rel="canonical" href="#">
-<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-<meta name="robots" content="index, follow">
-<script async src="https://cdn.ampproject.org/v0.js"></script>
-<script async custom-element="amp-ad"
-  src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  // Template completo AMP
+  const html = `
+  <!doctype html>
+  <html ⚡ lang="it">
+  <head>
+    <meta charset="utf-8">
+    <title>Prime Pagine dei Giornali | Bruno Rachiele</title>
+    <link rel="canonical" href="https://amp.brunorachiele.it/prime-pagine/index.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <style amp-boilerplate>
+      body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
+      animation:-amp-start 8s steps(1,end) 0s 1 normal both}
+      @keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+    </style>
+    <noscript>
+      <style amp-boilerplate>
+        body{animation:none}
+      </style>
+    </noscript>
+    <style amp-custom>
+      body { font-family: Arial; max-width: 1024px; margin:auto; padding:16px; background:#fff; color:#111; }
+      h1 { text-align:center; margin-bottom:24px; }
+      .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+      .card { border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+      .card .title { text-align:center; padding:8px; font-weight:bold; background:#f0f0f0; }
+      .ad { margin:24px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Prime Pagine dei Giornali</h1>
+    <div class="ad">
+      <amp-ad width="100vw" height="320" type="adsense"
+        data-ad-client="ca-pub-9225028785900171"
+        data-ad-slot="2980836148"
+        data-auto-format="rspv" data-full-width="">
+        <div overflow=""></div>
+      </amp-ad>
+    </div>
+    <div class="cards">
+      ${cardsHtml}
+    </div>
+  </body>
+  </html>
+  `;
 
-<style amp-boilerplate>
-body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
-animation:-amp-start 8s steps(1,end) 0s 1 normal both}
-@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
-</style>
-<noscript><style amp-boilerplate>body{animation:none}</style></noscript>
-
-<style amp-custom>
-body { font-family: Arial,sans-serif; max-width: 800px; margin:auto; padding:16px; background:#fff; }
-h1 { text-align:center; margin-bottom:24px; }
-.ritaglio { margin-bottom:24px; text-align:center; }
-.ritaglio amp-img { border-radius:8px; width:100%; max-width:600px; height:auto; }
-.ad { margin:32px 0; text-align:center; }
-</style>
-</head>
-<body>
-<h1>Prime Pagine dei Giornali</h1>
-`;
-
-  // Inseriamo i giornali e gli annunci ogni 3 giornali
-  for (let i = 0; i < cards.length; i++) {
-    const c = cards[i];
-    html += `<div class="ritaglio">
-<a href="${c.link}" target="_blank">
-<amp-img src="${c.immagine}" width="600" height="800" layout="responsive" alt="${c.nome}"></amp-img>
-<br>${c.nome}
-</a>
-</div>
-`;
-
-    // Inserimento Ads ogni 3 giornali
-    if ((i + 1) % 3 === 0) {
-      html += `<div class="ad">
-  <amp-ad width="300" height="250"
-    type="adsense"
-    data-ad-client="ca-pub-9225028785900171"
-    data-ad-slot="2980836148">
-  </amp-ad>
-</div>
-`;
-    }
-  }
-
-  html += `</body>\n</html>`;
-
-  fs.writeFileSync(INDEX_PATH, html, "utf8");
-  console.log("✅ Prime pagine AMP generata con Ads in amp/prime-pagine/index.html");
+  fs.writeFileSync(OUTPUT_FILE, html, "utf8");
+  console.log("✅ Prime pagine AMP generate in", OUTPUT_FILE);
 }
 
-main().catch(e => console.error(e));
+main().catch(err => {
+  console.error("❌ Errore:", err);
+  process.exit(1);
+});
