@@ -1,111 +1,71 @@
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// CONFIGURAZIONE
-const AMP_DIR = 'amp';                 // Cartella pubblica delle pagine AMP
-const RSS_URL = 'https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV';
-const TEMPLATE_FILE = 'article.html';
-const MAX_ARTICOLI = 10;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// CREA CARTELLA AMP SE NON ESISTE
-if (!fs.existsSync(AMP_DIR)) fs.mkdirSync(AMP_DIR, { recursive: true });
+const RSS_URL = "https://feeds.feedburner.com/brunorachiele/ZOU113SCMgV";
+const AMP_DOMAIN = "https://amp.brunorachiele.it";
+const AMP_BASE = "amp";
+const TEMPLATE_PATH = path.join(__dirname, "../articolo.html");
+const OUTPUT_BASE = path.join(__dirname, "..", AMP_BASE);
+const SITEMAP_PATH = path.join(OUTPUT_BASE, "sitemap.xml");
 
-// LEGGE IL TEMPLATE
-if (!fs.existsSync(TEMPLATE_FILE)) {
-  console.error('Template article.html non trovato!');
-  process.exit(1);
-}
-const template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
+async function main() {
+  console.log("Lettura feed RSS in corso...");
 
-// FUNZIONE PER LEGGERE RSS
-function fetchRSS(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, res => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve(data));
-    }).on('error', err => reject(err));
-  });
-}
+  const res = await fetch(RSS_URL);
+  const xml = await res.text();
 
-// MAIN
-(async () => {
-  try {
-    console.log('Lettura feed RSS in corso...');
-    const xml = await fetchRSS(RSS_URL);
+  const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)]
+    .slice(0, 10)
+    .map(m => m[1]);
 
-    // ESTRAE GLI ITEM DAL FEED
-    const items = [];
-    xml.replace(/<item>([\s\S]*?)<\/item>/g, (_, block) => {
-      const title = /<title>([\s\S]*?)<\/title>/.exec(block);
-      const link = /<link>([\s\S]*?)<\/link>/.exec(block);
-      const pubDate = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(block);
-      if (title && link && pubDate) {
-        items.push({
-          title: title[1],
-          link: link[1],
-          pubDate: pubDate[1]
-        });
-      }
-    });
+  const template = fs.readFileSync(TEMPLATE_PATH, "utf8");
 
-    if (items.length === 0) {
-      console.log('Nessun articolo trovato nel feed.');
-      return;
-    }
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-    // PRENDE SOLO GLI ULTIMI 10 ARTICOLI
-    const latest = items.slice(0, MAX_ARTICOLI);
+  for (const item of items) {
+    const title = item.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1];
+    const link = item.match(/<link>(.*?)<\/link>/)?.[1];
+    const pubDateRaw = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1];
 
-    // CREA PAGINE AMP
-    latest.forEach(item => {
-      let slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g, ''); // rimuove dominio e slash finali
-      if (slug.endsWith('.html')) slug = slug.slice(0, -5);          // rimuove .html se presente
+    if (!title || !link || !pubDateRaw) continue;
 
-      const filePath = path.join(AMP_DIR, slug + '.html');
+    const date = new Date(pubDateRaw);
+    const year = date.getFullYear().toString();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
 
-      // CREA CARTELLE INTERMEDIE SE NECESSARIO
-      const dir = path.dirname(filePath);
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const slug = link.split("/").pop().replace(".html", "");
+    const relPath = `${year}/${month}/${slug}.html`;
+    const outDir = path.join(OUTPUT_BASE, year, month);
+    const outFile = path.join(outDir, `${slug}.html`);
 
-      // Sostituisce i segnaposto nel template
-      const html = template
-        .replace(/{{title}}/g, item.title)
-        .replace(/{{link}}/g, item.link)
-        .replace(/{{pubDate}}/g, item.pubDate)
-        .replace(/{{isoDate}}/g, new Date(item.pubDate).toISOString());
+    fs.mkdirSync(outDir, { recursive: true });
 
-      fs.writeFileSync(filePath, html, 'utf8');
-      console.log('Generata pagina AMP:', filePath);
-    });
+    const ampHtml = template
+      .replace(/{{title}}/g, title)
+      .replace(/{{link}}/g, link)
+      .replace(/{{pubDate}}/g, date.toLocaleDateString("it-IT"))
+      .replace(/{{isoDate}}/g, date.toISOString());
 
-    // CREA SITEMAP.XML DIRETTAMENTE IN AMP_DIR
-    let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-    latest.forEach(item => {
-      let slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g, '');
-      if (slug.endsWith('.html')) slug = slug.slice(0, -5);
-      sitemap += `  <url>\n    <loc>https://amp.brunorachiele.it/${slug}.html</loc>\n`;
-      sitemap += `    <lastmod>${new Date(item.pubDate).toISOString()}</lastmod>\n  </url>\n`;
-    });
-    sitemap += '</urlset>';
-    fs.writeFileSync(path.join(AMP_DIR, 'sitemap.xml'), sitemap, 'utf8');
-    console.log('Generata sitemap.xml in amp/');
+    fs.writeFileSync(outFile, ampHtml, "utf8");
 
-    // CREA MINI-INDEX HTML PER GLI ULTIMI ARTICOLI
-    let indexHtml = '<ul>\n';
-    latest.forEach(item => {
-      let slug = item.link.replace(/^https?:\/\/[^\/]+\/|\/$/g, '');
-      if (slug.endsWith('.html')) slug = slug.slice(0, -5);
-      indexHtml += `  <li><a href="https://amp.brunorachiele.it/${slug}.html">${item.title}</a></li>\n`;
-    });
-    indexHtml += '</ul>';
-    fs.writeFileSync(path.join(AMP_DIR, 'ultimi.html'), indexHtml, 'utf8');
-    console.log('Generato mini-index ultimi articoli in amp/');
-
-  } catch (err) {
-    console.error('Errore nella generazione AMP o sitemap:', err);
-    process.exit(1);
+    sitemap += `  <url>\n`;
+    sitemap += `    <loc>${AMP_DOMAIN}/amp/${relPath}</loc>\n`;
+    sitemap += `    <lastmod>${date.toISOString().split("T")[0]}</lastmod>\n`;
+    sitemap += `  </url>\n`;
   }
-})();
+
+  sitemap += `</urlset>`;
+  fs.writeFileSync(SITEMAP_PATH, sitemap, "utf8");
+
+  console.log("✅ AMP e sitemap generati correttamente");
+}
+
+main().catch(err => {
+  console.error("❌ Errore:", err);
+  process.exit(1);
+});
