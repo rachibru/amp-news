@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-     xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+<rss version="2.0" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <channel>
     <title>Bruno Rachiele - Notizie</title>
     <link>https://amp.brunorachiele.it/amp/</link>
     <description>Ultime notizie politiche e sondaggi</description>
-    <!-- Gli articoli verranno generati dallo script -->
   </channel>
 </rss>
