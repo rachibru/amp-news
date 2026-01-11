@@ -1,7 +1,7 @@
 name: Genera Pagine AMP + Sitemap
 
 on:
-  workflow_dispatch:       # puoi eseguirlo manualmente
+  workflow_dispatch:       # esecuzione manuale
   schedule:
     - cron: '0 * * * *'   # ogni ora
   push:
@@ -41,12 +41,14 @@ jobs:
 
           (async () => {
             try {
+              // Legge il feed RSS
               const res = await fetch(RSS_URL);
               const xml = await res.text();
               const parser = new xml2js.Parser();
               const data = await parser.parseStringPromise(xml);
               const items = data.rss.channel[0].item;
 
+              // Mappa gli articoli
               const posts = items.map(item => {
                 const slug = item.link[0].replace(/^https?:\/\/[^\/]+\/|\/$/g,'');
                 const title = item.title[0];
@@ -56,6 +58,7 @@ jobs:
                 return { slug, title, date, isoDate, link };
               });
 
+              // Genera le pagine AMP
               posts.forEach(post => {
                 const folder = path.join(ampDir, post.date.format('YYYY'), post.date.format('MM'));
                 fs.ensureDirSync(folder);
@@ -71,20 +74,25 @@ jobs:
                 console.log('Generata pagina AMP:', filePath);
               });
 
-              // sitemap.xml
+              // Genera sitemap.xml
               const sitemap = builder.create('urlset',{encoding:'UTF-8'});
               sitemap.att('xmlns','http://www.sitemaps.org/schemas/sitemap/0.9');
+
               posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
+
               posts.forEach(post=>{
-                const folder = path.join(post.date.format('YYYY'), post.date.format('MM'));
-                const loc = path.join(folder, post.slug+'.html').replace(/\\/g,'/');
+                const loc = path.join(post.date.format('YYYY'), post.date.format('MM'), post.slug+'.html').replace(/\\/g,'/');
                 sitemap.ele('url')
                   .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
                   .ele('lastmod', {}, post.isoDate);
               });
+
               fs.writeFileSync(path.join(ampDir,'sitemap.xml'), sitemap.end({pretty:true}));
               console.log('Sitemap generata correttamente!');
-            } catch(e) { console.error('Errore:', e); process.exit(1); }
+            } catch(e) { 
+              console.error('Errore nella generazione AMP o sitemap:', e); 
+              process.exit(1); 
+            }
           })();
           "
 
@@ -93,7 +101,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add amp/
-          git commit -m "Aggiornamento automatico pagine AMP e sitemap" || echo "Nessuna modifica"
+          git commit -m 'Aggiornamento automatico pagine AMP e sitemap' || echo 'Nessuna modifica'
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
