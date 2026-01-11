@@ -12,6 +12,8 @@
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-ad"
     src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <script async custom-element="amp-analytics"
+    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 
   <!-- AMP boilerplate ufficiale -->
   <style amp-boilerplate>
@@ -131,7 +133,19 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
   </amp-ad>
 </div>
 
-
+<!-- Google Analytics AMP -->
+<amp-analytics type="gtag" data-credentials="include">
+  <script type="application/json">
+  {
+    "vars": {
+      "gtag_id": "G-EBDJS2FK9G",
+      "config": {
+        "G-EBDJS2FK9G": { "groups": "default" }
+      }
+    }
+  }
+  </script>
+</amp-analytics>
 
 <footer>
   © brunorachiele.it
