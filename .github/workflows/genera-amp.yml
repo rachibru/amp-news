@@ -81,6 +81,7 @@ jobs:
               posts.sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate));
 
               posts.forEach(post=>{
+                // <-- QUI regex corretta
                 const loc = path.join(post.date.format('YYYY'), post.date.format('MM'), post.slug+'.html').replace(/\\/g,'/');
                 sitemap.ele('url')
                   .ele('loc', {}, `https://amp.brunorachiele.it/${loc}`).up()
