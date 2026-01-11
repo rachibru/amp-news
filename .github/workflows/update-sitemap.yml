@@ -1,41 +1,20 @@
-name: Aggiorna Sitemap AMP
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'amp/**/*.html'    # trigger quando modifichi pagine AMP
-      - 'amp/sitemap.xml'  # trigger se sitemap viene modificata
-  workflow_dispatch:        # permette anche di eseguire manualmente
-
-jobs:
-  update-sitemap:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Aggiorna amp/sitemap.xml
+      - name: Aggiorna amp/sitemap.xml da zero
         run: |
+          # Installa temporaneamente i pacchetti necessari
+          npm install glob xmlbuilder
+
+          # Esegui il codice Node.js che genera la sitemap
           node <<'EOF'
           const fs = require('fs');
           const glob = require('glob');
           const builder = require('xmlbuilder');
 
-          const baseUrl = 'https://amp.brunorachiele.it';   // dominio AMP
-          const sitemapPath = 'amp/sitemap.xml';            // percorso sitemap
+          const baseUrl = 'https://amp.brunorachiele.it';
+          const sitemapPath = 'amp/sitemap.xml';
 
-          // Trova tutte le pagine AMP nella cartella amp/
+          // Trova tutte le pagine AMP nella cartella amp/, ignorando sitemap.xml
           const files = glob.sync('amp/**/*.html', { ignore: ['amp/sitemap.xml'] });
 
-          // Crea nuovo XML con tutte le pagine
           const urlset = builder.create('urlset', { encoding: 'UTF-8' });
           urlset.att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
@@ -45,18 +24,6 @@ jobs:
           });
 
           const xml = urlset.end({ pretty: true });
-
-          // Scrivi dentro amp/sitemap.xml
           fs.writeFileSync(sitemapPath, xml);
-          console.log('amp/sitemap.xml aggiornato con tutte le pagine AMP!');
+          console.log('amp/sitemap.xml completamente riscritto con tutte le pagine AMP!');
           EOF
-
-      - name: Commit e push sitemap.xml
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add amp/sitemap.xml
-          git commit -m "Aggiornata amp/sitemap.xml con nuove pagine AMP" || echo "Nessuna modifica da commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
