@@ -2,18 +2,23 @@
 <html amp lang="it">
 <head>
   <meta charset="utf-8">
-  <title>Prime Pagine dei Giornali</title>
-  <link rel="canonical" href="https://amp.brunorachiele.it/amp/prime-pagine/">
+  <title>I Giornali di Oggi</title>
+  <link rel="canonical" href="https://brunorachiele.it/prime-pagine">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-  <meta name="description" content="Prime pagine dei principali quotidiani italiani aggiornate ogni giorno.">
+  <meta name="description" content="Scopri le prime pagine dei principali quotidiani italiani, aggiornate ogni giorno alle 6 del mattino.">
+
+  <!-- Indica a Google la data di aggiornamento -->
+  <meta name="date" content="2026-01-11T06:00:00+01:00">
+  <meta property="article:published_time" content="2026-01-11T06:00:00+01:00">
+  <meta property="article:modified_time" content="2026-01-11T06:00:00+01:00">
 
   <!-- AMP core -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 
   <!-- AMP ADS -->
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-
-  <!-- AMP BOILERPLATE CORRETTO -->
+  
+  <!-- AMP BOILERPLATE -->
   <style amp-boilerplate>
     body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
     -moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
@@ -25,35 +30,86 @@
     @-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
     @keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
   </style>
-
   <noscript>
     <style amp-boilerplate>
       body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
     </style>
   </noscript>
 
-  <!-- STILI PERSONALIZZATI -->
+  <!-- STILI -->
   <style amp-custom>
-    body { font-family: Arial, sans-serif; margin: 16px; text-align: center; background: #fafafa; }
-    h1 { font-size: 1.6em; margin-bottom: 20px; }
-    table { width: 100%; border-collapse: collapse; }
-    td { padding: 16px 0; border-bottom: 1px solid #ddd; }
-    amp-img { border-radius: 8px; margin: 10px auto; }
-    small { color: #555; font-size: 0.9em; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    header {
+      padding: 20px 0;
+    }
+    header amp-img {
+      width: 120px;
+      height: auto;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 10px 0;
+      color: #222;
+    }
+    .main-image amp-img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px auto;
+      display: block;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 20px 0;
+      background-color: #ff4500;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    .btn:hover {
+      background-color: #e03e00;
+    }
+    small {
+      display: block;
+      color: #555;
+      font-size: 0.9em;
+      margin-top: 8px;
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- IMMAGINE HEADER -->
-  <amp-img
-    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
-    width="90"
-    height="90"
-    layout="fixed"
-    alt="Prime Pagine">
-  </amp-img>
+  <!-- LOGO -->
+  <header>
+    <amp-img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
+      width="120" height="120" layout="fixed" alt="Logo Brunorachiele.it">
+  </header>
 
+  <!-- TITOLO -->
+  <h1>I Giornali di Oggi</h1>
+
+  <!-- IMMAGINE FISSA -->
+  <div class="main-image">
+    <amp-img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7iuBFnrSwTOITu6qLlKUYNqoj3amr4TYgLnmKaYVwo15fRG-l22j7AFWW4gz5P6ZM80gzJFBq29Y12e0RulO6R8SY_s3yUbtsV_x3Ky8VqzzDHXPXHiufwPn-yuR7-1C9NpPNwJCjgs45_Ai1fJevER6KDUI6-KzrfTK1TQAlutujAfPVs4ONnjHU0oQ/s1600/NUOVE%20GRAFICHE%20SITO%20%281%29.png"
+      width="600" height="400" layout="responsive" alt="Prime Pagine dei Giornali">
+    </amp-img>
+  </div>
+
+  <!-- BOTTONE -->
+  <a class="btn" href="https://brunorachiele.it/prime-pagine" target="_blank">
+    Visualizza le prime pagine di oggi su Brunorachiele.it
+  </a>
+  
   <!-- ANNUNCIO PRINCIPALE -->
   <amp-ad width="100vw" height="320"
     type="adsense"
@@ -63,71 +119,9 @@
     data-full-width="">
     <div overflow=""></div>
   </amp-ad>
-
-  <h1>Prime Pagine dei Giornali</h1>
-
-  <table>
-    <tr><td>
-      Corriere della Sera 🇮🇹<br>
-      <amp-img src="https://static2.rcsobjects.it/images/corrierefc_nazionale_web-Big.jpg"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <tr><td>
-      Il Secolo XIX 🇮🇹<br>
-      <amp-img src="https://www.gelestatic.it/storage/quotidiani-locali/testate/copertina_ilsecoloxix_genova_w510.jpeg"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <!-- ANNUNCIO SECONDARIO -->
-    <tr><td>
-      <amp-ad width="100vw" height="320"
-        type="adsense"
-        data-ad-client="ca-pub-9225028785900171"
-        data-ad-slot="2980836148"
-        data-auto-format="rspv"
-        data-full-width="">
-        <div overflow=""></div>
-      </amp-ad>
-    </td></tr>
-
-    <tr><td>
-      La Ragione 🇮🇹<br>
-      <amp-img src="https://servizidue.laragione.eu/giornale/ultima-copertina"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <tr><td>
-      Il Dubbio 🇮🇹<br>
-      <amp-img src="https://images.ildubbio.news/primapagina/20251025.jpeg"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <tr><td>
-      Il Foglio 🇮🇹<br>
-      <amp-img src="https://eu01.newsmemory.com/?pSetup=ilfoglio&getprima&editionname=Il%20Foglio"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <tr><td>
-      La Repubblica 🇮🇹<br>
-      <amp-img src="https://sfoglio.repubblica.it/repubblica/api/cover.php?newspaper=REP&edition=nazionale&width=390&height=510"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-
-    <tr><td>
-      La Stampa 🇮🇹<br>
-      <amp-img src="https://www.lastampa.it/edicola/api/cover.php?newspaper=LASTAMPA&edition=TORINO&width=330&height=450"
-        width="400" height="550" layout="responsive"></amp-img>
-      <small>Aggiornato oggi</small>
-    </td></tr>
-  </table>
+  
+  <!-- DATA AGGIORNAMENTO -->
+  <small>Aggiornato ogni giorno alle 6:00</small>
 
 </body>
 </html>
