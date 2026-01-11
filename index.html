@@ -2,10 +2,11 @@
 <html ⚡ lang="it">
 <head>
   <meta charset="utf-8">
-  <title>brunorachiele.it</title>
+  <title>Bruno Rachiele</title>
 
-  <link rel="canonical" href="https://www.brunorachiele.it/">
+  <link rel="canonical" href="https://amp.brunorachiele.it/">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="Bruno Rachiele - Pagina AMP Home.">
   <meta name="robots" content="index, follow">
 
   <!-- AMP core -->
@@ -34,34 +35,35 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px 16px;
+      margin: auto;
+      padding: 40px 16px;
       background: #fff;
+      color: #111;
     }
     .logo {
-      width: 120px;
-      height: 120px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 1.5em;
       margin-bottom: 30px;
     }
-    a {
+    .btn {
       display: inline-block;
-      margin-top: 30px;
       padding: 14px 24px;
-      background: #6598b7;
+      background-color: #6598b7;
       color: #fff;
-      font-size: 1.1em;
-      border-radius: 6px;
+      font-size: 1.2em;
       text-decoration: none;
+      border-radius: 6px;
     }
   </style>
-  
-  <!-- AMP Analytics -->
-  <script async custom-element="amp-analytics"
-    src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 </head>
 
 <body>
 
-  <amp-img class="logo"
+<header>
+  <amp-img
+    class="logo"
     src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
     width="120"
     height="120"
@@ -69,23 +71,19 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
     alt="Bruno Rachiele">
   </amp-img>
 
-  <a href="https://www.brunorachiele.it/" target="_top">
-    Vai al sito principale
-  </a>
+  <h1>Benvenuto su Bruno Rachiele</h1>
 
-  <!-- Google Analytics AMP -->
-  <amp-analytics type="gtag" data-credentials="include">
-    <script type="application/json">
-    {
-      "vars": {
-        "gtag_id": "G-EBDJS2FK9G",
-        "config": {
-          "G-EBDJS2FK9G": { "groups": "default" }
-        }
-      }
-    }
-    </script>
-  </amp-analytics>
+  <a class="btn" href="https://www.brunorachiele.it/">Visita il sito completo →</a>
+</header>
 
 </body>
 </html>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EBDJS2FK9G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EBDJS2FK9G');
+</script>
