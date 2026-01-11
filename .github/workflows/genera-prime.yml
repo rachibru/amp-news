@@ -1,7 +1,8 @@
 name: Genera Prime Pagine AMP
+
 on:
   schedule:
-    - cron: '0 7 * * *' # ogni giorno alle 7 AM
+    - cron: '0 6 * * *' # ogni giorno alle 6:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -9,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-      - run: npm install node-fetch@3
-      - run: node amp/prime-pagine/scripts/genera-prime.js
+          node-version: 20
+      - name: Genera Prime Pagine AMP
+        run: node amp/prime-pagine/scripts/genera-prime.js
