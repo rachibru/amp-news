@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sondaggi Referendum Giustizia 2026 – brunorachiele.it</title>
 <meta name="description" content="Sondaggi aggiornati del Referendum Giustizia 2026. Grafici interattivi e risultati live.">
-<link rel="stylesheet" href="style.css"> <!-- Qui puoi inserire CSS personalizzato -->
 
 <style>
 body {
@@ -14,12 +13,12 @@ body {
     padding: 0;
     background:#f7f7f7;
     color:#333;
+    line-height:1.5;
 }
 
 header {
-    display:flex;
-    align-items:center;
-    padding:16px;
+    text-align:center;
+    padding:24px 16px;
     background:#1a73e8;
     color:#fff;
 }
@@ -28,24 +27,31 @@ header img {
     width:90px;
     height:90px;
     border-radius:12px;
-    margin-right:16px;
+    margin-bottom:12px;
 }
 
 header h1 {
-    font-size:1.8rem;
+    font-size:1.6rem;
     margin:0;
+}
+
+header small {
+    display:block;
+    font-size:0.9rem;
+    margin-top:4px;
+    opacity:0.85;
+}
+
+header h2 {
+    font-size:1.2rem;
+    margin-top:8px;
+    font-weight:normal;
 }
 
 .container {
     max-width:1200px;
     margin:20px auto;
     padding:0 16px;
-}
-
-h2 {
-    color:#1a73e8;
-    text-align:center;
-    margin-bottom:24px;
 }
 
 .flourish-embed {
@@ -61,15 +67,8 @@ h2 {
 .ad-box {
     width:100%;
     max-width:1200px;
-    height:320px;
     margin:30px auto;
-    background:#e0e0e0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:12px;
-    color:#555;
-    font-size:1.2rem;
+    text-align:center;
 }
 
 a.back-home {
@@ -91,11 +90,11 @@ a.back-home:hover {
 
 <header>
     <img src="logo-90x90.png" alt="Logo brunorachiele.it">
-    <h1>Speciale brunorachiele.it – Sondaggi Referendum Giustizia 2026</h1>
+    <h1>Sondaggi <small>Speciale – Bruno Rachiele.it</small></h1>
+    <h2>Referendum Giustizia 2026</h2>
 </header>
 
 <div class="container">
-    <h2>Ultimi Sondaggi</h2>
 
     <!-- Embed Flourish -->
     <div class="flourish-embed flourish-chart" data-src="visualisation/27172753">
@@ -107,18 +106,17 @@ a.back-home:hover {
 
     <!-- Box pubblicità -->
     <div class="ad-box">
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
-     crossorigin="anonymous"></script>
-<!-- referendumpagina -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9225028785900171"
-     data-ad-slot="2739440797"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
+                crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9225028785900171"
+             data-ad-slot="2739440797"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <a href="index.html" class="back-home">← Torna alla Home</a>
