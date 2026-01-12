@@ -1,0 +1,58 @@
+<!doctype html>
+<html ⚡ lang="it">
+<head>
+<meta charset="utf-8">
+<title>Risultati Referendum Giustizia 2026</title>
+<link rel="canonical" href="https://tuosito.github.io/amp/elezioni/2026/referendum-giustizia/risultati.html">
+<meta name="viewport" content="width=device-width,minimum-scale=1">
+<meta name="description" content="Risultati e sondaggi live del Referendum Giustizia 2026.">
+
+<script async src="https://cdn.ampproject.org/v0.js"></script>
+<script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
+<script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+
+<style amp-boilerplate>
+body{visibility:hidden}
+</style>
+<noscript>
+<style amp-boilerplate>
+body{visibility:visible}
+</style>
+</noscript>
+
+<style amp-custom>
+body {font-family:Arial,sans-serif; margin:16px;}
+h1 {color:#1a73e8;}
+.bar{height:24px;margin:6px 0;border-radius:6px;}
+.si{background:#1a73e8;color:#fff;padding:4px;}
+.no{background:#d93025;color:#fff;padding:4px;}
+a {display:block;margin-top:16px;color:#1a73e8;text-decoration:none;}
+</style>
+</head>
+
+<body>
+<h1>Risultati Referendum Giustizia 2026</h1>
+<p>Dati aggiornati in tempo reale dal nostro Google Fogli.</p>
+
+<amp-list
+  layout="fixed-height"
+  height="200"
+  src="https://opensheet.elk.sh/ID_FOGLIO/NomeFoglio"
+  items="."
+  refresh="1800">
+
+  <template type="amp-mustache">
+    <p>SÌ: {{si}}%</p>
+    <div class="bar si" style="width:{{si}}%">{{si}}%</div>
+
+    <p>NO: {{no}}%</p>
+    <div class="bar no" style="width:{{no}}%">{{no}}%</div>
+  </template>
+
+</amp-list>
+
+<a href="index.html">← Torna alla home</a>
+<small>Fonte: dati sondaggi live dal Google Fogli</small>
+
+</body>
+</html>
