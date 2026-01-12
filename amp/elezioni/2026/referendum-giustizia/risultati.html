@@ -1,58 +1,168 @@
-<!doctype html>
-<html ⚡ lang="it">
+<!DOCTYPE html>
+<html lang="it">
 <head>
-<meta charset="utf-8">
-<title>Risultati Referendum Giustizia 2026</title>
-<link rel="canonical" href="https://tuosito.github.io/amp/elezioni/2026/referendum-giustizia/risultati.html">
-<meta name="viewport" content="width=device-width,minimum-scale=1">
-<meta name="description" content="Risultati e sondaggi live del Referendum Giustizia 2026.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risultati Live Referendum Giustizia 2026 – brunorachiele.it</title>
+<meta name="description" content="Risultati live del Referendum Giustizia 2026, aggiornati automaticamente.">
 
-<script async src="https://cdn.ampproject.org/v0.js"></script>
-<script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
-<script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin:0;
+    padding:0;
+    background:#f7f7f7;
+    color:#333;
+    text-align:center;
+}
 
-<style amp-boilerplate>
-body{visibility:hidden}
-</style>
-<noscript>
-<style amp-boilerplate>
-body{visibility:visible}
-</style>
-</noscript>
+header {
+    padding:20px;
+    background:#6598b7;
+    color:#fff;
+}
 
-<style amp-custom>
-body {font-family:Arial,sans-serif; margin:16px;}
-h1 {color:#1a73e8;}
-.bar{height:24px;margin:6px 0;border-radius:6px;}
-.si{background:#1a73e8;color:#fff;padding:4px;}
-.no{background:#d93025;color:#fff;padding:4px;}
-a {display:block;margin-top:16px;color:#1a73e8;text-decoration:none;}
+header img {
+    width:90px;
+    height:90px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+header h1 {
+    font-size:1.6rem;
+    margin:0;
+}
+
+header small {
+    display:block;
+    font-size:0.9rem;
+    margin-top:4px;
+    opacity:0.85;
+}
+
+header h2 {
+    font-size:1.2rem;
+    margin-top:8px;
+    font-weight:normal;
+}
+
+.container {
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 16px;
+}
+
+.live-box {
+    position:relative;
+    width:250px;
+    height:250px;
+    margin:40px auto;
+    background:#1a73e8;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    animation: rotateBox 4s linear infinite;
+    box-shadow:0 6px 16px rgba(0,0,0,0.25);
+}
+
+@keyframes rotateBox {
+    0% { transform: rotate(0deg);}
+    25% { transform: rotate(3deg);}
+    50% { transform: rotate(0deg);}
+    75% { transform: rotate(-3deg);}
+    100% { transform: rotate(0deg);}
+}
+
+.live-text {
+    position:absolute;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#fff;
+    text-shadow:0 0 8px #ff0000;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity:1; }
+    25%, 75% { opacity:0; }
+}
+
+.logo-pulse {
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1);}
+    50% { transform: scale(1.1);}
+    100% { transform: scale(1);}
+}
+
+.results {
+    margin-top:30px;
+    font-size:1.2rem;
+}
+
+.ad-box {
+    width:100%;
+    max-width:1200px;
+    margin:30px auto;
+    text-align:center;
+}
+
+a.back-home {
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 24px;
+    background:#1a73e8;
+    color:#fff;
+    border-radius:8px;
+    text-decoration:none;
+}
+a.back-home:hover {
+    background:#1665c1;
+}
 </style>
 </head>
 
 <body>
-<h1>Risultati Referendum Giustizia 2026</h1>
-<p>Dati aggiornati in tempo reale dal nostro Google Fogli.</p>
 
-<amp-list
-  layout="fixed-height"
-  height="200"
-  src="https://opensheet.elk.sh/ID_FOGLIO/NomeFoglio"
-  items="."
-  refresh="1800">
+<header>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" alt="Logo brunorachiele.it">
+    <h1>Risultati Live <small>Speciale – Bruno Rachiele.it</small></h1>
+    <h2>Referendum Giustizia 2026</h2>
+</header>
 
-  <template type="amp-mustache">
-    <p>SÌ: {{si}}%</p>
-    <div class="bar si" style="width:{{si}}%">{{si}}%</div>
+<div class="container">
 
-    <p>NO: {{no}}%</p>
-    <div class="bar no" style="width:{{no}}%">{{no}}%</div>
-  </template>
+    <!-- Box live animato -->
+    <div class="live-box">
+        <div class="live-text">LIVE</div>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" class="logo-pulse" alt="Logo Bruno Rachiele">
+    </div>
 
-</amp-list>
+    <!-- Risultati live (placeholder) -->
+    <div class="results">
+        <p>SÌ: <strong>52%</strong></p>
+        <p>NO: <strong>48%</strong></p>
+    </div>
 
-<a href="index.html">← Torna alla home</a>
-<small>Fonte: dati sondaggi live dal Google Fogli</small>
+    <!-- Box pubblicità -->
+    <div class="ad-box">
+        <div style="width:100%; height:320px; background:#e0e0e0; display:flex; align-items:center; justify-content:center; border-radius:12px;">
+            Spazio pubblicità / AdSense
+        </div>
+    </div>
+
+    <a href="index.html" class="back-home">← Torna alla Home</a>
+</div>
 
 </body>
 </html>
