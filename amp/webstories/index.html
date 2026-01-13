@@ -3,35 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>Ultimi Sondaggi Politici - Bruno Rachiele</title>
-  <link rel="canonical" href="https://amp.brunorachiele.it/amp/webstories">
+
+  <!-- CANONICAL CORRETTO -->
+  <link rel="canonical" href="https://amp.brunorachiele.it/stories/index.html">
+
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="robots" content="index,follow">
 
   <!-- AMP runtime -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-  <!-- AMP boilerplate OBBLIGATORIO (NON MODIFICARE) -->
+  <!-- AMP boilerplate OBBLIGATORIO -->
   <style amp-boilerplate>
     body {
       -webkit-animation: -amp-start 8s steps(1,end) 0s 1 normal both;
-      -moz-animation: -amp-start 8s steps(1,end) 0s 1 normal both;
-      -ms-animation: -amp-start 8s steps(1,end) 0s 1 normal both;
       animation: -amp-start 8s steps(1,end) 0s 1 normal both;
-    }
-    @-webkit-keyframes -amp-start {
-      from { visibility: hidden; }
-      to { visibility: visible; }
-    }
-    @-moz-keyframes -amp-start {
-      from { visibility: hidden; }
-      to { visibility: visible; }
-    }
-    @-ms-keyframes -amp-start {
-      from { visibility: hidden; }
-      to { visibility: visible; }
-    }
-    @-o-keyframes -amp-start {
-      from { visibility: hidden; }
-      to { visibility: visible; }
     }
     @keyframes -amp-start {
       from { visibility: hidden; }
@@ -41,12 +27,7 @@
 
   <noscript>
     <style amp-boilerplate>
-      body {
-        -webkit-animation: none;
-        -moz-animation: none;
-        -ms-animation: none;
-        animation: none;
-      }
+      body { animation: none; }
     </style>
   </noscript>
 
@@ -54,7 +35,7 @@
   <script async custom-element="amp-story"
     src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
 
-  <!-- Stili personalizzati -->
+  <!-- STILI -->
   <style amp-custom>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -99,62 +80,76 @@
 
 <amp-story
   standalone
-  title="Web Stories Politica"
-  publisher="brunorachiele.it"
-  publisher-logo-src="https://amp.brunorachiele.it/amp/webstories"
-  poster-portrait-src="https://dummyimage.com/1080x1920/6598b7/ffffff.png">
+  title="Ultimi sondaggi politici"
+  publisher="Bruno Rachiele"
+  publisher-logo-src="/img/logo-amp.png"
+  poster-portrait-src="/poster/webstory-cover.jpg">
 
   <!-- COVER -->
   <amp-story-page id="cover">
     <amp-story-grid-layer template="vertical">
       <h1>Analisi, Sondaggi e Dati</h1>
       <p>Sondaggi, dati e analisi sempre aggiornati</p>
-      <a class="cta" href="https://www.brunorachiele.it/" target="_blank">
+      <a class="cta"
+         href="https://www.brunorachiele.it/"
+         target="_blank"
+         rel="noopener noreferrer">
         Vai al sito
       </a>
     </amp-story-grid-layer>
   </amp-story-page>
 
-  <!-- PRIMEPAGINE -->
-  <amp-story-page id="urne">
+  <!-- PRIME PAGINE -->
+  <amp-story-page id="primepagine">
     <amp-story-grid-layer template="vertical">
       <h1>#primepagine</h1>
       <p>Le prime pagine aggiornate ogni giorno</p>
-      <a class="cta" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" target="_blank">
-        Leggi le prime pagine di oggi
+      <a class="cta"
+         href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html"
+         target="_blank"
+         rel="noopener noreferrer">
+        Leggi le prime pagine
       </a>
     </amp-story-grid-layer>
   </amp-story-page>
 
-<!-- BREAKING NEWS -->
-  <amp-story-page id="sondaggi">
+  <!-- BREAKING NEWS -->
+  <amp-story-page id="breakingnews">
     <amp-story-grid-layer template="vertical">
       <h1>#breakingnews</h1>
       <p>Le ultime notizie in diretta dall'Italia e dal Mondo</p>
-      <a class="cta" href="https://www.brunorachiele.it/p/live-ultime-notizie.html" target="_blank">
-        Leggi l’analisi
+      <a class="cta"
+         href="https://www.brunorachiele.it/p/live-ultime-notizie.html"
+         target="_blank"
+         rel="noopener noreferrer">
+        Segui la diretta
       </a>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- SONDAGGI POLITICI -->
-  <amp-story-page id="sondaggi">
+  <amp-story-page id="sondaggi2026">
     <amp-story-grid-layer template="vertical">
-      <h1>Sondaggi politici del 2026</h1>
-      <p>Previsioni e analisi dell'andamento dei partiti nel 2026</p>
-      <a class="cta" href="https://www.brunorachiele.it/2026/01/politica-2026-analisi-demoscopiche-scenari.html
-" target="_blank">
+      <h1>Sondaggi politici 2026</h1>
+      <p>Previsioni e analisi sull'andamento dei partiti</p>
+      <a class="cta"
+         href="https://www.brunorachiele.it/2026/01/politica-2026-analisi-demoscopiche-scenari.html"
+         target="_blank"
+         rel="noopener noreferrer">
         Leggi l’analisi
       </a>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- GRADIMENTO LEADER -->
-  <amp-story-page id="leader">
+  <amp-story-page id="leader0501">
     <amp-story-grid-layer template="vertical">
-      <h1>Gradimento dei leader 5 gennaio 2026</h1>
+      <h1>Gradimento leader – 12 gennaio 2026</h1>
       <p>La prima rilevazione del gradimento dei leader</p>
-      <a class="cta" href="https://www.brunorachiele.it/2026/01/gradimento-dei-leader-supermedia-del-05.html" target="_blank">
+      <a class="cta"
+         href="https://www.brunorachiele.it/2026/01/gradimento-leader-12-gennaio-2026.html"
+         target="_blank"
+         rel="noopener noreferrer">
         Scopri i dati
       </a>
     </amp-story-grid-layer>
@@ -163,20 +158,26 @@
   <!-- ULTIMI 30 GIORNI -->
   <amp-story-page id="ultimi30">
     <amp-story-grid-layer template="vertical">
-      <h1>Gli ultimi 30 giorni politici - 26 dicembre 2025</h1>
-      <p>La media dei sondaggi politici degli ultimi 30 giorni</p>
-      <a class="cta" href="https://www.brunorachiele.it/2025/12/ultimi-30-giorni-politici-del-26.html" target="_blank">
+      <h1>Ultimi 30 giorni politici</h1>
+      <p>La media dei sondaggi degli ultimi 30 giorni</p>
+      <a class="cta"
+         href="https://www.brunorachiele.it/2025/12/ultimi-30-giorni-politici-del-26.html"
+         target="_blank"
+         rel="noopener noreferrer">
         Approfondisci
       </a>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- DALLE URNE AI NUMERI -->
-  <amp-story-page id="urne">
+  <amp-story-page id="urne-numeri">
     <amp-story-grid-layer template="vertical">
       <h1>Dalle urne ai numeri</h1>
-      <p>Come cambia il consenso elettorale dalle ultime elezioni ai sondaggi - 23 dicembre 2025</p>
-      <a class="cta" href="https://www.brunorachiele.it/2025/12/dalle-urne-ai-numeri-del-23-dicembre.html" target="_blank">
+      <p>Come cambia il consenso elettorale</p>
+      <a class="cta"
+         href="https://www.brunorachiele.it/2025/12/dalle-urne-ai-numeri-del-23-dicembre.html"
+         target="_blank"
+         rel="noopener noreferrer">
         Vai all’articolo
       </a>
     </amp-story-grid-layer>
