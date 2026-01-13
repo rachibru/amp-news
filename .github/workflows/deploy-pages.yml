@@ -1,0 +1,37 @@
+name: Deploy AMP Pages
+
+# Trigger: ogni push sul branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write        # Necessario per pubblicare
+      id-token: write     # Necessario per OIDC
+    steps:
+      # Step 1: checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Setup Node (richiesto da deploy-pages)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Copy files nella cartella root (opzionale se la tua pagina è in /autore)
+      - name: Copy autore page to root
+        run: |
+          mkdir -p public
+          cp -R autore/* public/
+
+      # Step 4: Deploy su GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          branch: main   # Branch da cui pubblicare
+          folder: public # Cartella da pubblicare (qui copiato /autore)
