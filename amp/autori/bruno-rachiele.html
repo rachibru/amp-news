@@ -87,6 +87,38 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
       font-weight: bold;
       word-break: break-word;
     }
+    .author-gallery {
+  margin: 2rem 0;
+}
+
+.author-gallery h2 {
+  margin-bottom: 1rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  text-align: center;
+}
+
+.gallery-grid img {
+  width: 100%;
+  max-width: 220px;   /* 🔴 limite dimensione */
+  height: auto;
+  border-radius: 6px;
+}
+
+.gallery-grid figcaption {
+  font-size: 0.85rem;
+  margin-top: 6px;
+  color: #444;
+}
+
   </style>
 
   <!-- SCHEMA.ORG PERSON -->
@@ -213,35 +245,46 @@ body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:non
 <section class="author-gallery">
   <h2>Galleria fotografica</h2>
 
-  <figure>
-    <img src="/foto/intervistarai.png"
-         alt="Bruno Rachiele intervista su Rai3">
-    <figcaption>Intervista Rai3 Buongiorno Regione - gennaio 2022</figcaption>
-  </figure>
-
-  <figure>
-    <img src="/foto/intervistalac.png"
-         alt="Bruno Rachiele intervista su LaCtv">
-    <figcaption>Intervista LaCtv - marzo 2021</figcaption>
-  </figure>
-
-  <figure>
-    <img src="/foto/intervistacovid.png"
-         alt="Dichiarazioni alla Stampa">
-    <figcaption>Dichiarazioni alla Stampa post discussione Trasporti Pubblici e Strutture Scolastiche - 7 gennaio 2022 </figcaption>
-  </figure>
+  <div class="gallery-grid">
 
     <figure>
-    <img src="/foto/intervistartl.jpg"
-         alt="Bruno Rachiele intervistato da rtl 102.5 - 14 febbraio 2021">
-    <figcaption>Bruno Rachiele intervistato da rtl 102.5</figcaption>
-  </figure>
+      <img src="/foto/intervistarai.png"
+           alt="Bruno Rachiele intervista su Rai3"
+           loading="lazy">
+      <figcaption>Intervista Rai3 – Buongiorno Regione (gennaio 2022)</figcaption>
+    </figure>
 
     <figure>
-    <img src="/foto/intervistartl1025.png"
-         alt="Bruno Rachiele intervistato da rtl 102.5 - 14 febbraio 2021">
-    <figcaption>Bruno Rachiele intervistato da rtl 102.5</figcaption>
-  </figure>
+      <img src="/foto/intervistalac.png"
+           alt="Bruno Rachiele intervista su LaCtv"
+           loading="lazy">
+      <figcaption>Intervista LaCtv (marzo 2021)</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/foto/intervistacovid.png"
+           alt="Bruno Rachiele dichiarazioni alla stampa"
+           loading="lazy">
+      <figcaption>Dichiarazioni alla stampa – 7 gennaio 2022</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/foto/intervistartl.jpg"
+           alt="Bruno Rachiele intervistato da RTL 102.5"
+           loading="lazy">
+      <figcaption>Intervista RTL 102.5</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/foto/intervistartl1025.png"
+           alt="Bruno Rachiele intervistato da RTL 102.5"
+           loading="lazy">
+      <figcaption>Intervista RTL 102.5</figcaption>
+    </figure>
+
+  </div>
+</section>
+
   
 </section>
   
