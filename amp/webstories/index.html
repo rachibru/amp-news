@@ -12,28 +12,53 @@
 
   <style amp-custom>
     amp-story {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       background-color: #6598b7;
-      color: #fff;
+      color: #ffffff;
     }
-    .center {
+
+    .wrap {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100%;
-      text-align: center;
       padding: 32px;
     }
-    h1 {
-      font-size: 2em;
-      line-height: 1.2;
-      margin-bottom: 24px;
+
+    .card {
+      max-width: 420px;
+      width: 100%;
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
     }
-    a {
-      font-size: 1.3em;
-      color: #fff;
-      text-decoration: underline;
+
+    .eyebrow {
+      font-size: 0.9em;
+      letter-spacing: 1px;
+      opacity: 0.85;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 1.9em;
+      line-height: 1.2;
+      margin: 0 0 24px;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #6598b7;
+      font-weight: 700;
+      font-size: 1.05em;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -44,66 +69,83 @@
   standalone
   title="Politica e Sondaggi – Bruno Rachiele"
   publisher="Bruno Rachiele"
-  publisher-logo-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/s1600/logo.png"
-  poster-portrait-src="">
+  publisher-logo-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/s1600/logo.png">
 
   <!-- 1 -->
   <amp-story-page id="p1">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>Sondaggio Politico<br>17 gennaio 2026</h1>
-      <a href="https://www.brunorachiele.it/2026/01/sondaggio-politico-17-gennaio-2026.html">
-        👉 Leggi l’analisi
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Supermedia</div>
+        <h1>Sondaggio Politico<br>17 gennaio 2026</h1>
+        <a class="btn" href="https://www.brunorachiele.it/2026/01/sondaggio-politico-17-gennaio-2026.html">
+          Leggi l’analisi →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- 2 -->
   <amp-story-page id="p2">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>Gradimento dei Leader<br>19 gennaio 2026</h1>
-      <a href="https://www.brunorachiele.it/2026/01/gradimento-dei-leader-19-gennaio-2026.html">
-        👉 Scopri i dati
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Gradimento</div>
+        <h1>Leader politici<br>19 gennaio 2026</h1>
+        <a class="btn" href="https://www.brunorachiele.it/2026/01/gradimento-dei-leader-19-gennaio-2026.html">
+          Scopri i dati →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- 3 -->
   <amp-story-page id="p3">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>Dalle urne ai numeri<br>21 gennaio 2026</h1>
-      <a href="https://www.brunorachiele.it/2026/01/dalle-urne-ai-numeri-del-21-gennaio.html">
-        👉 Analisi completa
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Analisi</div>
+        <h1>Dalle urne<br>ai numeri</h1>
+        <a class="btn" href="https://www.brunorachiele.it/2026/01/dalle-urne-ai-numeri-del-21-gennaio.html">
+          Approfondisci →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- 4 -->
   <amp-story-page id="p4">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>Ultimi 30 giorni<br>Politici</h1>
-      <a href="https://www.brunorachiele.it/2026/01/30-giorni-politici-del-23-gennaio.html">
-        👉 Guarda i trend
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Trend</div>
+        <h1>Ultimi 30 giorni<br>Politici</h1>
+        <a class="btn" href="https://www.brunorachiele.it/2026/01/30-giorni-politici-del-23-gennaio.html">
+          Guarda i movimenti →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- 5 -->
   <amp-story-page id="p5">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>Prime Pagine<br>dei Giornali</h1>
-      <a href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">
-        👉 Sfoglia ora
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Rassegna</div>
+        <h1>Prime pagine<br>dei giornali</h1>
+        <a class="btn" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">
+          Sfoglia ora →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
   <!-- 6 -->
   <amp-story-page id="p6">
-    <amp-story-grid-layer template="fill" class="center">
-      <h1>LiveNews<br>Ultime Notizie</h1>
-      <a href="https://www.brunorachiele.it/p/live-ultime-notizie.html">
-        👉 Segui in tempo reale
-      </a>
+    <amp-story-grid-layer template="fill" class="wrap">
+      <div class="card">
+        <div class="eyebrow">Live</div>
+        <h1>Ultime notizie<br>in tempo reale</h1>
+        <a class="btn" href="https://www.brunorachiele.it/p/live-ultime-notizie.html">
+          Segui Live →
+        </a>
+      </div>
     </amp-story-grid-layer>
   </amp-story-page>
 
