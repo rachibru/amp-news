@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="https://www.google.com/schemas/sitemap-news/0.9">
+<urlset 
+    xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
   <url>
     <loc>https://amp.brunorachiele.it/amp/prime-pagine/index.html</loc>
@@ -9,7 +10,7 @@
     <priority>1.0</priority>
     <news:news>
       <news:publication>
-        <news:name>Prime Pagine di Oggi</news:name>
+        <news:name>Prime Pagine dei giornali di oggi</news:name>
         <news:language>it</news:language>
       </news:publication>
       <news:publication_date>2026-01-17</news:publication_date>
