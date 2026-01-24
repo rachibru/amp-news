@@ -1,0 +1,161 @@
+<div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s1920/NUOVE%20GRAFICHE%20SITO.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="200" data-original-height="1080" data-original-width="1920" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s200/NUOVE%20GRAFICHE%20SITO.jpg"/></a></div>
+
+<!-- ===================== INTESTAZIONE ===================== -->
+<header id="live-header">
+  <div class="header-left">
+    <img src="https://public.flourish.studio/uploads/201668/f7949fc8-a5be-4f12-82a1-d2d2469dc4e9.png" alt="Logo Bruno Rachiele" class="logo">
+  </div>
+  <div class="header-center">
+    <div id="live-breaking" class="live-breaking">BREAKING NEWS</div>
+  </div>
+  <div class="header-right">
+    <div id="current-time" class="time"></div>
+    <div id="current-date" class="date"></div>
+  </div>
+</header>
+
+<!-- ===================== LIVEBLOG ===================== -->
+<div id="liveblog-wrapper">
+  <div id="liveblog"></div>
+</div>
+
+<script>
+// ===================== CONFIG =====================
+const AUTO_REFRESH_SECONDS = 30;
+const BREAKING_MINUTES = 30;
+
+const feeds = [
+  { name: "Google News", url: "https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=latest&hl=it&gl=IT&ceid=IT:it" },
+  { name: "ANSA", url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.ansa.it/sito/notizie/topnews/topnews_rss.xml" },
+  { name: "Rai News", url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.rainews.it/rss/ultimora" }
+];
+
+// ===================== FUNZIONI =====================
+function updateTimeDate(){
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2,'0');
+  const minutes = now.getMinutes().toString().padStart(2,'0');
+  const timeStr = hours + ":" + minutes;
+  const dayStr = now.toLocaleDateString("it-IT", { weekday: 'long', day: '2-digit', month:'long', year:'numeric' });
+
+  const timeDiv = document.getElementById('current-time');
+  const dateDiv = document.getElementById('current-date');
+  if(timeDiv) timeDiv.textContent = timeStr;
+  if(dateDiv) dateDiv.textContent = dayStr;
+}
+updateTimeDate();
+setInterval(updateTimeDate, 1000);
+
+// Lampeggio LIVE BREAKING NEWS ogni 5 secondi
+const liveBreaking = document.getElementById('live-breaking');
+if(liveBreaking){
+  setInterval(() => {
+    liveBreaking.style.opacity = (liveBreaking.style.opacity === '0' ? '1' : '0');
+  }, 5000);
+}
+
+// Calcola differenza tempo "x minuti fa"
+function diffMinutes(date){
+  const now = new Date();
+  const diff = Math.floor((now - date)/60000);
+  if(diff < 1) return "meno di 1 minuto fa";
+  if(diff < 60) return diff + " minuti fa";
+  const hours = Math.floor(diff/60);
+  const minutes = diff % 60;
+  return hours + "h " + minutes + "m fa";
+}
+
+// Traduci testo in italiano
+async function translateText(text){
+  try {
+    const res = await fetch(
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=it&dt=t&q=${encodeURIComponent(text)}`
+    );
+    const data = await res.json();
+    return data[0].map(item => item[0]).join('');
+  } catch(e){ return text; }
+}
+
+// Carica feed e traduci titoli
+async function loadFeed(feed){
+  try{
+    const res = await fetch(feed.url);
+    const data = await res.json();
+    if(data.items){
+      const originalTitles = data.items.map(item => item.title);
+      const translatedTitles = await translateText(originalTitles.join("\n"));
+      const splitTitles = translatedTitles.split("\n");
+      return data.items.map((item,i) => ({
+        titleIt: splitTitles[i] || item.title,
+        link: item.link,
+        date: new Date(item.pubDate),
+        source: feed.name
+      }));
+    }
+    return [];
+  } catch(e){ return []; }
+}
+
+// Render liveblog
+function render(news){
+  const container = document.getElementById("liveblog");
+  container.innerHTML = "";
+  const now = new Date();
+  news.forEach(n=>{
+    const isBreaking = (now - n.date)/(1000*60) < BREAKING_MINUTES;
+    container.innerHTML += `
+      <article class="live-item">
+        ${isBreaking ? '<span class="breaking">BREAKING</span>' : ''}
+        <h2><a href="${n.link}" target="_blank" rel="nofollow noopener">${n.titleIt}</a></h2>
+        <div class="meta">${n.source} | <time datetime="${n.date.toISOString()}">${diffMinutes(n.date)}</time></div>
+      </article>
+    `;
+  });
+}
+
+// Carica tutti i feed
+async function loadAll(){
+  const now = new Date();
+  if(now.getHours()===0 && now.getMinutes()<1){
+    document.getElementById("liveblog").innerHTML="";
+  }
+  const results = await Promise.all(feeds.map(loadFeed));
+  const news = results.flat().filter(n => n.date.toString()!=="Invalid Date").sort((a,b)=>b.date - a.date);
+  render(news);
+}
+loadAll();
+setInterval(loadAll, AUTO_REFRESH_SECONDS*1000);
+</script>
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-gw-3+1f-3d+2z"
+     data-ad-client="ca-pub-9225028785900171"
+     data-ad-slot="1294094231"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- Meta tag SEO per la pagina Liveblog Ultime Notizie -->
+<title>Liveblog Ultime Notizie – Aggiornamenti in tempo reale</title>
+<meta name="description" content="Resta aggiornato in tempo reale con il nostro liveblog: ultime notizie dall’Italia e dal mondo, aggiornate minuto per minuto con approfondimenti e immagini.">
+<meta name="keywords" content="ultime notizie, liveblog, aggiornamenti in tempo reale, cronaca, Italia, mondo, breaking news">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph per condivisioni social -->
+<meta property="og:title" content="Liveblog Ultime Notizie – Aggiornamenti in tempo reale">
+<meta property="og:description" content="Resta aggiornato in tempo reale con il nostro liveblog: ultime notizie dall’Italia e dal mondo, aggiornate minuto per minuto con approfondimenti e immagini.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.brunorachiele.it/p/live-ultime-notizie.html">
+<meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s1920/NUOVE%20GRAFICHE%20SITO.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Liveblog Ultime Notizie – Aggiornamenti in tempo reale">
+<meta name="twitter:description" content="Resta aggiornato in tempo reale con il nostro liveblog: ultime notizie dall’Italia e dal mondo, aggiornate minuto per minuto con approfondimenti e immagini.">
+<meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s1920/NUOVE%20GRAFICHE%20SITO.jpg">
+
