@@ -2,126 +2,168 @@
 <html amp lang="it">
 <head>
   <meta charset="utf-8">
-  <title>I Giornali di Oggi</title>
-  <link rel="canonical" href="https://brunorachiele.it/prime-pagine">
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-  <meta name="description" content="Scopri le prime pagine dei principali quotidiani italiani, aggiornate ogni giorno alle 6 del mattino.">
+  <title>I Giornali di Oggi – Prime Pagine</title>
 
-  <!-- Indica a Google la data di aggiornamento -->
+  <link rel="canonical" href="https://www.brunorachiele.it/prime-pagine">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="Le prime pagine dei principali quotidiani italiani, aggiornate automaticamente ogni giorno.">
+
+  <!-- DATA AGGIORNAMENTO -->
   <meta name="date" content="2026-01-13T06:00:00+01:00">
   <meta property="article:published_time" content="2026-01-13T06:00:00+01:00">
   <meta property="article:modified_time" content="2026-01-13T06:00:00+01:00">
 
-  <!-- AMP core -->
+  <!-- AMP CORE -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-ad"
+    src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-  <!-- AMP ADS -->
-  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-  
   <!-- AMP BOILERPLATE -->
   <style amp-boilerplate>
     body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
     -moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
     -ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;
     animation:-amp-start 8s steps(1,end) 0s 1 normal both}
-    @-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
-    @-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
-    @-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
-    @-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
     @keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
   </style>
   <noscript>
-    <style amp-boilerplate>
-      body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
-    </style>
+    <style amp-boilerplate>body{animation:none}</style>
   </noscript>
 
   <!-- STILI -->
   <style amp-custom>
-    body {
+    body{
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      background: #f9f9f9;
+      background:#f9f9f9;
+      margin:0;
+      text-align:center;
     }
-    header {
-      padding: 20px 0;
+    header{
+      padding:20px 0;
     }
-    header amp-img {
-      width: 120px;
-      height: auto;
+    h1{
+      font-size:2em;
+      margin:10px 0;
+      color:#222;
     }
-    h1 {
-      font-size: 2em;
-      margin: 10px 0;
-      color: #222;
+    .cover{
+      background:#fff;
+      margin:15px;
+      padding:15px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,.1);
     }
-    .main-image amp-img {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      border-radius: 8px;
-      margin: 20px auto;
-      display: block;
+    .cover h2{
+      font-size:1.2em;
+      margin-bottom:10px;
     }
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      margin: 20px 0;
-      background-color: #6598b7;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      font-size: 1em;
+    amp-img{
+      border-radius:8px;
     }
-    .btn:hover {
-      background-color: #6598b7;
-    }
-    small {
-      display: block;
-      color: #555;
-      font-size: 0.9em;
-      margin-top: 8px;
+    small{
+      display:block;
+      margin-top:8px;
+      font-size:.9em;
+      color:#555;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- LOGO -->
-  <header>
-    <amp-img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
-      width="120" height="120" layout="fixed" alt="Logo Brunorachiele.it">
-  </header>
+<!-- LOGO -->
+<header>
+  <amp-img
+    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/logo.png"
+    width="120" height="120" layout="fixed"
+    alt="Brunorachiele.it">
+</header>
 
-  <!-- TITOLO -->
-  <h1>I Giornali di Oggi</h1>
+<h1>I Giornali di Oggi</h1>
 
-  <!-- IMMAGINE FISSA -->
-  <div class="main-image">
-    <amp-img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7iuBFnrSwTOITu6qLlKUYNqoj3amr4TYgLnmKaYVwo15fRG-l22j7AFWW4gz5P6ZM80gzJFBq29Y12e0RulO6R8SY_s3yUbtsV_x3Ky8VqzzDHXPXHiufwPn-yuR7-1C9NpPNwJCjgs45_Ai1fJevER6KDUI6-KzrfTK1TQAlutujAfPVs4ONnjHU0oQ/s1600/NUOVE%20GRAFICHE%20SITO%20%281%29.png"
-      width="600" height="400" layout="responsive" alt="Prime Pagine dei Giornali">
+<!-- CORRIERE -->
+<div class="cover">
+  <h2>Corriere della Sera 🇮🇹</h2>
+  <a href="https://static2.rcsobjects.it/images/corrierefc_nazionale_web-Big.jpg" target="_blank">
+    <amp-img src="https://static2.rcsobjects.it/images/corrierefc_nazionale_web-Big.jpg"
+      width="400" height="550" layout="responsive"
+      alt="Corriere della Sera">
     </amp-img>
-  </div>
-
-  <!-- BOTTONE -->
-  <a class="btn" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" target="_blank">
-    Visualizza le prime pagine di oggi su Brunorachiele.it
   </a>
-  
-  <!-- ANNUNCIO PRINCIPALE -->
-  <amp-ad width="100vw" height="320"
-    type="adsense"
-    data-ad-client="ca-pub-9225028785900171"
-    data-ad-slot="2980836148"
-    data-auto-format="rspv"
-    data-full-width="">
-    <div overflow=""></div>
-  </amp-ad>
-  
-  <!-- DATA AGGIORNAMENTO -->
-  <small>Aggiornato ogni giorno alle 6:00</small>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- SECOLO XIX -->
+<div class="cover">
+  <h2>Il Secolo XIX 🇮🇹</h2>
+  <a href="https://www.gelestatic.it/storage/quotidiani-locali/testate/copertina_ilsecoloxix_genova_w510.jpeg" target="_blank">
+    <amp-img src="https://www.gelestatic.it/storage/quotidiani-locali/testate/copertina_ilsecoloxix_genova_w510.jpeg"
+      width="400" height="550" layout="responsive"
+      alt="Il Secolo XIX">
+    </amp-img>
+  </a>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- LA RAGIONE -->
+<div class="cover">
+  <h2>La Ragione 🇮🇹</h2>
+  <a href="https://servizidue.laragione.eu/giornale/ultima-copertina" target="_blank">
+    <amp-img src="https://servizidue.laragione.eu/giornale/ultima-copertina"
+      width="400" height="550" layout="responsive"
+      alt="La Ragione">
+    </amp-img>
+  </a>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- IL FOGLIO -->
+<div class="cover">
+  <h2>Il Foglio 🇮🇹</h2>
+  <a href="https://eu01.newsmemory.com/?pSetup=ilfoglio&getprima&editionname=Il%20Foglio" target="_blank">
+    <amp-img src="https://eu01.newsmemory.com/?pSetup=ilfoglio&getprima&editionname=Il%20Foglio"
+      width="400" height="550" layout="responsive"
+      alt="Il Foglio">
+    </amp-img>
+  </a>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- REPUBBLICA -->
+<div class="cover">
+  <h2>La Repubblica 🇮🇹</h2>
+  <a href="https://sfoglio.repubblica.it/repubblica/api/cover.php?newspaper=REP&edition=nazionale&width=390&height=510" target="_blank">
+    <amp-img src="https://sfoglio.repubblica.it/repubblica/api/cover.php?newspaper=REP&edition=nazionale&width=390&height=510"
+      width="400" height="550" layout="responsive"
+      alt="La Repubblica">
+    </amp-img>
+  </a>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- LA STAMPA -->
+<div class="cover">
+  <h2>La Stampa 🇮🇹</h2>
+  <a href="https://www.lastampa.it/edicola/api/cover.php?newspaper=LASTAMPA&edition=TORINO&width=330&height=450" target="_blank">
+    <amp-img src="https://www.lastampa.it/edicola/api/cover.php?newspaper=LASTAMPA&edition=TORINO&width=330&height=450"
+      width="400" height="550" layout="responsive"
+      alt="La Stampa">
+    </amp-img>
+  </a>
+  <small>Aggiornato oggi</small>
+</div>
+
+<!-- ADS -->
+<amp-ad width="100vw" height="320"
+  type="adsense"
+  data-ad-client="ca-pub-9225028785900171"
+  data-ad-slot="2980836148"
+  data-auto-format="rspv"
+  data-full-width>
+  <div overflow></div>
+</amp-ad>
+
+<small>Aggiornato ogni giorno alle 6:00</small>
 
 </body>
 </html>
