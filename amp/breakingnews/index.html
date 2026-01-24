@@ -1,66 +1,75 @@
-<!doctype html>
-<html ⚡ lang="it">
+<!DOCTYPE html>
+<html lang="it">
 <head>
   <meta charset="utf-8">
   <title>Breaking News – Ultime Notizie in Tempo Reale</title>
 
-  <link rel="canonical" href="https://www.brunorachiele.it/">
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-
-  <meta name="description" content="Breaking news e ultime notizie dall’Italia e dal mondo. Aggiornamenti rapidi e verificati.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Breaking news e ultime notizie dall’Italia e dal mondo. Aggiornamenti continui minuto per minuto.">
+  <meta name="keywords" content="breaking news, ultime notizie, live news, italia, mondo">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Breaking News – Ultime Notizie">
-  <meta property="og:description" content="Aggiornamenti rapidi e breaking news dall’Italia e dal mondo.">
-  <meta property="og:image" content="https://amp.brunorachiele.it/foto/breaking.jpg">
+  <meta property="og:description" content="Aggiornamenti in tempo reale dall’Italia e dal mondo.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://amp.brunorachiele.it/amp/breakingnews/">
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s1920/NUOVE%20GRAFICHE%20SITO.jpg">
 
-  <!-- AMP -->
-  <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <script async custom-element="amp-ad"
-    src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-
-  <style amp-custom>
-    body {
-      font-family: Arial, sans-serif;
-      background:#f4f4f4;
+  <!-- CSS -->
+  <style>
+    body{
       margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#f2f2f2;
     }
-    header {
+    .top-image img{
+      width:180px;
+      margin:10px auto;
+      display:block;
+    }
+    header{
       background:#b30000;
       color:#fff;
       padding:12px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
     }
-    header h1 {
+    header h1{
       font-size:18px;
       margin:0;
       animation: blink 2s infinite;
     }
-    @keyframes blink {
-      50% { opacity:0.3; }
+    @keyframes blink{
+      50%{opacity:.3}
     }
-    .news {
+    .time{
+      font-size:14px;
+      text-align:right;
+    }
+    #liveblog{
       padding:10px;
     }
-    article {
+    article{
       background:#fff;
       margin-bottom:10px;
       padding:10px;
       border-left:5px solid #b30000;
     }
-    article h2 {
+    article.breaking{
+      border-left-color:#ff0000;
+      background:#fff3f3;
+    }
+    article h2{
       font-size:16px;
-      margin:0 0 5px;
+      margin:0 0 6px;
     }
-    article a {
-      text-decoration:none;
+    article a{
       color:#000;
+      text-decoration:none;
     }
-    .meta {
+    .meta{
       font-size:12px;
       color:#555;
     }
@@ -69,47 +78,93 @@
 
 <body>
 
+<div class="top-image">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgP37BghF7AGSfT5UjhEUXXy7ih5Ytiq5tOTSZZ24SNdZS13S13xGv6K4iJHKBpX3N6OIQuoaSRN7ogqtORaeAwJavCMgcxOAICCNvR-BdbmuNYx1Qgq7bBn40RyZ0QL0xiAew5wnN2yU-eRE8wQ3CzumCebFUP0PvSHWkTdsCB3a15Nd3W-Dvp_focZ08/s200/NUOVE%20GRAFICHE%20SITO.jpg" alt="Breaking News">
+</div>
+
 <header>
-  <amp-img src="https://public.flourish.studio/uploads/201668/f7949fc8-a5be-4f12-82a1-d2d2469dc4e9.png"
-    width="40" height="40" layout="fixed" alt="Logo"></amp-img>
   <h1>BREAKING NEWS</h1>
+  <div class="time">
+    <div id="current-time"></div>
+    <div id="current-date"></div>
+  </div>
 </header>
 
-<main class="news">
+<div id="liveblog"></div>
 
-  <!-- NOTIZIA 1 -->
-  <article>
-    <h2>
-      <a href="https://www.brunorachiele.it/2026/01/esempio-notizia.html">
-        Titolo Breaking News di esempio
-      </a>
-    </h2>
-    <div class="meta">ANSA · pochi minuti fa</div>
-  </article>
-
-  <!-- NOTIZIA 2 -->
-  <article>
-    <h2>
-      <a href="#">
-        Altra notizia urgente in aggiornamento
-      </a>
-    </h2>
-    <div class="meta">Rai News · 10 min fa</div>
-  </article>
-
-</main>
-
-<!-- ADS AMP -->
-<amp-ad
-  width="100vw"
-  height="320"
-  type="adsense"
+<!-- ADS -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
+crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+  style="display:block;margin:10px"
   data-ad-client="ca-pub-9225028785900171"
   data-ad-slot="1294094231"
-  data-auto-format="fluid"
-  data-full-width>
-  <div overflow></div>
-</amp-ad>
+  data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- LIVE SCRIPT -->
+<script>
+const AUTO_REFRESH_SECONDS = 30;
+const BREAKING_MINUTES = 30;
+
+const feeds = [
+  { name: "Google News", url: "https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=latest&hl=it&gl=IT&ceid=IT:it" },
+  { name: "ANSA", url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.ansa.it/sito/notizie/topnews/topnews_rss.xml" },
+  { name: "Rai News", url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.rainews.it/rss/ultimora" }
+];
+
+function updateTime(){
+  const now = new Date();
+  document.getElementById("current-time").textContent =
+    now.toLocaleTimeString("it-IT",{hour:'2-digit',minute:'2-digit'});
+  document.getElementById("current-date").textContent =
+    now.toLocaleDateString("it-IT",{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+}
+updateTime();
+setInterval(updateTime,1000);
+
+function diffMinutes(date){
+  const diff = Math.floor((new Date()-date)/60000);
+  if(diff<1) return "ora";
+  if(diff<60) return diff+" min fa";
+  return Math.floor(diff/60)+"h fa";
+}
+
+async function loadFeed(feed){
+  try{
+    const res = await fetch(feed.url);
+    const data = await res.json();
+    return data.items.map(item=>({
+      title:item.title,
+      link:item.link,
+      date:new Date(item.pubDate),
+      source:feed.name
+    }));
+  }catch(e){return []}
+}
+
+async function loadAll(){
+  const results = await Promise.all(feeds.map(loadFeed));
+  const news = results.flat().sort((a,b)=>b.date-a.date);
+  const container = document.getElementById("liveblog");
+  container.innerHTML = "";
+  const now = new Date();
+
+  news.forEach(n=>{
+    const isBreaking = (now-n.date)/60000 < BREAKING_MINUTES;
+    container.innerHTML += `
+      <article class="${isBreaking?'breaking':''}">
+        <h2><a href="${n.link}" target="_blank" rel="nofollow noopener">${n.title}</a></h2>
+        <div class="meta">${n.source} · ${diffMinutes(n.date)}</div>
+      </article>`;
+  });
+}
+
+loadAll();
+setInterval(loadAll,AUTO_REFRESH_SECONDS*1000);
+</script>
 
 </body>
 </html>
