@@ -396,6 +396,23 @@
       align-items:center; justify-content:space-between;
     }
     .foot a{color: rgba(234,240,255,.88); text-decoration:underline; text-underline-offset:3px}
+
+    .bar{
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  overflow:hidden;
+  margin: 10px 0 10px;
+}
+.barFill{
+  height:100%;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(79,179,255,.95), rgba(124,92,255,.95));
+  width:0%;
+  transition: width .35s ease;
+}
+    
   </style>
 
   <!-- AdSense (UNA volta sola) -->
@@ -404,6 +421,63 @@
 </head>
 
 <body>
+
+  <script>
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbx7DXJHg9DqfCRvXh2mAyEsVxCgFo_FvdTsUDMba_qN3-ELndcd9MV_1wUBp2utpRKXZQ/exec";
+
+function fmtNum(x){
+  return new Intl.NumberFormat('it-IT').format(x);
+}
+
+function fmtPct(x){
+  return new Intl.NumberFormat('it-IT', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(x) + '%';
+}
+
+async function updateAffluenzaBoxes(){
+  try{
+    // anti-cache
+    const res = await fetch(ENDPOINT + "?t=" + Date.now(), { cache: "no-store" });
+    const data = await res.json();
+
+    data.forEach(row => {
+      const area = String(row.area || "").toLowerCase().trim();
+      const votanti = Number(row.votanti);
+      const aventi = Number(row.aventi_diritto);
+      const updated = row.updated_at ? String(row.updated_at) : "";
+
+      if (!aventi || aventi <= 0) return;
+      const pct = (votanti / aventi) * 100;
+
+      if(area === "nazionale"){
+        document.getElementById("nazVot").textContent = fmtNum(votanti);
+        document.getElementById("nazAventi").textContent = fmtNum(aventi);
+        document.getElementById("affNaz").textContent = fmtPct(pct);
+        document.getElementById("affNazBar").style.width = Math.min(pct,100) + "%";
+        document.getElementById("nazTime").textContent = updated || "—";
+      }
+
+      if(area === "spm"){
+        document.getElementById("spmVot").textContent = fmtNum(votanti);
+        document.getElementById("spmAventi").textContent = fmtNum(aventi);
+        document.getElementById("affSpm").textContent = fmtPct(pct);
+        document.getElementById("affSpmBar").style.width = Math.min(pct,100) + "%";
+        document.getElementById("spmTime").textContent = updated || "—";
+      }
+    });
+
+  } catch(err){
+    console.warn("Errore caricamento affluenze:", err);
+  }
+}
+
+// primo giro + refresh ogni minuto
+updateAffluenzaBoxes();
+setInterval(updateAffluenzaBoxes, 60000);
+</script>
+  
   <!-- Topbar -->
   <div class="topbar">
     <div class="wrap">
@@ -462,21 +536,37 @@
           </div>
         </div>
 
-        <div class="hero-side">
-          <div class="stat">
-            <small>Stato aggiornamento</small>
-            <b class="ok">LIVE</b>
-            <small class="muted">Ultimo aggiornamento: <span id="lastUpdate">…</span></small>
-          </div>
+        <!-- BOX 1: Affluenza Nazionale -->
+<div class="stat">
+  <small>Affluenza Nazionale (LIVE)</small>
+  <b><span id="affNaz">--,--%</span></b>
 
-          <div class="stat">
-            <small>Nota per i motori di ricerca</small>
-            <b>Pagina “Live” ottimizzata</b>
-            <small class="muted">Schema LiveBlogPosting + meta social</small>
-          </div>
-        </div>
-      </div>
-    </section>
+  <small class="muted">
+    Votanti: <span id="nazVot">--</span> su <span id="nazAventi">--</span>
+  </small>
+
+  <div class="bar" aria-label="Barra affluenza nazionale">
+    <div class="barFill" id="affNazBar" style="width:0%"></div>
+  </div>
+
+  <small class="muted">Ultimo update: <span id="nazTime">…</span></small>
+</div>
+
+<!-- BOX 2: Affluenza San Pietro a Maida -->
+<div class="stat">
+  <small>Affluenza San Pietro a Maida (LIVE)</small>
+  <b><span id="affSpm">--,--%</span></b>
+
+  <small class="muted">
+    Votanti: <span id="spmVot">--</span> su <span id="spmAventi">--</span>
+  </small>
+
+  <div class="bar" aria-label="Barra affluenza San Pietro a Maida">
+    <div class="barFill" id="affSpmBar" style="width:0%"></div>
+  </div>
+
+  <small class="muted">Ultimo update: <span id="spmTime">…</span></small>
+</div>
 
     <!-- AdSense slot (facoltativo) -->
     <div class="ad-box" aria-label="Annuncio sponsorizzato">
