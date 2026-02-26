@@ -1,208 +1,609 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Referendum Giustizia 2026 – brunorachiele.it</title>
-<meta name="description" content="Speciale Referendum Giustizia 2026: quesito, sondaggi e risultati live.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-body {
-    font-family: 'Arial', sans-serif;
-    margin:0;
-    padding:0;
-    background:#f7f7f7;
-    color:#333;
-    text-align:center;
-}
+  <title>Referendum Giustizia 2026 – Risultati LIVE | brunorachiele.it</title>
+  <meta name="description" content="Speciale Referendum Giustizia 2026: quesito, sondaggi e risultati LIVE aggiornati in tempo reale." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://brunorachiele.it/referendum-giustizia/" />
 
-header {
-    padding:24px 16px;
-    background:#6598b7;
-    color:#fff;
-}
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Referendum Giustizia 2026 – Risultati LIVE | brunorachiele.it" />
+  <meta property="og:description" content="Segui i risultati in diretta, i sondaggi e tutte le info sul quesito." />
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" />
+  <meta property="og:locale" content="it_IT" />
 
-header img {
-    width:90px;
-    height:90px;
-    border-radius:12px;
-    margin-bottom:12px;
-}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Referendum Giustizia 2026 – Risultati LIVE" />
+  <meta name="twitter:description" content="Aggiornamenti in tempo reale: risultati, sondaggi e quesito." />
+  <meta name="twitter:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" />
 
-header h1 {
-    font-size:1.8rem;
-    margin:0;
-}
+  <!-- Schema.org: LiveBlogPosting (aiuta a far capire “LIVE”) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LiveBlogPosting",
+    "headline": "Referendum Giustizia 2026 – Risultati LIVE",
+    "description": "Speciale Referendum Giustizia 2026: quesito, sondaggi e risultati live aggiornati in tempo reale.",
+    "url": "https://brunorachiele.it/referendum-giustizia/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "brunorachiele.it",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png"
+      }
+    },
+    "about": "Referendum Giustizia 2026",
+    "inLanguage": "it-IT",
+    "coverageStartTime": "2026-01-01T00:00:00+01:00",
+    "dateModified": "2026-02-26T00:00:00+01:00"
+  }
+  </script>
 
-header small {
-    display:block;
-    font-size:1rem;
-    margin-top:4px;
-    opacity:0.85;
-}
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a31;
+      --card:#111f3d;
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --line:rgba(255,255,255,.10);
+      --brand:#4fb3ff;
+      --brand2:#7c5cff;
+      --live:#ff3b30;
+      --ok:#30d158;
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:26px;
+      --max:1120px;
+    }
 
-header h2 {
-    font-size:1.3rem;
-    margin-top:8px;
-    font-weight:normal;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(79,179,255,.18), transparent 60%),
+        radial-gradient(700px 450px at 80% 15%, rgba(124,92,255,.18), transparent 60%),
+        linear-gradient(180deg, #070b14 0%, var(--bg) 38%, #060a12 100%);
+      color:var(--text);
+    }
 
-.container {
-    max-width:1000px;
-    margin:30px auto;
-    padding:0 16px;
-}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 16px;}
 
-.section {
-    background:#fff;
-    padding:24px;
-    margin-bottom:30px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:999;
+      backdrop-filter: blur(14px);
+      background: rgba(11,18,32,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+    }
+    .logo{
+      width:40px;height:40px;border-radius:12px;
+      border:1px solid var(--line);
+      background:#0c162b;
+      object-fit:cover;
+    }
+    .brand b{display:block; font-size:14px; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color:var(--muted); margin-top:1px}
 
-.section:hover {
-    transform: translateY(-4px);
-}
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      padding:9px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      color:var(--muted);
+      transition: .2s;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22); color: var(--text);}
+    .pill.live{
+      border-color: rgba(255,59,48,.35);
+      background: rgba(255,59,48,.10);
+      color: var(--text);
+      position: relative;
+      padding-left: 28px;
+    }
+    .pill.live::before{
+      content:"";
+      width:10px;height:10px;border-radius:999px;
+      background: var(--live);
+      position:absolute; left:12px; top:50%; transform: translateY(-50%);
+      box-shadow: 0 0 0 6px rgba(255,59,48,.18);
+      animation: pulse 1.4s infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,59,48,.25)}
+      100%{box-shadow:0 0 0 12px rgba(255,59,48,0)}
+    }
 
-.section img {
-    width:100%;
-    max-width:600px;
-    border-radius:12px;
-    margin-bottom:16px;
-}
+    /* Breaking ticker */
+    .ticker{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .ticker .inner{
+      display:flex; align-items:center; gap:12px;
+      padding:10px 0;
+      overflow:hidden;
+    }
+    .tag-live{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,59,48,.14);
+      border:1px solid rgba(255,59,48,.30);
+      font-weight:700; letter-spacing:.6px; font-size:12px;
+      white-space:nowrap;
+    }
+    .tag-live i{
+      width:8px;height:8px;border-radius:999px;background:var(--live); display:inline-block;
+      box-shadow:0 0 0 6px rgba(255,59,48,.16);
+    }
+    .marquee{
+      position:relative; flex:1;
+      color:var(--muted); font-size:13px;
+      white-space:nowrap;
+      overflow:hidden;
+    }
+    .marquee span{
+      display:inline-block;
+      padding-left: 100%;
+      animation: scroll 18s linear infinite;
+    }
+    @keyframes scroll{
+      0%{transform: translateX(0)}
+      100%{transform: translateX(-100%)}
+    }
 
-.section h3 {
-    color:#1a73e8;
-    margin-bottom:12px;
-}
+    /* Hero */
+    .hero{
+      padding:26px 0 14px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+    }
 
-.section p {
-    margin-bottom:16px;
-    font-size:1rem;
-}
+    .hero-main{
+      background: linear-gradient(135deg, rgba(79,179,255,.18), rgba(124,92,255,.18));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-main::after{
+      content:"";
+      position:absolute; inset:-80px -120px auto auto;
+      width:240px;height:240px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(79,179,255,.45), transparent 60%);
+      filter: blur(2px);
+      opacity:.9;
+      transform: rotate(18deg);
+    }
+    .kicker{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .badge strong{color:var(--text)}
+    .badge.live{
+      border-color: rgba(255,59,48,.35);
+      background: rgba(255,59,48,.12);
+      color: var(--text);
+    }
+    .badge.live em{
+      font-style:normal;
+      background: var(--live);
+      width:8px;height:8px;border-radius:999px; display:inline-block;
+      box-shadow:0 0 0 6px rgba(255,59,48,.16);
+    }
 
-.section a {
-    display:inline-block;
-    padding:10px 20px;
-    background:#1a73e8;
-    color:#fff;
-    border-radius:8px;
-    text-decoration:none;
-}
-.section a:hover {
-    background:#1665c1;
-}
+    h1{
+      margin:0;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      margin:10px 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.5;
+      max-width: 62ch;
+    }
+    .cta-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight:700;
+      font-size: 14px;
+      transition: .2s;
+      min-width: 210px;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(79,179,255,.95), rgba(124,92,255,.95));
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 14px 40px rgba(79,179,255,.12);
+    }
+    .btn.primary:hover{filter: brightness(1.05)}
 
-.ad-box {
-    width:100%;
-    max-width:1200px;
-    margin:20px auto;
-    text-align:center;
-}
-</style>
+    .hero-side{
+      display:grid;
+      gap:16px;
+    }
+    .stat{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .stat small{display:block; color: var(--muted); font-size:12px}
+    .stat b{display:block; font-size:18px; margin-top:6px}
+    .stat .ok{color: rgba(48,209,88,.95)}
+    .stat .muted{color: var(--muted); font-weight:600}
 
-<!-- Script AdSense da mettere una volta sola -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
-        crossorigin="anonymous"></script>
+    /* Cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+      padding: 10px 0 26px;
+    }
+    .card{
+      grid-column: span 6;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      transition:.2s;
+      display:flex;
+      flex-direction:column;
+      min-height: 260px;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.22)}
+    @media (max-width: 920px){ .card{grid-column: span 12;} }
 
+    .card .img{
+      height: 150px;
+      background: #0a1427;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .card .img img{
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:.92;
+      transform: scale(1.02);
+    }
+    .card .img .label{
+      position:absolute;
+      left:12px; top:12px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:12px;
+      color: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+    }
+    .label.live i{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--live); display:inline-block;
+      box-shadow:0 0 0 6px rgba(255,59,48,.16);
+    }
+
+    .card .body{
+      padding:16px 16px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+    .card h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .card .meta{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:auto;
+      color: rgba(234,240,255,.70);
+      font-size:12px;
+    }
+    .card .go{
+      margin-top:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:11px 12px;
+      border-radius: 14px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .card .go:hover{border-color: rgba(255,255,255,.22)}
+
+    /* Ad box */
+    .ad-box{
+      margin: 8px 0 22px;
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding:18px 0 32px;
+      color: var(--muted);
+      font-size:13px;
+    }
+    .foot{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+    }
+    .foot a{color: rgba(234,240,255,.88); text-decoration:underline; text-underline-offset:3px}
+  </style>
+
+  <!-- AdSense (UNA volta sola) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9225028785900171"
+          crossorigin="anonymous"></script>
 </head>
+
 <body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <a class="brand" href="./">
+          <img class="logo" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" alt="Logo brunorachiele.it" />
+          <div>
+            <b>brunorachiele.it</b>
+            <span>Speciale Referendum</span>
+          </div>
+        </a>
 
-<header>
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOeKLAFzNySkI5ahC_uZiv0Asne6shnjr1QndoMNmRBtkNdQfe59GGO3nY5nc5C4OCXNMXGXu1XtHm0X7gPqbvTgFjqszFGQrPD3G5R4c2MIJPiZCk5OX6dLbnYKeU1itEVo7OcJB9I0N-Wi9z9WP64l5_btoNMrZ111Ex8i-W9UcKwOJPv5uDnl6LwhA/s1600/2ed26cc2-38e4-4d67-a1c5-5e522b654c90%20%281%29.png" alt="Logo brunorachiele.it">
-    <h1>Speciale – brunorachiele.it</h1>
-    <h2>Referendum Giustizia 2026</h2>
-</header>
-
-<div class="container">
-
-    <!-- Sezione Quesito -->
-    <div class="section">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Quesito Referendum">
-        <h3>Quesito</h3>
-        <p>Scopri come votare, le date del referendum e tutte le informazioni utili.</p>
-        <a href="quesito.html">Vai alla pagina</a>
-
-        <!-- Annuncio AdSense -->
-        <div class="ad-box">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9225028785900171"
-                 data-ad-slot="2739440797"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+        <nav class="nav">
+          <a class="pill" href="quesito.html">Quesito</a>
+          <a class="pill" href="sondaggi.html">Sondaggi</a>
+          <a class="pill live" href="risultati.html">Risultati LIVE</a>
+          <a class="pill" href="risultati-spm.html">San Pietro a Maida</a>
+        </nav>
+      </div>
     </div>
 
-    <!-- Sezione Sondaggi -->
-    <div class="section">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Sondaggi Referendum">
-        <h3>Sondaggi</h3>
-        <p>Visualizza i risultati dei sondaggi aggiornati in tempo reale con grafici interattivi.</p>
-        <a href="sondaggi.html">Vai alla pagina</a>
-
-        <!-- Annuncio AdSense -->
-        <div class="ad-box">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9225028785900171"
-                 data-ad-slot="2739440797"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+    <!-- Ticker breaking -->
+    <div class="ticker">
+      <div class="wrap">
+        <div class="inner">
+          <div class="tag-live"><i></i> LIVE</div>
+          <div class="marquee" aria-label="Aggiornamenti in scorrimento">
+            <span id="tickerText">Aggiornamento in tempo reale: risultati, affluenza e dati in arrivo dai seggi • Ultimo update: in caricamento… •</span>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="kicker">
+            <span class="badge live"><em></em> LIVE RESULTS</span>
+            <span class="badge"><strong>Referendum Giustizia 2026</strong></span>
+            <span class="badge">Aggiornamenti continui</span>
+          </div>
+
+          <h1>Risultati LIVE, sondaggi e info sul quesito</h1>
+          <p class="sub">
+            Una pagina rapida stile newsroom: vai ai risultati in diretta, controlla i sondaggi e consulta il quesito.
+            <strong>“Ultimo aggiornamento”</strong> sempre visibile per far capire anche a Google che è live.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="risultati.html">Apri Risultati LIVE →</a>
+            <a class="btn" href="sondaggi.html">Vedi Sondaggi →</a>
+            <a class="btn" href="quesito.html">Leggi Quesito →</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="stat">
+            <small>Stato aggiornamento</small>
+            <b class="ok">LIVE</b>
+            <small class="muted">Ultimo aggiornamento: <span id="lastUpdate">…</span></small>
+          </div>
+
+          <div class="stat">
+            <small>Nota per i motori di ricerca</small>
+            <b>Pagina “Live” ottimizzata</b>
+            <small class="muted">Schema LiveBlogPosting + meta social</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AdSense slot (facoltativo) -->
+    <div class="ad-box" aria-label="Annuncio sponsorizzato">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9225028785900171"
+           data-ad-slot="2739440797"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
 
-    <!-- Sezione Risultati Live -->
-    <div class="section">
-        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgLNwvRbLtfoT5OmOfeewSTkdg15LbXQ2us9Bl78KmTxrw6TCcaBBTnnDmLZADK2afXsKTW8R7jIW4IUVDkYoAq0uBp6_MUxPyuRaPXAUu_h6ulL2D2-Dae01iEGdJExJo_SjSg9D9JGDHo1R5Yt2basn6eBoxhSKDDpho6NI0Od35GdEp6ioKesVTA2EP6=s498" alt="Risultati Live Referendum">
-        <h3>Risultati Live</h3>
-        <p>Segui i risultati del referendum in diretta mentre arrivano dai seggi.</p>
-        <a href="risultati.html">Vai alla pagina</a>
-
-        <!-- Annuncio AdSense -->
-        <div class="ad-box">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9225028785900171"
-                 data-ad-slot="2739440797"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+    <!-- Cards -->
+    <section class="grid" aria-label="Sezioni speciali">
+      <article class="card">
+        <div class="img">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Quesito Referendum" />
+          <div class="label">Guida al voto</div>
         </div>
+        <div class="body">
+          <h3>Quesito</h3>
+          <p>Date, cosa si vota, come votare e cosa cambia: tutto in una pagina chiara.</p>
+          <div class="meta">
+            <span>• Info ufficiali</span>
+            <span>• Spiegazione semplice</span>
+          </div>
+          <a class="go" href="quesito.html">Vai al quesito →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Sondaggi Referendum" />
+          <div class="label">Trend</div>
+        </div>
+        <div class="body">
+          <h3>Sondaggi</h3>
+          <p>Grafici e dati aggiornati: una vista rapida per capire come si muove l’opinione pubblica.</p>
+          <div class="meta">
+            <span>• Grafici</span>
+            <span>• Update frequenti</span>
+          </div>
+          <a class="go" href="sondaggi.html">Vai ai sondaggi →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img">
+          <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgLNwvRbLtfoT5OmOfeewSTkdg15LbXQ2us9Bl78KmTxrw6TCcaBBTnnDmLZADK2afXsKTW8R7jIW4IUVDkYoAq0uBp6_MUxPyuRaPXAUu_h6ulL2D2-Dae01iEGdJExJo_SjSg9D9JGDHo1R5Yt2basn6eBoxhSKDDpho6NI0Od35GdEp6ioKesVTA2EP6=s498" alt="Risultati Live Referendum" />
+          <div class="label live"><i></i> LIVE</div>
+        </div>
+        <div class="body">
+          <h3>Risultati LIVE</h3>
+          <p>La pagina principale: risultati in diretta mentre arrivano dai seggi, con indicatori chiari.</p>
+          <div class="meta">
+            <span>• Diretta</span>
+            <span>• Aggiornamento continuo</span>
+          </div>
+          <a class="go" href="risultati.html">Apri risultati →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Risultati San Pietro a Maida" />
+          <div class="label">Locale</div>
+        </div>
+        <div class="body">
+          <h3>San Pietro a Maida</h3>
+          <p>Focus sui risultati locali: una pagina dedicata al comune per lettura immediata.</p>
+          <div class="meta">
+            <span>• Comune</span>
+            <span>• Dati locali</span>
+          </div>
+          <a class="go" href="risultati-spm.html">Apri risultati locali →</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- AdSense slot (facoltativo) -->
+    <div class="ad-box" aria-label="Annuncio sponsorizzato">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9225028785900171"
+           data-ad-slot="2739440797"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
 
-    <!-- Sezione Risultati San Pietro a Maida -->
-    <div class="section">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib-mwyxO9DqQx2o08DZF34q2BfiC3YeW9NebmMSRWxZ92ApQBwbBhuwhQhU9UeKYDDa_IqpLTDDHm9Em931n5KSDEjbMlJM4nmXhDgpplo_m6gZTR-3S8KOmWPNfzSZ5c0dlxcm0REM0RkMMGsF-BVpzsSQO0gmdrv6pD6n6kaXOYid7LpzueECp1sQ10/s1600/POLITICA.png" alt="Risultati San Pietro a Maida">
-        <h3>Risultati San Pietro a Maida</h3>
-        <p>Consulta i risultati locali del referendum per il comune di San Pietro a Maida.</p>
-        <a href="risultati-spm.html">Vai alla pagina</a>
-
-        <!-- Annuncio AdSense -->
-        <div class="ad-box">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9225028785900171"
-                 data-ad-slot="2739440797"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+    <footer>
+      <div class="foot">
+        <div>© <span id="year"></span> brunorachiele.it • Speciale Referendum Giustizia 2026</div>
+        <div>
+          <a href="risultati.html">Risultati LIVE</a> ·
+          <a href="sondaggi.html">Sondaggi</a> ·
+          <a href="quesito.html">Quesito</a>
         </div>
-    </div>
+      </div>
+    </footer>
+  </main>
 
-</div>
+  <script>
+    // Timestamp "Ultimo aggiornamento" (visibile + utile per fiducia/SEO)
+    function formatIT(d){
+      return new Intl.DateTimeFormat('it-IT', {
+        weekday:'short', year:'numeric', month:'short', day:'2-digit',
+        hour:'2-digit', minute:'2-digit'
+      }).format(d);
+    }
 
+    function updateTimestamp(){
+      const now = new Date();
+      const txt = formatIT(now);
+      document.getElementById('lastUpdate').textContent = txt;
+      document.getElementById('tickerText').textContent =
+        `Aggiornamento in tempo reale: risultati, affluenza e dati in arrivo dai seggi • Ultimo update: ${txt} •`;
+      document.getElementById('year').textContent = now.getFullYear();
+    }
+    updateTimestamp();
+
+    // Se vuoi far percepire "live" anche senza dati nuovi, puoi aggiornare il timestamp ogni 60s:
+    setInterval(updateTimestamp, 60000);
+  </script>
 </body>
 </html>
