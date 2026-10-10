@@ -42,14 +42,14 @@ def main():
         content = entry.summary if 'summary' in entry else entry.description
         pub_date = entry.published if 'published' in entry else datetime.datetime.now().isoformat()
         
-        # Estrarre il percorso completo dall'URL (es. /2026/10/nome-articolo.html)
+        # Estrarre il percorso relativo dall'URL originale (es. 2026/10/nome-articolo.html)
         parsed_url = urlparse(link)
         rel_path = parsed_url.path.lstrip('/') # Rimuove lo slash iniziale
         
-        # Percorso finale: pages/2026/10/nome-articolo.html
-        full_filepath = os.path.join('pages', rel_path)
+        # Salva direttamente nella cartella YYYY/MM/ senza "pages"
+        full_filepath = rel_path
         
-        # Crea automaticamente le sottocartelle (es. pages/2026/10/)
+        # Crea automaticamente le sottocartelle (es. 2026/10/)
         os.makedirs(os.path.dirname(full_filepath), exist_ok=True)
         
         amp_content = transform_to_amp(content)
