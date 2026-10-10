@@ -1,7 +1,6 @@
 <!doctype html>
 <html ⚡ lang="it">
 <head>
-  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
   <meta charset="utf-8">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <!-- Componente AdSense per AMP -->
@@ -66,24 +65,27 @@
       
       <!-- PUBBLICITÀ ADSENSE (Prima del contenuto) -->
       <div class="ad-container">
-        <amp-ad width="300" height="250"
-            type="adsense"
-            data-ad-client="ca-pub-9225028785900171"
-            data-ad-slot="3435201094">
-        </amp-ad>
-      </div>
+<amp-ad width="300" height="250"
+    type="adsense"
+    data-ad-client="ca-pub-9225028785900171"
+    data-ad-slot="3435201094"
+    data-auto-format="mngs"
+    data-full-width="">
+  <div overflow=""></div>
+</amp-ad>
 
       {{ CONTENT }}
 
       <!-- PUBBLICITÀ ADSENSE (Fine articolo) -->
       <div class="ad-container">
-        <amp-ad width="300" height="250"
-            type="adsense"
-            data-ad-client="ca-pub-9225028785900171"
-            data-ad-slot="3435201094">
-        </amp-ad>
-      </div>
-    </main>
+       <amp-ad width="300" height="250"
+    type="adsense"
+    data-ad-client="ca-pub-9225028785900171"
+    data-ad-slot="3435201094"
+    data-auto-format="mngs"
+    data-full-width="">
+  <div overflow=""></div>
+</amp-ad>
 
     <footer>
       <p><a href="{{ CANONICAL_URL }}">Leggi la notizia completa su BrunoRachiele.it</a></p>
