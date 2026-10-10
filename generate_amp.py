@@ -10,7 +10,7 @@ RSS_FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
 def transform_to_amp(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     
-    # Converte tutte le immagini standard in <amp-img>
+    # Converte le immagini standard in <amp-img>
     for img in soup.find_all('img'):
         amp_img = soup.new_tag('amp-img')
         amp_img['src'] = img.get('src', '')
@@ -42,14 +42,14 @@ def main():
         content = entry.summary if 'summary' in entry else entry.description
         pub_date = entry.published if 'published' in entry else datetime.datetime.now().isoformat()
         
-        # Estrarre il percorso relativo dall'URL originale (es. 2026/10/nome-articolo.html)
+        # Estrae il percorso dal link del post (es. /2026/10/titolo-post.html)
         parsed_url = urlparse(link)
-        rel_path = parsed_url.path.lstrip('/') # Rimuove lo slash iniziale
+        rel_path = parsed_url.path.lstrip('/')
         
-        # Salva direttamente nella cartella YYYY/MM/ senza "pages"
+        # Salva direttamente nella cartella dell'anno e del mese (es. 2026/10/titolo-post.html)
         full_filepath = rel_path
         
-        # Crea automaticamente le sottocartelle (es. 2026/10/)
+        # Crea le cartelle necessarie
         os.makedirs(os.path.dirname(full_filepath), exist_ok=True)
         
         amp_content = transform_to_amp(content)
