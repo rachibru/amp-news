@@ -5,7 +5,7 @@
   <title>Rassegna Stampa dell'11 Ottobre 2026: Stabilità istituzionale e primato del Centrodestra verso il traguardo di legislatura</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <!-- Componentes AMP obligatorios -->
+  <!-- Componenti AMP obbligatori -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
   <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
@@ -14,9 +14,10 @@
   <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <!-- Script per annunci automatici AdSense AMP -->
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
-  <!-- Relación canónica bidireccional (GitHub -> Blogger) -->
+  <!-- Relazione canonica bidireccionale (GitHub -> Blogger) -->
   <link rel="canonical" href="https://www.brunorachiele.it/2026/10/rassegna-stampa-dell11-ottobre-2026.html">
 
   <!-- Schema.org Structured Data (NewsArticle) -->
@@ -75,7 +76,6 @@
       line-height: 1.6;
     }
 
-    /* Header superior con logo cuadrado y botón Bypass */
     .amp-top-header {
       background-color: #ffffff;
       border-bottom: 1px solid #e0e0e0;
@@ -132,20 +132,37 @@
       margin-top: 8px;
     }
 
-    .heading .summary {
-      font-weight: 500;
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
     .share-buttons {
       margin: 16px 0;
     }
 
-    .article-content img, .article-content amp-img {
-      max-width: 100%;
-      height: auto;
+    .article-summary {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333333;
+      margin-bottom: 24px;
+    }
+
+    /* Box Pulsante Continua a Leggere */
+    .read-more-box {
+      text-align: center;
+      margin: 28px 0;
+      padding: 20px;
+      background-color: var(--color-bg-light);
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
     .cookie-disclaimer {
@@ -159,18 +176,21 @@
 </head>
 <body>
 
-  <!-- Header: Logo cuadrado y botón para leer en la web principal -->
+  <!-- Attivazione Annunci Automatici Google AdSense -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"></amp-auto-ads>
+
+  <!-- Header: Logo quadrato e pulsante bypass -->
   <header class="amp-top-header">
     <div class="header-container">
       <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-dell11-ottobre-2026.html" class="brand-link">
-        <amp-img src="https://www.brunorachiele.it/favicon.ico" 
+        <amp-img src="https://static.brunorachiele.it/logo.png" 
                  width="40" 
                  height="40" 
                  layout="fixed" 
                  alt="Bruno Rachiele"
                  class="square-logo">
         </amp-img>
-        <span>Bruno Rachiele</span>
+        <span>brunorachiele.it</span>
       </a>
 
       <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-dell11-ottobre-2026.html" class="bypass-btn">
@@ -183,11 +203,10 @@
     <article>
       <div class="heading">
         <h1>Rassegna Stampa dell'11 Ottobre 2026: Stabilità istituzionale e primato del Centrodestra verso il traguardo di legislatura</h1>
-        <p class="summary">{{ DESCRIPTION }}</p>
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
-      <!-- Botones para compartir -->
+      <!-- Pulsanti per condividere -->
       <div class="share-buttons">
         <amp-social-share type="twitter" width="45" height="33"></amp-social-share>
         <amp-social-share type="facebook" width="45" height="33"></amp-social-share>
@@ -195,46 +214,22 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
-      <!-- Cuerpo del artículo -->
-      <div class="article-content">
-        <div class="rassegna-container">
-<amp-img alt="Rassegna Stampa dell'11 Ottobre 2026: Stabilità istituzionale e primato del Centrodestra verso il traguardo di legislatura" height="600" layout="responsive" src="https://static.brunorachiele.it/rassegnastampa.png" width="800"></amp-img>
-<div class="card-review">
-<h2>📌 Primo Piano &amp; Attualità</h2>
-<p>La questione abitativa si impone al centro dell'agenda nazionale come una delle criticità sociali più avvertite dal tessuto produttivo e dalle famiglie. La rilevazione demoscopica segnala come quasi sette italiani su dieci (il 67,9%) considerino l'accesso alla casa una vera e propria emergenza, condivisa in modo trasversale da ceto medio, giovani lavoratori e nuclei urbani. Lungi dal prestarsi a derive dirigiste o a fallimentari logiche di blocco degli affitti di stampo massimalista, la sfida per una maggioranza liberale e riformatrice risiede nell'adozione di un approccio pragmatico: incentivare l'offerta privata, accelerare la rigenerazione urbana attraverso semplificazioni burocratiche e promuovere partnership pubblico-private a tutela del diritto di proprietà e della mobilità del lavoro.</p>
-<div class="card-source">📰 Fonte: Termometro Politico</div>
-</div>
-<div class="card-review">
-<h2>🏛️ Politica &amp; Istituzioni</h2>
-<p>A pochi giorni dal compimento del quarto anno dall'insediamento dell'esecuto guidato da Giorgia Meloni (13 ottobre 2022), il dibattito politico ruota attorno al compimento naturale della legislatura, fissato dall'art. 61 della Costituzione entro l'autunno del 2027. Al centro del confronto parlamentare campeggia il dossier riforme, con particolare attenzione al cosiddetto <em>Stabilicum</em> (o <em>Melonellum</em>), la nuova architettura elettorale concepita per garantire governi scaturiti dal responso chiaro delle urne e scongiurare paralisi assembleari. Sebbene tre cittadini su quattro ammettano di non conoscerne ancora i dettagli tecnici, l'orientamento di fondo degli elettori valorizza il principio cardine della stabilità: la prospettiva di un premio di maggioranza legato alla soglia del 42% premia la coesione e punisce le coalizioni disomogenee concepite unicamente per fini di veto.</p>
-<div class="card-source">📰 Fonte: Il Messaggero, Today, La Sicilia</div>
-</div>
-<div class="card-review">
-<h2>🌐 Esteri &amp; Geopolitica</h2>
-<p>In una fase storica dominata da tensioni multilaterali e riassetti competitivi su scala globale, la persistente continuità del quadro politico italiano rappresenta un elemento di raro pregio diplomatico e geoeconomico. La traiettoria atlantista e l'autorevolezza mostrata dall'Italia nei consessi europei consolidano il ruolo di Roma quale interlocutore fidato nell'area mediterranea ed euro-occidentale. Il contrasto tra l'instabilità politica che attraversa le democrazie d'oltralpe e la solidità dell'indirizzo di governo italiano rafforza la leva negoziale del Paese, rassicurando alleati e cancellerie sulla capacità di mantenere impegni strategici di lungo respiro in materia di difesa comune e sicurezza energetica.</p>
-<div class="card-source">📰 Fonte: Analisi della stampa nazionale ed estera</div>
-</div>
-<div class="card-review">
-<h2>📰 Dalle Prime Pagine</h2>
-<p>I titoli della carta stampata odierna riflettono la crescente centralità della corsa verso il 2027 e le geometrie parlamentari che ne deriveranno. Le prime pagine evidenziano il costante rafforzamento di Fratelli d'Italia e della figura della Presidente del Consiglio, a fronte di una parabola discendente della leadership di Elly Schlein nel Partito Democratico. Spazio rilevante viene assegnato anche alla tenuta dell'alleanza di centrodestra nel suo perimetro di governo tradizionale, che dimostra di poter prescindere da fughe centrifughe, mentre il fronte progressista fatica a compattarsi di fronte all'irriducibile competizione interna esercitata dal Movimento 5 Stelle di Giuseppe Conte.</p>
-<div class="card-source">📰 Fonte: Il Messaggero, QuiFinanza, La Sicilia</div>
-</div>
-<div class="card-review">
-<h2>🗳️ Elezioni &amp; Sondaggi</h2>
-<p>Le ultime rilevazioni demoscopiche confermano un trend inequivocabile a favore del polo di centro-destra. Fratelli d'Italia consolida il proprio primato al 27%, allargando la forbice rispetto al Nazareno, appesantito dall'emorragia di consensi della segreteria Schlein. L'assetto complessivo della coalizione di governo – pur registrando flessioni per l'area leghista e la componente Vannacci – si attesta su una base solida del 41,3%, superando nettamente il potenziale elettorale del cosiddetto "Campo Largo" (39,4%). Con il traguardo del 42% fissato come snodo per blindare il premio della nuova legge elettorale, i numeri evidenziano un vantaggio competitivo cruciale per l'area liberale e conservatrice, laddove le opposizioni pagano l'assenza di una visione comune e un'insanabile concorrenza per la leadership.</p>
-<div class="card-source">📰 Fonte: QuiFinanza, Il Messaggero, La Sicilia</div>
-</div>
-<div class="card-review">
-<h2>📈 Economia &amp; Mercati</h2>
-<p>L'orizzonte di una legislatura che marcia verso la sua naturale scadenza istituzionale proietta un segnale rassicurante sui mercati finanziari, con spread e titoli di Stato che beneficiano della prevedibilità delle scelte di finanza pubblica. La responsabilità sui conti dello Stato si conferma la migliore barriera difensiva per preservare la credibilità dell'Italia dinanzi a investitori e agenzie di rating. Sul fronte dell'economia reale, il focus resta sull'allocazione efficiente degli investimenti e sullo sviluppo immobiliare: l'emergenza abitativa reclama politiche pro-crescita che liberino risorse private, de-burocratizzino l'edilizia e sostengano l'occupazione, lontano da logiche assistenzialiste che rischierebbero di comprimere la redditività del capitale e deprimere l'offerta sul mercato.</p>
-<div class="card-source">📰 Fonte: QuiFinanza, Termometro Politico</div>
-</div>
-</div>
+      <!-- Anteprima dell'articolo -->
+      <div class="article-summary">
+        {{ SUMMARY }}
+      </div>
+
+      <!-- Pulsante Continua a Leggere sul sito originale -->
+      <div class="read-more-box">
+        <p style="margin-top: 0; font-weight: 500;">Per leggere l'articolo completo prosegui sul sito principale:</p>
+        <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-dell11-ottobre-2026.html" class="read-more-btn">
+          Continua a leggere su brunorachiele.it ↗
+        </a>
       </div>
     </article>
   </main>
 
-  <!-- Aviso de cookies AMP -->
+  <!-- Avviso cookie AMP -->
   <amp-user-notification class="cookie-disclaimer" layout="nodisplay" id="amp-user-notification1">
     Questo sito utilizza componenti AMP standard.
     <button on="tap:amp-user-notification1.dismiss">Accetta</button>

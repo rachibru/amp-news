@@ -5,7 +5,7 @@
   <title>Sondaggio Politico 12 settembre 2026 – Supermedia Bruno Rachiele</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <!-- Componentes AMP obligatorios -->
+  <!-- Componenti AMP obbligatori -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
   <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
@@ -14,9 +14,10 @@
   <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <!-- Script per annunci automatici AdSense AMP -->
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
-  <!-- Relación canónica bidireccional (GitHub -> Blogger) -->
+  <!-- Relazione canonica bidireccionale (GitHub -> Blogger) -->
   <link rel="canonical" href="https://www.brunorachiele.it/2026/09/sondaggio-politico-12-settembre-2026-supermedia.html">
 
   <!-- Schema.org Structured Data (NewsArticle) -->
@@ -75,7 +76,6 @@
       line-height: 1.6;
     }
 
-    /* Header superior con logo cuadrado y botón Bypass */
     .amp-top-header {
       background-color: #ffffff;
       border-bottom: 1px solid #e0e0e0;
@@ -132,20 +132,37 @@
       margin-top: 8px;
     }
 
-    .heading .summary {
-      font-weight: 500;
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
     .share-buttons {
       margin: 16px 0;
     }
 
-    .article-content img, .article-content amp-img {
-      max-width: 100%;
-      height: auto;
+    .article-summary {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333333;
+      margin-bottom: 24px;
+    }
+
+    /* Box Pulsante Continua a Leggere */
+    .read-more-box {
+      text-align: center;
+      margin: 28px 0;
+      padding: 20px;
+      background-color: var(--color-bg-light);
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
     .cookie-disclaimer {
@@ -159,18 +176,21 @@
 </head>
 <body>
 
-  <!-- Header: Logo cuadrado y botón para leer en la web principal -->
+  <!-- Attivazione Annunci Automatici Google AdSense -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"></amp-auto-ads>
+
+  <!-- Header: Logo quadrato e pulsante bypass -->
   <header class="amp-top-header">
     <div class="header-container">
       <a href="https://www.brunorachiele.it/2026/09/sondaggio-politico-12-settembre-2026-supermedia.html" class="brand-link">
-        <amp-img src="https://www.brunorachiele.it/favicon.ico" 
+        <amp-img src="https://static.brunorachiele.it/logo.png" 
                  width="40" 
                  height="40" 
                  layout="fixed" 
                  alt="Bruno Rachiele"
                  class="square-logo">
         </amp-img>
-        <span>Bruno Rachiele</span>
+        <span>brunorachiele.it</span>
       </a>
 
       <a href="https://www.brunorachiele.it/2026/09/sondaggio-politico-12-settembre-2026-supermedia.html" class="bypass-btn">
@@ -183,11 +203,10 @@
     <article>
       <div class="heading">
         <h1>Sondaggio Politico 12 settembre 2026 – Supermedia Bruno Rachiele</h1>
-        <p class="summary">{{ DESCRIPTION }}</p>
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
-      <!-- Botones para compartir -->
+      <!-- Pulsanti per condividere -->
       <div class="share-buttons">
         <amp-social-share type="twitter" width="45" height="33"></amp-social-share>
         <amp-social-share type="facebook" width="45" height="33"></amp-social-share>
@@ -195,43 +214,22 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
-      <!-- Cuerpo del artículo -->
-      <div class="article-content">
-        <!-- Schema.org Dati Strutturati per Google News -->
-<!-- Contenuto dell'Articolo -->
-<article>
-<h1>Sondaggio Politico 12 settembre 2026</h1>
-<p style="color: #64748b; font-size: 0.9em;">
-    Aggiornamento del <time datetime="2026-09-12">12 settembre 2026</time>
-</p>
-<!-- Prima immagine: Eager per velocizzare LCP -->
-<div style="text-align: center; margin-top: 15px;">
-<amp-img alt="Copertina Sondaggi Politici Bruno Rachiele" height="600" layout="responsive" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3oENyRpBHtz3H7gnlGcoL1LByXkZnhJ778LMHidXlHODs-4Sa8C4syc4p8yAC8E36FRMIm77dyzUJ55qoKelRfylMpWrEtn9RjNpZxgl4xK4BSe4ycNARZL8_EVrqnyvvZqTCVUzZwUXNkQzwbDT-NvQ4hkRR0dbXpqqr-yujXa5kZjL65f-RSfAl7fk/s1600/NUOVE%20GRAFICHE%20SITO%20%282%29.png" width="800"></amp-img>
-</div>
-<div style="text-align: center;">
-<amp-img alt="Grafica del sondaggio politico aggiornato al 12 settembre 2026" height="600" layout="responsive" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjx0IXeyrcvImhp3S4Xq2CLKNv55vFjOodCq3RzTx7O9hqm9EkDxwtXhX9R_Pex7XiFSVa_ktreWxvlDzVrP67R2G33lZgXcP39aDBHUfTLMkhrw3lsj1tX2GXHDpzW5ujy0ZsR2gRO56-6s1gUikac8Rd2wIieknwjWqDQQS_sEmWKMaFnlK61O58d2Ys/s960/GRAFICA%20SONDAGGI%20(17).jpg" width="800"></amp-img>
-</div>
-<div style="text-align: center;">
-<amp-img alt="Grafico preferenze coalizioni 12 settembre 2026" height="600" layout="responsive" src="https://www.brunorachiele.it/feeds/posts/URL_IMMAGINE_COALIZIONI_MANCANTE" width="800"></amp-img>
-</div>
-<hr style="margin: 30px 0px; border: 0; border-top: 1px solid #e2e8f0;"/>
-<!-- Testo dell'articolo -->
-<div>
-<p>Di seguito la supermedia dei sondaggi politici italiani aggiornata a 12 settembre 2026, con il dettaglio sulle intenzioni di voto e i trend delle coalizioni.</p>
-</div>
-<p style="color: #555555; font-size: 0.9em; margin-top: 15px;">
-    Supermedia a cura di <strong>Bruno Rachiele</strong><br/>
-    Fonte dati ufficiale: 
-    <a href="https://sondaggipoliticoelettorali.it" rel="noopener noreferrer" target="_blank">
-      sondaggipoliticoelettorali.it
-    </a>
-</p>
-</article>
+      <!-- Anteprima dell'articolo -->
+      <div class="article-summary">
+        {{ SUMMARY }}
+      </div>
+
+      <!-- Pulsante Continua a Leggere sul sito originale -->
+      <div class="read-more-box">
+        <p style="margin-top: 0; font-weight: 500;">Per leggere l'articolo completo prosegui sul sito principale:</p>
+        <a href="https://www.brunorachiele.it/2026/09/sondaggio-politico-12-settembre-2026-supermedia.html" class="read-more-btn">
+          Continua a leggere su brunorachiele.it ↗
+        </a>
       </div>
     </article>
   </main>
 
-  <!-- Aviso de cookies AMP -->
+  <!-- Avviso cookie AMP -->
   <amp-user-notification class="cookie-disclaimer" layout="nodisplay" id="amp-user-notification1">
     Questo sito utilizza componenti AMP standard.
     <button on="tap:amp-user-notification1.dismiss">Accetta</button>

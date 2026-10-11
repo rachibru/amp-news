@@ -5,7 +5,7 @@
   <title>Rassegna Stampa Politica – 9 Ottobre 2026: La rotta della stabilità e il cantiere della Manovra</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  <!-- Componentes AMP obligatorios -->
+  <!-- Componenti AMP obbligatori -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
   <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
@@ -14,9 +14,10 @@
   <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+  <!-- Script per annunci automatici AdSense AMP -->
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
-  <!-- Relación canónica bidireccional (GitHub -> Blogger) -->
+  <!-- Relazione canonica bidireccionale (GitHub -> Blogger) -->
   <link rel="canonical" href="https://www.brunorachiele.it/2026/10/rassegna-stampa-politica-9-ottobre-2026_02085798598.html">
 
   <!-- Schema.org Structured Data (NewsArticle) -->
@@ -75,7 +76,6 @@
       line-height: 1.6;
     }
 
-    /* Header superior con logo cuadrado y botón Bypass */
     .amp-top-header {
       background-color: #ffffff;
       border-bottom: 1px solid #e0e0e0;
@@ -132,20 +132,37 @@
       margin-top: 8px;
     }
 
-    .heading .summary {
-      font-weight: 500;
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
     .share-buttons {
       margin: 16px 0;
     }
 
-    .article-content img, .article-content amp-img {
-      max-width: 100%;
-      height: auto;
+    .article-summary {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333333;
+      margin-bottom: 24px;
+    }
+
+    /* Box Pulsante Continua a Leggere */
+    .read-more-box {
+      text-align: center;
+      margin: 28px 0;
+      padding: 20px;
+      background-color: var(--color-bg-light);
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
     .cookie-disclaimer {
@@ -159,18 +176,21 @@
 </head>
 <body>
 
-  <!-- Header: Logo cuadrado y botón para leer en la web principal -->
+  <!-- Attivazione Annunci Automatici Google AdSense -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"></amp-auto-ads>
+
+  <!-- Header: Logo quadrato e pulsante bypass -->
   <header class="amp-top-header">
     <div class="header-container">
       <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-politica-9-ottobre-2026_02085798598.html" class="brand-link">
-        <amp-img src="https://www.brunorachiele.it/favicon.ico" 
+        <amp-img src="https://static.brunorachiele.it/logo.png" 
                  width="40" 
                  height="40" 
                  layout="fixed" 
                  alt="Bruno Rachiele"
                  class="square-logo">
         </amp-img>
-        <span>Bruno Rachiele</span>
+        <span>brunorachiele.it</span>
       </a>
 
       <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-politica-9-ottobre-2026_02085798598.html" class="bypass-btn">
@@ -183,11 +203,10 @@
     <article>
       <div class="heading">
         <h1>Rassegna Stampa Politica – 9 Ottobre 2026: La rotta della stabilità e il cantiere della Manovra</h1>
-        <p class="summary">{{ DESCRIPTION }}</p>
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
-      <!-- Botones para compartir -->
+      <!-- Pulsanti per condividere -->
       <div class="share-buttons">
         <amp-social-share type="twitter" width="45" height="33"></amp-social-share>
         <amp-social-share type="facebook" width="45" height="33"></amp-social-share>
@@ -195,76 +214,22 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
-      <!-- Cuerpo del artículo -->
-      <div class="article-content">
-        <div class="rassegna-container">
-<amp-img alt="Immagine articolo" height="600" layout="responsive" src="https://static.brunorachiele.it/rassegnastampa.png" width="800"></amp-img>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">📌</span>
-<h2>In Primo Piano</h2>
-</div>
-<div class="card-body">
-<p>Al centro dell’apertura dei principali quotidiani nazionali si colloca la definizione del perimetro della nuova Legge di Bilancio, con il Documento Programmatico di Finanza Pubblica che raccoglie il plauso dei mercati e la prudente approvazione di Bruxelles. I titoli odierni evidenziano una convergenza chiara: il Governo procede con fermezza lungo la direttrice della sostenibilità dei conti pubblici, blindando il taglio strutturale del cuneo fiscale e confermando il sostegno mirato ai redditi medi e bassi. Nonostante le turbolenze geopolitiche globali, l'Italia si presenta all'appuntamento autunnale con indicatori macroeconomici più solidi della media europea, capitalizzando quattro anni di credibilità internazionale e coerenza esecutiva.</p>
-</div>
-<div class="card-source">📰 Fonte principale: Il Messaggero / Corriere della Sera</div>
-</div>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">🏛️</span>
-<h2>Governo e Maggioranza</h2>
-</div>
-<div class="card-body">
-<p>I retroscena politici descrivono un centro-destra compatto e operativo. A Palazzo Chigi la sintonia tra Giorgia Meloni e i vicepremier consolida un'agenda legislativa serrata: avanti senza esitazioni sul compimento delle riforme istituzionali e sull’efficientamento della spesa pubblica. Sul fronte parlamentare, la maggioranza dimostra una compattezza invidiabile, respingendo i tentativi di logoramento e confermando gli impegni sulla modernizzazione infrastrutturale del Paese, a partire dalle opere strategiche per il Mezzogiorno e dai piani di autonomia energetica. Viene ampiamente sottolineato il successo della mediazione governativa nella gestione dei fondi europei e nella tutela della sovranità industriale italiana.</p>
-</div>
-<div class="card-source">📰 Fonte: Il Giornale / Libero</div>
-</div>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">🗣️</span>
-<h2>Le Opposizioni</h2>
-</div>
-<div class="card-body">
-<p>Il fronte progressista continua a mostrare evidenti crepe tattiche e programmatiche. Come mettono in luce i resoconti delle assemblee parlamentari, il Partito Democratico e il Movimento 5 Stelle rimangono divisi sulle priorità strategiche, incapaci di presentare una contro-manovra economica organica e credibile. Le contestazioni si arenano spesso in slogan demagogici o in una dialettica pretestuosa sui diritti civili, eludendo il confronto sui numeri reali del bilancio. L'assenza di una leadership unitaria e la persistente tentazione massimalista rendono l'azione del campo largo sterile e priva di presa sull'elettorato moderato, che continua a privilegiare la concretezza dell'esecutivo.</p>
-</div>
-<div class="card-source">📰 Fonte: La Repubblica / La Stampa</div>
-</div>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">📈</span>
-<h2>Economia e Lavoro</h2>
-</div>
-<div class="card-body">
-<p>I dati diffusi nelle ultime ore certificano la tenuta del modello economico promosso dall'esecutivo. L'occupazione a tempo indeterminato segna un ulteriore incremento, trainata dagli incentivi alle assunzioni e da una politica industriale che premia chi produce e innova anziché finanziare l'assistenzialismo. Lo spread BTP-Bund si mantiene su livelli di assoluta serenità, mentre le agenzie di rating confermano l'affidabilità del debito italiano. Le misure di alleggerimento burocratico e il rifinanziamento delle agevolazioni per le piccole e medie imprese confermano l'impostazione liberale e pro-crescita della politica economica governativa.</p>
-</div>
-<div class="card-source">📰 Fonte: Il Sole 24 Ore / ANSA</div>
-</div>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">✍️</span>
-<h2>La Riflessione di Bruno Rachiele</h2>
-</div>
-<div class="card-body">
-<p>Nel panorama politico italiano, tradizionalmente scandito da stagioni effimere e cambi di casacca, la stabilità conquistata da questo Governo rappresenta il vero fattore di discontinuità e di forza sistemica. Quando un esecutivo ha davanti a sé un orizzonte temporale certo, le scelte economiche abbandonano l'ansia del consenso immediato per tradursi in autentica visione d'insieme: difesa del potere d'acquisto, tutela del ceto produttivo e ripristino dell'orgoglio nazionale. La serenità con cui la maggioranza affronta i passaggi più complessi dimostra che l'Italia ha finalmente archiviato l'era dell'emergenza permanente, tornando a essere un partner europeo autorevole, pragmatico e prevedibile.</p>
-</div>
-<div class="card-source">📰 Analisi d'autore a cura di Bruno Rachiele</div>
-</div>
-<div class="news-card">
-<div class="card-header">
-<span class="card-icon">🎯</span>
-<h2>In Sintesi</h2>
-</div>
-<div class="card-body">
-<p>La giornata odierna evidenzia un quadro nitido: un Governo saldo che persegue con rigore e concretezza i propri obiettivi di mandato, contrapposto a un'opposizione sfilacciata e priva di alternative praticabili. La rotta è tracciata all'insegna della stabilità e della crescita.</p>
-</div>
-<div class="card-source">📰 Sintesi Rassegna Stampa del 09/10/2026</div>
-</div>
-</div>
+      <!-- Anteprima dell'articolo -->
+      <div class="article-summary">
+        {{ SUMMARY }}
+      </div>
+
+      <!-- Pulsante Continua a Leggere sul sito originale -->
+      <div class="read-more-box">
+        <p style="margin-top: 0; font-weight: 500;">Per leggere l'articolo completo prosegui sul sito principale:</p>
+        <a href="https://www.brunorachiele.it/2026/10/rassegna-stampa-politica-9-ottobre-2026_02085798598.html" class="read-more-btn">
+          Continua a leggere su brunorachiele.it ↗
+        </a>
       </div>
     </article>
   </main>
 
-  <!-- Aviso de cookies AMP -->
+  <!-- Avviso cookie AMP -->
   <amp-user-notification class="cookie-disclaimer" layout="nodisplay" id="amp-user-notification1">
     Questo sito utilizza componenti AMP standard.
     <button on="tap:amp-user-notification1.dismiss">Accetta</button>
