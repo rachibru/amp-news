@@ -32,7 +32,7 @@
     },
     "headline": "Ultimi 30 giorni Politici dell'8 maggio 2026 - Bruno Rachiele",
     "image": [
-      "{{ FEATURED_IMAGE }}"
+      "https://static.brunorachiele.it/sfondo.png"
     ],
     "datePublished": "{{ DATE_PUBLISHED }}",
     "dateModified": "{{ DATE_MODIFIED }}",
@@ -233,9 +233,9 @@
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
-      <!-- Foto in evidenza dell'articolo -->
+      <!-- Foto in evidenza fissa -->
       <div class="featured-image-box">
-        <amp-img src="{{ FEATURED_IMAGE }}" 
+        <amp-img src="https://static.brunorachiele.it/sfondo.png" 
                  width="16" 
                  height="9" 
                  layout="responsive" 
@@ -251,6 +251,10 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
+      <!-- Estratto dell'articolo (max 3 righe) -->
+      <div class="article-summary">
+        {{ SUMMARY }}
+      </div>
 
       <!-- Pulsante Continua a Leggere -->
       <div class="read-more-box">
