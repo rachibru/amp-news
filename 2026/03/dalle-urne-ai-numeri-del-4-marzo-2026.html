@@ -176,19 +176,15 @@
   </style>
 </head>
 <body>
-<!-- Google Analytics 4 (GA4) per AMP -->
-<amp-analytics type="googleanalytics" id="analytics1">
-  <script type="application/json">
-  {
-    "vars": {
-      "gtag_id": "G-WV7HSX52FP",
-      "config": {
-        "G-WV7HSX52FP": { "groups": "default" }
-      }
-    }
-  }
-  </script>
-</amp-analytics>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WV7HSX52FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WV7HSX52FP');
+</script>
   
 
   <!-- Attivazione Annunci Automatici Google AdSense -->
