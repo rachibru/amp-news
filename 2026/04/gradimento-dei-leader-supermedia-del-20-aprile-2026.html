@@ -1,7 +1,6 @@
 <!doctype html>
 <html ⚡ lang="it">
 <head>
-  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <meta charset="utf-8">
   <title>Gradimento dei Leader supermedia del 20 aprile 2026 - Bruno Rachiele</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -133,15 +132,27 @@
       margin-top: 8px;
     }
 
+    .featured-image-box {
+      margin: 16px 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
     .share-buttons {
       margin: 16px 0;
     }
 
+    /* Estratto limitato a massimo 3 righe di testo */
     .article-summary {
-      font-size: 1.1rem;
-      line-height: 1.7;
+      font-size: 1.05rem;
+      line-height: 1.6;
       color: #333333;
       margin-bottom: 24px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Box Pulsante Continua a Leggere */
@@ -176,16 +187,20 @@
   </style>
 </head>
 <body>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WV7HSX52FP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-WV7HSX52FP');
-</script>
-  
+  <!-- Tracciamento Google Analytics 4 (GA4) nativo per AMP -->
+  <amp-analytics type="googleanalytics" id="analytics1">
+    <script type="application/json">
+    {
+      "vars": {
+        "gtag_id": "G-WV7HSX52FP",
+        "config": {
+          "G-WV7HSX52FP": { "groups": "default" }
+        }
+      }
+    }
+    </script>
+  </amp-analytics>
 
   <!-- Attivazione Annunci Automatici Google AdSense -->
   <amp-auto-ads type="adsense" data-ad-client="ca-pub-9225028785900171"></amp-auto-ads>
@@ -217,6 +232,16 @@
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
+      <!-- Immagine in Evidenza dell'Articolo -->
+      <div class="featured-image-box">
+        <amp-img src="{{ FEATURED_IMAGE }}" 
+                 width="16" 
+                 height="9" 
+                 layout="responsive" 
+                 alt="Gradimento dei Leader supermedia del 20 aprile 2026 - Bruno Rachiele">
+        </amp-img>
+      </div>
+
       <!-- Pulsanti per condividere -->
       <div class="share-buttons">
         <amp-social-share type="twitter" width="45" height="33"></amp-social-share>
@@ -225,7 +250,7 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
-      <!-- Anteprima dell'articolo -->
+      <!-- Estratto dell'articolo (limitato a max 3 righe) -->
       <div class="article-summary">
         {{ SUMMARY }}
       </div>
