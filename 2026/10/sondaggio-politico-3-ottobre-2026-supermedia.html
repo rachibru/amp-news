@@ -5,6 +5,9 @@
   <title>Sondaggio Politico 3 ottobre 2026 – Supermedia Bruno Rachiele</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
+  <!-- PASSAGGIO 1 ADSENSE: Script per annunci automatici AdSense AMP -->
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
   <!-- Componenti AMP obbligatori -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
@@ -14,8 +17,6 @@
   <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
   <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-  <!-- Script per annunci automatici AdSense AMP -->
-  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
   <!-- Relazione canonica bidirezionale (GitHub -> Blogger) -->
   <link rel="canonical" href="https://www.brunorachiele.it/2026/10/sondaggio-politico-3-ottobre-2026-supermedia.html">
@@ -142,7 +143,7 @@
       margin: 16px 0;
     }
 
-    /* Estratto limitato a massimo 3 righe di testo */
+    /* Estratto dell'articolo limitato a un massimo di 3 righe */
     .article-summary {
       font-size: 1.05rem;
       line-height: 1.6;
@@ -188,7 +189,10 @@
 </head>
 <body>
 
-  <!-- Tracciamento Google Analytics 4 (GA4) nativo per AMP -->
+  <!-- PASSAGGIO 2 ADSENSE: Codice per annunci automatici subito dopo il body -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-9225028785900171"></amp-auto-ads>
+
+  <!-- Google Analytics 4 (GA4) nativo per AMP -->
   <amp-analytics type="googleanalytics" id="analytics1">
     <script type="application/json">
     {
@@ -201,9 +205,6 @@
     }
     </script>
   </amp-analytics>
-
-  <!-- Attivazione Annunci Automatici Google AdSense -->
-  <amp-auto-ads type="adsense" data-ad-client="ca-pub-9225028785900171"></amp-auto-ads>
 
   <!-- Header: Logo quadrato e pulsante bypass -->
   <header class="amp-top-header">
@@ -232,7 +233,7 @@
         <p><small>Di <strong>brunorachiele.it</strong></small></p>
       </div>
 
-      <!-- Immagine in Evidenza dell'Articolo -->
+      <!-- Foto in evidenza dell'articolo -->
       <div class="featured-image-box">
         <amp-img src="{{ FEATURED_IMAGE }}" 
                  width="16" 
@@ -250,12 +251,8 @@
         <amp-social-share type="pinterest" width="45" height="33"></amp-social-share>
       </div>
 
-      <!-- Estratto dell'articolo (limitato a max 3 righe) -->
-      <div class="article-summary">
-        {{ SUMMARY }}
-      </div>
 
-      <!-- Pulsante Continua a Leggere sul sito originale -->
+      <!-- Pulsante Continua a Leggere -->
       <div class="read-more-box">
         <p style="margin-top: 0; font-weight: 500;">Per leggere l'articolo completo prosegui sul sito principale:</p>
         <a href="https://www.brunorachiele.it/2026/10/sondaggio-politico-3-ottobre-2026-supermedia.html" class="read-more-btn">
