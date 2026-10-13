@@ -8,6 +8,9 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Edizione digitale rapida AMP con l'analisi delle prime pagine dei quotidiani italiani di oggi. Rassegna stampa aggiornata ogni mattina.">
 
+  <!-- Reindirizzamento Istantaneo (Fallback Meta HTML per massima velocità) -->
+  <meta http-equiv="refresh" content="0;url=https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">
+
   <!-- Script Obbligatori Core AMP -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
 
@@ -87,25 +90,9 @@
     }
   </style>
 
-  <!-- Script di Reindirizzamento Istantaneo senza blocchi CORS -->
+  <!-- Script di Reindirizzamento JavaScript Immediato -->
   <script>
-    (function() {
-      var feedUrl = 'https://www.brunorachiele.it/feeds/posts/summary/-/%22Rassegna%20Stampa%22?alt=json&max-results=1';
-      fetch(feedUrl)
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
-            var latestPost = data.feed.entry[0];
-            var alternateLink = latestPost.link.find(function(l) { return l.rel === 'alternate'; });
-            if (alternateLink && alternateLink.href) {
-              window.location.replace(alternateLink.href);
-            }
-          }
-        })
-        .catch(function(err) {
-          console.error(err);
-        });
-    })();
+    window.location.replace("https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html");
   </script>
 
   <!-- Dati Strutturati Schema.org per Google News -->
@@ -152,9 +139,9 @@
   <div class="amp-card">
     <div class="loader"></div>
     <h1>📰 Prime Pagine dei Giornali</h1>
-    <p>Caricamento della rassegna stampa del giorno in corso...</p>
+    <p>Reindirizzamento in corso verso la rassegna stampa...</p>
     
-    <a id="target-link" href="https://www.brunorachiele.it" class="btn-redirect">
+    <a id="target-link" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" class="btn-redirect">
       Apri la Rassegna Stampa
     </a>
   </div>
