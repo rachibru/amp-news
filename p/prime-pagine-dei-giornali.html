@@ -10,7 +10,6 @@
 
   <!-- Script Obbligatori Core AMP -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
 
   <!-- Script per Google Analytics su AMP -->
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
@@ -88,6 +87,27 @@
     }
   </style>
 
+  <!-- Script di Reindirizzamento Istantaneo senza blocchi CORS -->
+  <script>
+    (function() {
+      var feedUrl = 'https://www.brunorachiele.it/feeds/posts/summary/-/%22Rassegna%20Stampa%22?alt=json&max-results=1';
+      fetch(feedUrl)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
+            var latestPost = data.feed.entry[0];
+            var alternateLink = latestPost.link.find(function(l) { return l.rel === 'alternate'; });
+            if (alternateLink && alternateLink.href) {
+              window.location.replace(alternateLink.href);
+            }
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+    })();
+  </script>
+
   <!-- Dati Strutturati Schema.org per Google News -->
   <script type="application/ld+json">
   {
@@ -150,26 +170,6 @@
       <div overflow=""></div>
     </amp-ad>
   </div>
-
-  <!-- Script di Reindirizzamento Dinamico all'Ultima Rassegna -->
-  <amp-script script="redirect-script" layout="nodisplay"></amp-script>
-
-  <script id="redirect-script" type="text/plain" target="amp-script">
-    const feedUrl = 'https://www.brunorachiele.it/feeds/posts/summary/-/%22Rassegna%20Stampa%22?alt=json&max-results=1';
-    
-    fetch(feedUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
-          const latestPost = data.feed.entry[0];
-          const alternateLink = latestPost.link.find(l => l.rel === 'alternate');
-          if (alternateLink && alternateLink.href) {
-            window.location.replace(alternateLink.href);
-          }
-        }
-      })
-      .catch(err => console.error(err));
-  </script>
 
 </body>
 </html>
