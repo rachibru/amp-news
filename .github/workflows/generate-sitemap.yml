@@ -4,7 +4,7 @@ on:
   schedule:
     # Esegue l'aggiornamento automatico ogni giorno alle 00:00 UTC
     - cron: '0 0 * * *'
-  workflow_dispatch: # Permette di avviarlo anche manualmente da GitHub
+  workflow_dispatch: # Permette l'avvio manuale
 
 jobs:
   build:
@@ -13,24 +13,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Sitemap XML
+      - name: Generate Dynamic Sitemap from Blogger Feed
         run: |
-          cat <<EOF > sitemap.xml
-          <?xml version="1.0" encoding="UTF-8"?>
-          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <url>
-              <loc>https://amp.brunorachiele.it/prime-pagine-dei-giornali.html</loc>
-              <lastmod>$(date +'%Y-%m-%d')</lastmod>
-              <changefreq>daily</changefreq>
-              <priority>1.0</priority>
-            </url>
-          </urlset>
-          EOF
+          python3 -c "
+          import urllib.request
+          import xml.etree.ElementTree as ET
+
+          feed_url = 'https://www.brunorachiele.it/feeds/posts/default?max-results=500'
+          req = urllib.request.Request(feed_url, headers={'User-Agent': 'Mozilla/5.0'})
+          
+          try:
+              with urllib.request.urlopen(req) as response:
+                  xml_data = response.read()
+
+              root = ET.fromstring(xml_data)
+              ns = {'atom': 'http://www.w3.org/2005/Atom'}
+
+              urls = ['https://amp.brunorachiele.it/prime-pagine-dei-giornali.html']
+
+              for entry in root.findall('atom:entry', ns):
+                  for link in entry.findall('atom:link', ns):
+                      if link.attrib.get('rel') == 'alternate' and link.attrib.get('type') == 'text/html':
+                          urls.append(link.attrib.get('href'))
+
+              sitemap_content = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
+              sitemap_content += '<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n'
+              
+              for url in urls:
+                  sitemap_content += f'  <url>\n    <loc>{url}</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+              
+              sitemap_content += '</urlset>'
+
+              with open('sitemap.xml', 'w', encoding='utf-8') as f:
+                  f.write(sitemap_content)
+              print('Sitemap generata con successo!')
+
+          except Exception as e:
+              print(f'Errore nella generazione: {e}')
+          "
 
       - name: Commit and Push Sitemap
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "Auto-update sitemap.xml [skip ci]" || exit 0
+          git commit -m "Auto-update dynamic sitemap.xml [skip ci]" || exit 0
           git push
