@@ -2,9 +2,8 @@ name: Generate AMP Sitemap
 
 on:
   schedule:
-    # Esegue l'aggiornamento automatico ogni giorno alle 00:00 UTC
     - cron: '0 0 * * *'
-  workflow_dispatch: # Permette l'avvio manuale
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Dynamic Sitemap from Blogger Feed
+      - name: Generate Dynamic Sitemap for AMP Subdomain
         run: |
           python3 -c "
           import urllib.request
@@ -27,14 +26,19 @@ jobs:
                   xml_data = response.read()
 
               root = ET.fromstring(xml_data)
-              ns = {'atom': 'http://www.w3.org/2005/Atom'}
+              ns = {'atom': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 
+              # Pagina principale AMP
               urls = ['https://amp.brunorachiele.it/prime-pagine-dei-giornali.html']
 
+              # Estrazione post e conversione URL per il sottodominio AMP
               for entry in root.findall('atom:entry', ns):
                   for link in entry.findall('atom:link', ns):
                       if link.attrib.get('rel') == 'alternate' and link.attrib.get('type') == 'text/html':
-                          urls.append(link.attrib.get('href'))
+                          orig_url = link.attrib.get('href')
+                          # Converte l'URL di Blogger nel formato del sottodominio AMP
+                          amp_url = orig_url.replace('https://www.brunorachiele.it/', 'https://amp.brunorachiele.it/')
+                          urls.append(amp_url)
 
               sitemap_content = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
               sitemap_content += '<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n'
@@ -46,7 +50,7 @@ jobs:
 
               with open('sitemap.xml', 'w', encoding='utf-8') as f:
                   f.write(sitemap_content)
-              print('Sitemap generata con successo!')
+              print('Sitemap AMP generata con successo!')
 
           except Exception as e:
               print(f'Errore nella generazione: {e}')
