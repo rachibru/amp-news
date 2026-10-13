@@ -12,24 +12,52 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Clean Sitemap XML
+      - name: Scan HTML files and generate Sitemap XML
         run: |
-          cat <<EOF > sitemap.xml
-          <?xml version="1.0" encoding="UTF-8"?>
-          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <url>
-              <loc>https://amp.brunorachiele.it/prime-pagine-dei-giornali.html</loc>
-              <lastmod>$(date +'%Y-%m-%d')</lastmod>
-              <changefreq>daily</changefreq>
-              <priority>1.0</priority>
-            </url>
-          </urlset>
-          EOF
+          python3 -c "
+          import os
+          from datetime import datetime
+
+          base_url = 'https://amp.brunorachiele.it/'
+          today = datetime.now().strftime('%Y-%m-%d')
+          urls = []
+
+          # Scansione di tutti i file .html presenti nel repository
+          for root, dirs, files in os.walk('.'):
+              # Ignora cartelle nascoste come .git o .github
+              if '.git' in root or '.github' in root:
+                  continue
+              for file in files:
+                  if file.endswith('.html') and file != '404.html':
+                      rel_path = os.path.relpath(os.path.join(root, file), '.')
+                      # Normalizza i separatori di percorso per le URL web
+                      web_path = rel_path.replace('\\\\', '/')
+                      if web_path.startswith('./'):
+                          web_path = web_path[2:]
+                      
+                      urls.append(base_url + web_path)
+
+          # Ordina gli URL per pulizia
+          urls.sort()
+
+          sitemap_content = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
+          sitemap_content += '<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n'
+
+          for url in urls:
+              sitemap_content += f'  <url>\n    <loc>{url}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+
+          sitemap_content += '</urlset>'
+
+          with open('sitemap.xml', 'w', encoding='utf-8') as f:
+              f.write(sitemap_content)
+
+          print(f'Sitemap generata con {len(urls)} pagine trovate!')
+          "
 
       - name: Commit and Push Sitemap
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "Auto-update clean sitemap.xml [skip ci]" || exit 0
+          git commit -m "Auto-update sitemap with all repo HTML pages [skip ci]" || exit 0
           git push
