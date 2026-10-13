@@ -1,0 +1,36 @@
+name: Generate AMP Sitemap
+
+on:
+  schedule:
+    # Esegue l'aggiornamento automatico ogni giorno alle 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Permette di avviarlo anche manualmente da GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate Sitemap XML
+        run: |
+          cat <<EOF > sitemap.xml
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <url>
+              <loc>https://amp.brunorachiele.it/prime-pagine-dei-giornali.html</loc>
+              <lastmod>$(date +'%Y-%m-%d')</lastmod>
+              <changefreq>daily</changefreq>
+              <priority>1.0</priority>
+            </url>
+          </urlset>
+          EOF
+
+      - name: Commit and Push Sitemap
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "Auto-update sitemap.xml [skip ci]" || exit 0
+          git push
