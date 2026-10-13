@@ -8,17 +8,14 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Edizione digitale rapida AMP con l'analisi delle prime pagine e la rassegna stampa dei quotidiani italiani di oggi.">
 
-  <!-- Script Core Obbligatori AMP Runtime -->
+  <!-- Script Core AMP -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-
-  <!-- Script Componenti AMP Analytics & Ads -->
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
-  <!-- Boilerplate CSS AMP Obbligatorio -->
+  <!-- Boilerplate CSS AMP -->
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
-  <!-- Custom CSS Strettamente Inlined (Regola AMP) -->
   <style amp-custom>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -35,18 +32,22 @@
       width: 100%;
       background: #1a365d;
       color: #ffffff;
-      padding: 24px 16px;
+      padding: 28px 16px 24px;
       text-align: center;
       box-sizing: border-box;
     }
-    .logo-container {
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: center;
+    .logo-box {
+      background: #ffffff;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
     .header h1 {
-      margin: 0 0 6px;
-      font-size: 1.4rem;
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      font-weight: 700;
     }
     .date-badge {
       display: inline-block;
@@ -58,8 +59,8 @@
     }
     .container {
       width: 90%;
-      max-width: 520px;
-      margin: 30px auto;
+      max-width: 500px;
+      margin: 24px auto;
     }
     .card {
       background: #ffffff;
@@ -68,6 +69,12 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.05);
       border: 1px solid #e2e8f0;
       text-align: center;
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #1a365d;
+      font-size: 1.25rem;
+      line-height: 1.3;
     }
     .card p {
       color: #64748b;
@@ -84,19 +91,18 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 4px 10px rgba(26, 54, 93, 0.2);
+      font-size: 0.98rem;
+      box-shadow: 0 4px 12px rgba(26, 54, 93, 0.25);
       box-sizing: border-box;
     }
     .ad-container {
       width: 100%;
-      max-width: 520px;
-      margin: 20px auto;
+      max-width: 500px;
+      margin: 16px auto 24px;
       text-align: center;
     }
   </style>
 
-  <!-- Structured Data JSON-LD (Unica deroga consentita da AMP per gli script) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -115,7 +121,7 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Bruno Rachiele",
+      "name": "brunorachiele.it",
       "logo": {
         "@type": "ImageObject",
         "url": "https://static.brunorachiele.it/logo.png"
@@ -141,10 +147,9 @@
     </script>
   </amp-analytics>
 
-  <!-- Intestazione con Logo Ufficiale HTML AMP -->
   <header class="header">
-    <div class="logo-container">
-      <amp-img src="https://static.brunorachiele.it/logo.png" width="180" height="50" layout="fixed" alt="Logo Bruno Rachiele"></amp-img>
+    <div class="logo-box">
+      <amp-img src="https://static.brunorachiele.it/logo.png" width="160" height="42" layout="fixed" alt="Logo Bruno Rachiele"></amp-img>
     </div>
     <h1>📰 Prime Pagine dei Giornali</h1>
     <div class="date-badge">Edizione del Giorno</div>
@@ -152,7 +157,7 @@
 
   <main class="container">
     <div class="card">
-      <h2 style="margin-top:0; color:#1a365d; font-size:1.25rem;">Rassegna Stampa &amp; Prime Pagine</h2>
+      <h2>Rassegna Stampa &amp; Prime Pagine</h2>
       <p>Consulta l'edizione aggiornata delle prime pagine dei quotidiani italiani e l'analisi delle notizie di oggi.</p>
 
       <a href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" class="btn-main">
