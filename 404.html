@@ -147,7 +147,7 @@
       </a>
     </div>
 
-    <!-- Banner AdSense Subito Sotto la Card Principale -->
+    <!-- Banner AdSense Subito Sotto la Scheda -->
     <div class="ad-box">
       <ins class="adsbygoogle"
            style="display:block"
@@ -162,56 +162,55 @@
 
     <div class="posts-title">📰 Ultimi articoli dal blog:</div>
     
-    <!-- Contenitore Articoli Dinamici con AdSense In-Feed -->
     <div id="latest-posts">
       <p style="color: #64748b; font-size: 0.9rem;">Caricamento ultimi articoli...</p>
     </div>
+
+    <!-- Banner AdSense in Fondo alla Pagina -->
+    <div class="ad-box">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9225028785900171"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
   </main>
 
+  <!-- Script del Feed Ottimizzato senza syntax error -->
   <script>
-    // Recupera in automatico gli ultimi 5 articoli dal feed di Blogger
-    fetch('https://www.brunorachiele.it/feeds/posts/default?alt=json&max-results=5')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('latest-posts');
-        if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
-          let html = '';
-          data.feed.entry.forEach((entry, index) => {
-            const title = entry.title.$t;
-            const alternateLink = entry.link.find(l => l.rel === 'alternate');
-            
-            if (alternateLink && alternateLink.href) {
-              html += `
-                <div class="post-item">
-                  <a href="${alternateLink.href}">${title}</a>
-                </div>
-              `;
-            }
-
-            // Inserisce un banner pubblicitario IN-FEED dopo il secondo articolo
-            if (index === 1) {
-              html += `
-                <div class="ad-box">
-                  <ins class="adsbygoogle"
-                       style="display:block"
-                       data-ad-client="ca-pub-9225028785900171"
-                       data-ad-slot="1234567890"
-                       data-ad-format="fluid"
-                       data-ad-layout-key="-fb+5w+4e-db+86"
-                       data-full-width-responsive="true"></ins>
-                  <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
-                </div>
-              `;
-            }
-          });
-          container.innerHTML = html;
-        } else {
-          container.innerHTML = '<p style="color: #64748b;">Nessun articolo trovato.</p>';
-        }
-      })
-      .catch(err => {
-        document.getElementById('latest-posts').innerHTML = '';
-      });
+    (function() {
+      var feedUrl = 'https://www.brunorachiele.it/feeds/posts/summary?alt=json&max-results=5';
+      
+      fetch(feedUrl)
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          var container = document.getElementById('latest-posts');
+          if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
+            var html = '';
+            data.feed.entry.forEach(function(entry) {
+              var title = entry.title.$t;
+              var alternateLink = entry.link.find(function(l) { return l.rel === 'alternate'; });
+              if (alternateLink && alternateLink.href) {
+                html += '<div class="post-item"><a href="' + alternateLink.href + '">' + title + '</a></div>';
+              }
+            });
+            container.innerHTML = html;
+          } else {
+            container.innerHTML = '<p style="color: #64748b;">Nessun articolo disponibile al momento.</p>';
+          }
+        })
+        .catch(function(err) {
+          console.error('Errore feed:', err);
+          var container = document.getElementById('latest-posts');
+          if (container) {
+            container.innerHTML = '<div class="post-item"><a href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">📌 Prime Pagine dei Giornali e Rassegna Stampa</a></div>';
+          }
+        });
+    })();
   </script>
 
 </body>
