@@ -8,15 +8,17 @@
   <meta name="robots" content="index, follow">
   <meta name="description" content="Edizione digitale rapida AMP con l'analisi delle prime pagine e la rassegna stampa dei quotidiani italiani di oggi.">
 
-  <!-- Script Core AMP -->
+  <!-- Script Core Obbligatori AMP Runtime -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-  <!-- Analytics & Ads AMP -->
+
+  <!-- Script Componenti AMP Analytics & Ads -->
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
   <!-- Boilerplate CSS AMP Obbligatorio -->
   <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
+  <!-- Custom CSS Strettamente Inlined (Regola AMP) -->
   <style amp-custom>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -24,42 +26,58 @@
       color: #1e293b;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
     .header {
+      width: 100%;
       background: #1a365d;
       color: #ffffff;
       padding: 24px 16px;
       text-align: center;
+      box-sizing: border-box;
+    }
+    .logo-container {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
     }
     .header h1 {
-      margin: 0 0 8px;
-      font-size: 1.5rem;
+      margin: 0 0 6px;
+      font-size: 1.4rem;
     }
     .date-badge {
       display: inline-block;
       background: rgba(255, 255, 255, 0.15);
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 500;
     }
     .container {
-      max-width: 680px;
-      margin: 20px auto;
-      padding: 0 16px;
+      width: 90%;
+      max-width: 520px;
+      margin: 30px auto;
     }
     .card {
       background: #ffffff;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 32px 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
       border: 1px solid #e2e8f0;
-      margin-bottom: 20px;
+      text-align: center;
+    }
+    .card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
     }
     .btn-main {
-      display: block;
+      display: inline-block;
       width: 100%;
-      text-align: center;
       background-color: #1a365d;
       color: #ffffff;
       padding: 14px 0;
@@ -67,21 +85,19 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 1rem;
-      margin: 16px 0;
+      box-shadow: 0 4px 10px rgba(26, 54, 93, 0.2);
       box-sizing: border-box;
     }
-    .article-content {
-      line-height: 1.6;
-      font-size: 0.98rem;
-    }
     .ad-container {
-      margin: 20px 0;
+      width: 100%;
+      max-width: 520px;
+      margin: 20px auto;
       text-align: center;
     }
   </style>
 
-  <!-- Schema.org NewsArticle Dinamico per Google Search Console -->
-  <script type="application/ld+json" id="schema-json">
+  <!-- Structured Data JSON-LD (Unica deroga consentita da AMP per gli script) -->
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -89,8 +105,9 @@
       "@type": "WebPage",
       "@id": "https://amp.brunorachiele.it/prime-pagine-dei-giornali.html"
     },
-    "headline": "Prime Pagine dei Giornali e Rassegna Stampa di Oggi",
-    "description": "Analisi aggiornata delle prime pagine dei quotidiani italiani di oggi.",
+    "headline": "Prime Pagine dei Giornali di Oggi - Rassegna Stampa AMP",
+    "description": "Edizione digitale rapida AMP con l'analisi delle prime pagine e la rassegna stampa dei quotidiani italiani di oggi.",
+    "image": ["https://static.brunorachiele.it/logo.png"],
     "author": {
       "@type": "Person",
       "name": "Bruno Rachiele",
@@ -98,7 +115,11 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "brunorachiele.it",
+      "name": "Bruno Rachiele",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://static.brunorachiele.it/logo.png"
+      },
       "url": "https://brunorachiele.it"
     }
   }
@@ -120,28 +141,23 @@
     </script>
   </amp-analytics>
 
+  <!-- Intestazione con Logo Ufficiale HTML AMP -->
   <header class="header">
+    <div class="logo-container">
+      <amp-img src="https://static.brunorachiele.it/logo.png" width="180" height="50" layout="fixed" alt="Logo Bruno Rachiele"></amp-img>
+    </div>
     <h1>📰 Prime Pagine dei Giornali</h1>
-    <div class="date-badge" id="current-date-badge">Edizione di Oggi</div>
+    <div class="date-badge">Edizione del Giorno</div>
   </header>
 
   <main class="container">
-
-    <!-- Card Link Diretto alle Prime Pagine -->
     <div class="card">
-      <h2 style="margin-top:0; font-size:1.2rem; color:#1a365d;">Rassegna Stampa &amp; Prime Pagine</h2>
-      <p style="color:#64748b; font-size:0.9rem;">Accedi direttamente alla versione completa delle prime pagine e degli approfondimenti:</p>
-      
+      <h2 style="margin-top:0; color:#1a365d; font-size:1.25rem;">Rassegna Stampa &amp; Prime Pagine</h2>
+      <p>Consulta l'edizione aggiornata delle prime pagine dei quotidiani italiani e l'analisi delle notizie di oggi.</p>
+
       <a href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" class="btn-main">
-        📌 Apri la Pagina Ufficiale delle Prime Pagine
+        📌 Leggi la Rassegna Stampa Ufficiale
       </a>
-    </div>
-
-    <!-- Contenitore dell'Ultimo Articolo caricato dal Feed -->
-    <div class="card">
-      <div id="latest-post-content" class="article-content">
-        <p style="text-align:center; color:#64748b;">Caricamento della rassegna stampa in corso...</p>
-      </div>
     </div>
 
     <!-- Banner AdSense AMP -->
@@ -155,44 +171,7 @@
         <div overflow=""></div>
       </amp-ad>
     </div>
-
   </main>
-
-  <!-- Script Integrato per Data Dinamica e Importazione Contenuto Ultima Rassegna senza Redirect -->
-  <script>
-    (function() {
-      // 1. Formattazione e aggiornamento della data odierna
-      var today = new Date();
-      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      var formattedDate = today.toLocaleDateString('it-IT', options);
-      formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-      
-      var badgeElem = document.getElementById('current-date-badge');
-      if (badgeElem) {
-        badgeElem.innerText = formattedDate;
-      }
-
-      // 2. Recupero dinamico dell'ultimo articolo da Blogger senza redirect
-      var feedUrl = 'https://www.brunorachiele.it/feeds/posts/default/-/%22Rassegna%20Stampa%22?alt=json&max-results=1';
-      fetch(feedUrl)
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
-            var entry = data.feed.entry[0];
-            var title = entry.title.$t;
-            var content = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
-            
-            var container = document.getElementById('latest-post-content');
-            if (container) {
-              container.innerHTML = '<h2 style="color:#1a365d; margin-top:0;">' + title + '</h2>' + content;
-            }
-          }
-        })
-        .catch(function(err) {
-          console.error('Errore nel recupero del feed:', err);
-        });
-    })();
-  </script>
 
 </body>
 </html>
