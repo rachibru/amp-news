@@ -34,7 +34,7 @@
       width: 100%;
       background: #1a365d;
       color: #ffffff;
-      padding: 28px 16px 24px;
+      padding: 36px 16px 24px;
       text-align: center;
       box-sizing: border-box;
     }
@@ -48,12 +48,12 @@
     }
     .logo-box img {
       display: block;
-      width: 160px;
+      width: 150px;
       height: auto;
     }
     .header h1 {
       margin: 0 0 6px;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
     }
     .container {
@@ -97,18 +97,18 @@
     .posts-title {
       font-size: 1.1rem;
       color: #1a365d;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       text-align: left;
-      font-weight: 600;
+      font-weight: 700;
     }
     .post-item {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 14px 16px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       text-align: left;
-      transition: border-color 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
     .post-item a {
       color: #1a365d;
@@ -116,13 +116,14 @@
       font-weight: 600;
       font-size: 0.95rem;
       display: block;
+      line-height: 1.4;
     }
     .post-item a:hover {
       color: #2563eb;
     }
     .ad-box {
       width: 100%;
-      margin: 20px 0;
+      margin: 16px 0;
       text-align: center;
     }
   </style>
@@ -146,7 +147,7 @@
       </a>
     </div>
 
-    <!-- Banner AdSense 1 (subito sotto la scheda principale) -->
+    <!-- Banner AdSense Subito Sotto la Card Principale -->
     <div class="ad-box">
       <ins class="adsbygoogle"
            style="display:block"
@@ -160,39 +161,45 @@
     </div>
 
     <div class="posts-title">📰 Ultimi articoli dal blog:</div>
+    
+    <!-- Contenitore Articoli Dinamici con AdSense In-Feed -->
     <div id="latest-posts">
       <p style="color: #64748b; font-size: 0.9rem;">Caricamento ultimi articoli...</p>
-    </div>
-
-    <!-- Banner AdSense 2 (in fondo alla pagina) -->
-    <div class="ad-box">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-9225028785900171"
-           data-ad-slot="1234567890"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
     </div>
   </main>
 
   <script>
-    // Recupera in automatico gli ultimi 4 articoli dal feed di Blogger
-    fetch('https://www.brunorachiele.it/feeds/posts/default?alt=json&max-results=4')
+    // Recupera in automatico gli ultimi 5 articoli dal feed di Blogger
+    fetch('https://www.brunorachiele.it/feeds/posts/default?alt=json&max-results=5')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('latest-posts');
         if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
           let html = '';
-          data.feed.entry.forEach(entry => {
+          data.feed.entry.forEach((entry, index) => {
             const title = entry.title.$t;
             const alternateLink = entry.link.find(l => l.rel === 'alternate');
+            
             if (alternateLink && alternateLink.href) {
               html += `
                 <div class="post-item">
                   <a href="${alternateLink.href}">${title}</a>
+                </div>
+              `;
+            }
+
+            // Inserisce un banner pubblicitario IN-FEED dopo il secondo articolo
+            if (index === 1) {
+              html += `
+                <div class="ad-box">
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-client="ca-pub-9225028785900171"
+                       data-ad-slot="1234567890"
+                       data-ad-format="fluid"
+                       data-ad-layout-key="-fb+5w+4e-db+86"
+                       data-full-width-responsive="true"></ins>
+                  <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
                 </div>
               `;
             }
