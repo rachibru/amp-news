@@ -9,49 +9,58 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout repository with full history
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Mantiene la cronologia git per leggere le vere date dei file
 
-      - name: Scan HTML files and generate Sitemap XML
+      - name: Scan HTML files and generate Sitemap XML with real file dates
         run: |
           python3 -c "
           import os
+          import subprocess
           from datetime import datetime
 
           base_url = 'https://amp.brunorachiele.it/'
-          today = datetime.now().strftime('%Y-%m-%d')
-          urls = []
+          urls_data = []
 
-          # Scansione di tutti i file .html presenti nel repository
           for root, dirs, files in os.walk('.'):
-              # Ignora cartelle nascoste come .git o .github
               if '.git' in root or '.github' in root:
                   continue
               for file in files:
                   if file.endswith('.html') and file != '404.html':
-                      rel_path = os.path.relpath(os.path.join(root, file), '.')
-                      # Normalizza i separatori di percorso per le URL web
+                      file_path = os.path.join(root, file)
+                      rel_path = os.path.relpath(file_path, '.')
                       web_path = rel_path.replace('\\\\', '/')
                       if web_path.startswith('./'):
                           web_path = web_path[2:]
                       
-                      urls.append(base_url + web_path)
+                      # Ottiene la data dell'ultimo commit Git per questo file specifico
+                      try:
+                          git_date = subprocess.check_output(
+                              ['git', 'log', '-1', '--format=%cd', '--date=short', file_path]
+                          ).decode('utf-8').strip()
+                          if not git_date:
+                              git_date = datetime.now().strftime('%Y-%m-%d')
+                      except Exception:
+                          git_date = datetime.now().strftime('%Y-%m-%d')
 
-          # Ordina gli URL per pulizia
-          urls.sort()
+                      urls_data.append((base_url + web_path, git_date))
+
+          urls_data.sort(key=lambda x: x[0])
 
           sitemap_content = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
           sitemap_content += '<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n'
 
-          for url in urls:
-              sitemap_content += f'  <url>\n    <loc>{url}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+          for url, lastmod in urls_data:
+              sitemap_content += f'  <url>\n    <loc>{url}</loc>\n    <lastmod>{lastmod}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
 
           sitemap_content += '</urlset>'
 
           with open('sitemap.xml', 'w', encoding='utf-8') as f:
               f.write(sitemap_content)
 
-          print(f'Sitemap generata con {len(urls)} pagine trovate!')
+          print(f'Sitemap generata con successo per {len(urls_data)} pagine!')
           "
 
       - name: Commit and Push Sitemap
@@ -59,5 +68,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "Auto-update sitemap with all repo HTML pages [skip ci]" || exit 0
+          git commit -m "Auto-update sitemap with accurate file modification dates [skip ci]" || exit 0
           git push
