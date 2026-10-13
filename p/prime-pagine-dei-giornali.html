@@ -6,18 +6,12 @@
   <link rel="canonical" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="robots" content="index, follow">
-  <meta name="description" content="Edizione digitale rapida AMP con l'analisi delle prime pagine dei quotidiani italiani di oggi. Rassegna stampa aggiornata ogni mattina.">
+  <meta name="description" content="Edizione digitale rapida AMP con l'analisi delle prime pagine e la rassegna stampa dei quotidiani italiani di oggi.">
 
-  <!-- Reindirizzamento Istantaneo (Fallback Meta HTML per massima velocità) -->
-  <meta http-equiv="refresh" content="0;url=https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html">
-
-  <!-- Script Obbligatori Core AMP -->
+  <!-- Script Core AMP -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
-
-  <!-- Script per Google Analytics su AMP -->
+  <!-- Analytics & Ads AMP -->
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-
-  <!-- Script per Google Ads / AdSense su AMP -->
   <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
   <!-- Boilerplate CSS AMP Obbligatorio -->
@@ -30,73 +24,64 @@
       color: #1e293b;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
     }
-    .amp-card {
-      background: #ffffff;
-      max-width: 480px;
-      width: 90%;
-      margin: 20px auto;
-      padding: 32px 24px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    .header {
+      background: #1a365d;
+      color: #ffffff;
+      padding: 24px 16px;
       text-align: center;
-      border: 1px solid #e2e8f0;
-      box-sizing: border-box;
     }
-    h1 {
-      font-size: 1.4rem;
-      color: #1a365d;
-      margin-bottom: 12px;
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
     }
-    p {
-      font-size: 0.95rem;
-      color: #64748b;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-    .btn-redirect {
+    .date-badge {
       display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .container {
+      max-width: 680px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+    .btn-main {
+      display: block;
+      width: 100%;
+      text-align: center;
       background-color: #1a365d;
       color: #ffffff;
-      padding: 12px 24px;
+      padding: 14px 0;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      margin: 16px 0;
+      box-sizing: border-box;
     }
-    .loader {
-      width: 36px;
-      height: 36px;
-      margin: 0 auto 18px;
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid #1a365d;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .article-content {
+      line-height: 1.6;
+      font-size: 0.98rem;
     }
     .ad-container {
-      width: 100%;
-      max-width: 480px;
-      margin: 10px auto 20px;
+      margin: 20px 0;
       text-align: center;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
   </style>
 
-  <!-- Script di Reindirizzamento JavaScript Immediato -->
-  <script>
-    window.location.replace("https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html");
-  </script>
-
-  <!-- Dati Strutturati Schema.org per Google News -->
-  <script type="application/ld+json">
+  <!-- Schema.org NewsArticle Dinamico per Google Search Console -->
+  <script type="application/ld+json" id="schema-json">
   {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -104,8 +89,8 @@
       "@type": "WebPage",
       "@id": "https://amp.brunorachiele.it/prime-pagine-dei-giornali.html"
     },
-    "headline": "Prime Pagine dei Giornali di Oggi - Rassegna Stampa AMP",
-    "description": "Edizione digitale rapida AMP con l'analisi delle prime pagine dei quotidiani italiani di oggi.",
+    "headline": "Prime Pagine dei Giornali e Rassegna Stampa di Oggi",
+    "description": "Analisi aggiornata delle prime pagine dei quotidiani italiani di oggi.",
     "author": {
       "@type": "Person",
       "name": "Bruno Rachiele",
@@ -113,7 +98,7 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Bruno Rachiele",
+      "name": "brunorachiele.it",
       "url": "https://brunorachiele.it"
     }
   }
@@ -121,7 +106,7 @@
 </head>
 <body>
 
-  <!-- Configurazione Google Analytics 4 (GA4) -->
+  <!-- Google Analytics 4 (GA4) -->
   <amp-analytics type="googleanalytics" id="analytics1">
     <script type="application/json">
     {
@@ -135,28 +120,79 @@
     </script>
   </amp-analytics>
 
-  <!-- Scheda Principale -->
-  <div class="amp-card">
-    <div class="loader"></div>
+  <header class="header">
     <h1>📰 Prime Pagine dei Giornali</h1>
-    <p>Reindirizzamento in corso verso la rassegna stampa...</p>
-    
-    <a id="target-link" href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" class="btn-redirect">
-      Apri la Rassegna Stampa
-    </a>
-  </div>
+    <div class="date-badge" id="current-date-badge">Edizione di Oggi</div>
+  </header>
 
-  <!-- Unità Pubblicitaria Google AdSense AMP -->
-  <div class="ad-container">
-    <amp-ad width="100vw" height="320"
-      type="adsense"
-      data-ad-client="ca-pub-9225028785900171"
-      data-ad-slot="1234567890"
-      data-auto-format="mrec"
-      data-full-width="">
-      <div overflow=""></div>
-    </amp-ad>
-  </div>
+  <main class="container">
+
+    <!-- Card Link Diretto alle Prime Pagine -->
+    <div class="card">
+      <h2 style="margin-top:0; font-size:1.2rem; color:#1a365d;">Rassegna Stampa &amp; Prime Pagine</h2>
+      <p style="color:#64748b; font-size:0.9rem;">Accedi direttamente alla versione completa delle prime pagine e degli approfondimenti:</p>
+      
+      <a href="https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html" class="btn-main">
+        📌 Apri la Pagina Ufficiale delle Prime Pagine
+      </a>
+    </div>
+
+    <!-- Contenitore dell'Ultimo Articolo caricato dal Feed -->
+    <div class="card">
+      <div id="latest-post-content" class="article-content">
+        <p style="text-align:center; color:#64748b;">Caricamento della rassegna stampa in corso...</p>
+      </div>
+    </div>
+
+    <!-- Banner AdSense AMP -->
+    <div class="ad-container">
+      <amp-ad width="100vw" height="320"
+        type="adsense"
+        data-ad-client="ca-pub-9225028785900171"
+        data-ad-slot="1234567890"
+        data-auto-format="mrec"
+        data-full-width="">
+        <div overflow=""></div>
+      </amp-ad>
+    </div>
+
+  </main>
+
+  <!-- Script Integrato per Data Dinamica e Importazione Contenuto Ultima Rassegna senza Redirect -->
+  <script>
+    (function() {
+      // 1. Formattazione e aggiornamento della data odierna
+      var today = new Date();
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var formattedDate = today.toLocaleDateString('it-IT', options);
+      formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+      
+      var badgeElem = document.getElementById('current-date-badge');
+      if (badgeElem) {
+        badgeElem.innerText = formattedDate;
+      }
+
+      // 2. Recupero dinamico dell'ultimo articolo da Blogger senza redirect
+      var feedUrl = 'https://www.brunorachiele.it/feeds/posts/default/-/%22Rassegna%20Stampa%22?alt=json&max-results=1';
+      fetch(feedUrl)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.feed && data.feed.entry && data.feed.entry.length > 0) {
+            var entry = data.feed.entry[0];
+            var title = entry.title.$t;
+            var content = entry.content ? entry.content.$t : (entry.summary ? entry.summary.$t : '');
+            
+            var container = document.getElementById('latest-post-content');
+            if (container) {
+              container.innerHTML = '<h2 style="color:#1a365d; margin-top:0;">' + title + '</h2>' + content;
+            }
+          }
+        })
+        .catch(function(err) {
+          console.error('Errore nel recupero del feed:', err);
+        });
+    })();
+  </script>
 
 </body>
 </html>
