@@ -127,6 +127,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://amp.brunorachiele.it/2026/10/rassegna-stampa-centrodestra-oltre-il.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://amp.brunorachiele.it/2026/10/rassegna-stampa-del-10-ottobre-2026-il.html</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>daily</changefreq>
@@ -165,6 +171,12 @@
   <url>
     <loc>https://amp.brunorachiele.it/2026/10/rassegna-stampa-del-15-ottobre-2026.html</loc>
     <lastmod>2026-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://amp.brunorachiele.it/2026/10/rassegna-stampa-del-17-ottobre-2026.html</loc>
+    <lastmod>2026-10-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
