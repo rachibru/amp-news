@@ -2,9 +2,9 @@ name: Generate AMP Pages Automatically
 
 on:
   schedule:
-    # Controlla automaticamente ogni 3 ore se ci sono nuovi post su Blogger
-    - cron: '0 */3 * * *'
-  workflow_dispatch: # Ti permette di avviarlo a mano con un click se vuoi
+    # Controlla automaticamente ogni 5 minuti se ci sono nuovi post su Blogger
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # Permette l'avvio manuale su GitHub
 
 jobs:
   build:
@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
@@ -32,5 +32,5 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add .
-        git diff-index --quiet HEAD || git commit -m "Aggiornamento automatico pagine AMP"
+        git diff-index --quiet HEAD || git commit -m "Aggiornamento automatico pagine AMP [skip ci]"
         git push
