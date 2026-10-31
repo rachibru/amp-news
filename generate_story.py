@@ -1,10 +1,11 @@
 import os
 import re
+import json
 import shutil
 import datetime
 import feedparser
 
-# Feed RSS di Blogger configurato per estrarre fino a 500 post
+# Feed RSS di Blogger per estrarre tutti i post
 FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss&max-results=500"
 
 # Mappa delle immagini di sfondo statiche
@@ -28,28 +29,22 @@ def get_bg_and_tag(title):
     elif "prima pagina" in t_lower or "prime pagine" in t_lower:
         return BG_MAP["primepagine"], "Prime Pagine"
     else:
+        # Immagine di default per tutti gli altri argomenti
         return BG_MAP["generico"], "Notizie"
 
 def generate_web_stories():
-    # ----------------------------------------------------
-    # 0. ELIMINA TUTTE LE STORIE VECCHIE E RICREA LA CARTELLA DA ZERO
-    # ----------------------------------------------------
+    # 0. Pulizia completa: elimina la cartella e riparte da zero
     if os.path.exists("stories"):
         shutil.rmtree("stories")
-        print("Cartella 'stories' eliminata con successo.")
-    
     os.makedirs("stories", exist_ok=True)
-    print("Cartella 'stories' ricreata da zero.")
 
-    # Caricamento del template HTML
     with open("story_template.html", "r", encoding="utf-8") as f:
         template = f.read()
 
     date_str = datetime.datetime.now().strftime("%d %B %Y")
+    stories_list = []
 
-    # ----------------------------------------------------
-    # 1. GENERAZIONE AUTOMATICA PER LE PRIME PAGINE (Pagina Statica)
-    # ----------------------------------------------------
+    # 1. Storia fissa Prime Pagine
     title_pp = "Prime Pagine dei Giornali di Oggi"
     link_pp = "https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html"
     bg_pp = BG_MAP["primepagine"]
@@ -63,19 +58,23 @@ def generate_web_stories():
     output_pp = "stories/prime-pagine-dei-giornali.html"
     with open(output_pp, "w", encoding="utf-8") as f:
         f.write(story_pp_html)
-    print(f"Generata Web Story Statica: {output_pp}")
 
-    # ----------------------------------------------------
-    # 2. GENERAZIONE NUOVE STORIE DA FEED RSS
-    # ----------------------------------------------------
+    stories_list.append({
+        "title": title_pp,
+        "url": "https://amp.brunorachiele.it/stories/prime-pagine-dei-giornali.html",
+        "image": bg_pp,
+        "tag": "Prime Pagine"
+    })
+
+    # 2. Generazione storie dinamiche da feed RSS
     feed = feedparser.parse(FEED_URL)
     if feed.entries:
-        print(f"Trovati {len(feed.entries)} post nel feed. Generazione storie in corso...")
         for entry in feed.entries:
             title = entry.title
             link = entry.link
             slug = clean_slug(title)
             
+            # Se la categoria non matcha, assegna la foto generica
             bg_url, tag_label = get_bg_and_tag(title)
             
             story_html = template.replace("{{TITOLO_POST}}", title)\
@@ -84,10 +83,21 @@ def generate_web_stories():
                                  .replace("{{CATEGORIA_TAG}}", tag_label)\
                                  .replace("{{IMMAGINE_BG}}", bg_url)
 
-            output_path = f"stories/{slug}.html"
+            story_file = f"{slug}.html"
+            output_path = f"stories/{story_file}"
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write(story_html)
-            print(f"Generata Web Story: {output_path}")
+
+            stories_list.append({
+                "title": title,
+                "url": f"https://amp.brunorachiele.it/stories/{story_file}",
+                "image": bg_url,
+                "tag": tag_label
+            })
+
+    # 3. Creazione del feed JSON per il widget
+    with open("stories/feed.json", "w", encoding="utf-8") as f:
+        json.dump(stories_list, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
     generate_web_stories()
