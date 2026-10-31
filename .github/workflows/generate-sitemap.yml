@@ -2,7 +2,7 @@ name: Generate AMP Sitemap
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '*/5 * * * *' # Esegue ogni 5 minuti
   workflow_dispatch:
 
 jobs:
@@ -12,30 +12,47 @@ jobs:
       - name: Checkout repository with full history
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Mantiene la cronologia git per leggere le vere date dei file
+          fetch-depth: 0
 
-      - name: Scan HTML files and generate Sitemap XML with real file dates
+      - name: Install BeautifulSoup4
+        run: pip install beautifulsoup4
+
+      - name: Scan HTML files and generate Sitemap XML with Canonical & Real Dates
         run: |
           python3 -c "
           import os
+          import re
           import subprocess
           from datetime import datetime
+          from bs4 import BeautifulSoup
 
           base_url = 'https://amp.brunorachiele.it/'
+          ignored_files = {'404.html', 'template.html', 'story_template.html'}
           urls_data = []
 
           for root, dirs, files in os.walk('.'):
-              if '.git' in root or '.github' in root:
+              if '.git' in root or '.github' in root or 'assets' in root:
                   continue
               for file in files:
-                  if file.endswith('.html') and file != '404.html':
+                  if file.endswith('.html') and file not in ignored_files:
                       file_path = os.path.join(root, file)
                       rel_path = os.path.relpath(file_path, '.')
                       web_path = rel_path.replace('\\\\', '/')
                       if web_path.startswith('./'):
                           web_path = web_path[2:]
+
+                      amp_url = base_url + web_path
                       
-                      # Ottiene la data dell'ultimo commit Git per questo file specifico
+                      canonical_url = ''
+                      try:
+                          with open(file_path, 'r', encoding='utf-8') as f:
+                              soup = BeautifulSoup(f.read(), 'html.parser')
+                              can_tag = soup.find('link', rel=lambda x: x and 'canonical' in x.lower())
+                              if can_tag and can_tag.get('href'):
+                                  canonical_url = can_tag['href']
+                      except Exception:
+                          pass
+
                       try:
                           git_date = subprocess.check_output(
                               ['git', 'log', '-1', '--format=%cd', '--date=short', file_path]
@@ -45,22 +62,31 @@ jobs:
                       except Exception:
                           git_date = datetime.now().strftime('%Y-%m-%d')
 
-                      urls_data.append((base_url + web_path, git_date))
+                      priority = '0.8'
+                      if 'stories/' in web_path:
+                          priority = '0.9'
+
+                      urls_data.append((amp_url, git_date, priority, canonical_url))
 
           urls_data.sort(key=lambda x: x[0])
 
           sitemap_content = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'
           sitemap_content += '<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n'
 
-          for url, lastmod in urls_data:
-              sitemap_content += f'  <url>\n    <loc>{url}</loc>\n    <lastmod>{lastmod}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n'
+          for url, lastmod, priority, canonical in urls_data:
+              sitemap_content += '  <url>\n'
+              sitemap_content += f'    <loc>{url}</loc>\n'
+              sitemap_content += f'    <lastmod>{lastmod}</lastmod>\n'
+              sitemap_content += '    <changefreq>daily</changefreq>\n'
+              sitemap_content += f'    <priority>{priority}</priority>\n'
+              sitemap_content += '  </url>\n'
 
           sitemap_content += '</urlset>'
 
           with open('sitemap.xml', 'w', encoding='utf-8') as f:
               f.write(sitemap_content)
 
-          print(f'Sitemap generata con successo per {len(urls_data)} pagine!')
+          print(f'Sitemap AMP creata con successo per {len(urls_data)} URL!')
           "
 
       - name: Commit and Push Sitemap
@@ -68,5 +94,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sitemap.xml
-          git commit -m "Auto-update sitemap with accurate file modification dates [skip ci]" || exit 0
+          git commit -m "Auto-update sitemap with AMP & Web Stories pages [skip ci]" || exit 0
           git push
