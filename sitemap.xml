@@ -2,7 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://amp.brunorachiele.it/2026/02/dalle-urne-ai-numeri-del-25-febbraio.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://amp.brunorachiele.it/2026/02/gradimento-dei-leader-supermedia-del-23-febbraio-2026.html</loc>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -14,7 +20,7 @@
   </url>
   <url>
     <loc>https://amp.brunorachiele.it/2026/02/ultimi-30-giorni-politici-del-27-febbraio-2026.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -189,6 +195,12 @@
   <url>
     <loc>https://amp.brunorachiele.it/2026/10/meloni-sfonda-il-29-ma-il-campo-largo_0511896138.html</loc>
     <lastmod>2026-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://amp.brunorachiele.it/2026/10/meloni-sopra-il-29-insidiata-dal-campo.html</loc>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
