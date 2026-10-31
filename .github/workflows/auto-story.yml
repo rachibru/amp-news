@@ -2,8 +2,8 @@ name: Auto Generate and Deploy Web Stories
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Esegue ogni 5 minuti
-  workflow_dispatch: # Permette l'avvio manuale su GitHub
+    - cron: '*/5 * * * *' # Si esegue ogni 5 minuti
+  workflow_dispatch: # Permette l'avvio manuale da GitHub Actions
 
 jobs:
   build-and-deploy:
@@ -27,6 +27,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add stories/
+          git add -A stories/
           git commit -m "Auto-generate Web Stories [skip ci]" || exit 0
           git push
