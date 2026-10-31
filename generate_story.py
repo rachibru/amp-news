@@ -1,19 +1,18 @@
 import os
 import re
 import datetime
-import urllib.parse
 import feedparser
 
-# Configurazione URL ed Etichette Sfondi Statici
+# Feed RSS di Blogger
 FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
-BASE_ASSETS = "https://amp.brunorachiele.it/assets/"
 
+# Mappa dei tuoi link statici per le immagini di sfondo
 BG_MAP = {
-    "sondaggi": BASE_ASSETS + "bg-sondaggi.jpg",
-    "rassegna": BASE_ASSETS + "bg-rassegna.jpg",
-    "prima pagina": BASE_ASSETS + "bg-primepagine.jpg",
-    "prime pagine": BASE_ASSETS + "bg-primepagine.jpg",
-    "generico": BASE_ASSETS + "bg-generico.jpg"
+    "sondaggi": "https://TUO_LINK_STATICO/bg-sondaggi.jpg",
+    "rassegna": "https://TUO_LINK_STATICO/bg-rassegna.jpg",
+    "prima pagina": "https://TUO_LINK_STATICO/bg-primepagine.jpg",
+    "prime pagine": "https://TUO_LINK_STATICO/bg-primepagine.jpg",
+    "generico": "https://TUO_LINK_STATICO/bg-generico.jpg"
 }
 
 def clean_slug(title):
@@ -27,22 +26,23 @@ def get_bg_and_tag(title):
     elif "rassegna" in t_lower:
         return BG_MAP["rassegna"], "Rassegna Stampa"
     elif "prima pagina" in t_lower or "prime pagine" in t_lower:
-        return BG_MAP["prime pagina"], "Prime Pagine"
+        return BG_MAP["prima pagina"], "Prime Pagine"
     else:
         return BG_MAP["generico"], "Notizie"
 
 def generate_web_stories():
     feed = feedparser.parse(FEED_URL)
     if not feed.entries:
-        print("Nessun articolo trovato nel feed.")
+        print("Nessun articolo trovato nel feed RSS.")
         return
 
+    # Legge il template dalla radice del repository
     with open("story_template.html", "r", encoding="utf-8") as f:
         template = f.read()
 
     os.makedirs("stories", exist_ok=True)
 
-    for entry in feed.entries[:5]: # Elabora gli ultimi 5 articoli
+    for entry in feed.entries[:5]: # Prende gli ultimi 5 articoli
         title = entry.title
         link = entry.link
         date_str = datetime.datetime.now().strftime("%d %B %Y")
