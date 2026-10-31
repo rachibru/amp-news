@@ -1,10 +1,11 @@
 import os
 import re
+import shutil
 import datetime
 import feedparser
 
-# Feed RSS di Blogger per i post standard
-FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
+# Feed RSS di Blogger configurato per estrarre fino a 500 post
+FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss&max-results=500"
 
 # Mappa delle immagini di sfondo statiche
 BG_MAP = {
@@ -30,11 +31,20 @@ def get_bg_and_tag(title):
         return BG_MAP["generico"], "Notizie"
 
 def generate_web_stories():
+    # ----------------------------------------------------
+    # 0. ELIMINA TUTTE LE STORIE VECCHIE E RICREA LA CARTELLA DA ZERO
+    # ----------------------------------------------------
+    if os.path.exists("stories"):
+        shutil.rmtree("stories")
+        print("Cartella 'stories' eliminata con successo.")
+    
+    os.makedirs("stories", exist_ok=True)
+    print("Cartella 'stories' ricreata da zero.")
+
     # Caricamento del template HTML
     with open("story_template.html", "r", encoding="utf-8") as f:
         template = f.read()
 
-    os.makedirs("stories", exist_ok=True)
     date_str = datetime.datetime.now().strftime("%d %B %Y")
 
     # ----------------------------------------------------
@@ -56,11 +66,12 @@ def generate_web_stories():
     print(f"Generata Web Story Statica: {output_pp}")
 
     # ----------------------------------------------------
-    # 2. GENERAZIONE DA FEED RSS PER I POST NORMALI (Ultimi 10 post)
+    # 2. GENERAZIONE NUOVE STORIE DA FEED RSS
     # ----------------------------------------------------
     feed = feedparser.parse(FEED_URL)
     if feed.entries:
-        for entry in feed.entries[:10]:
+        print(f"Trovati {len(feed.entries)} post nel feed. Generazione storie in corso...")
+        for entry in feed.entries:
             title = entry.title
             link = entry.link
             slug = clean_slug(title)
@@ -76,7 +87,7 @@ def generate_web_stories():
             output_path = f"stories/{slug}.html"
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write(story_html)
-            print(f"Generata/Aggiornata Web Story: {output_path}")
+            print(f"Generata Web Story: {output_path}")
 
 if __name__ == "__main__":
     generate_web_stories()
