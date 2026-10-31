@@ -56,11 +56,11 @@ def generate_web_stories():
     print(f"Generata Web Story Statica: {output_pp}")
 
     # ----------------------------------------------------
-    # 2. GENERAZIONE DA FEED RSS PER I POST NORMALI
+    # 2. GENERAZIONE DA FEED RSS PER I POST NORMALI (Ultimi 10 post)
     # ----------------------------------------------------
     feed = feedparser.parse(FEED_URL)
     if feed.entries:
-        for entry in feed.entries[:5]:
+        for entry in feed.entries[:10]:
             title = entry.title
             link = entry.link
             slug = clean_slug(title)
@@ -76,7 +76,7 @@ def generate_web_stories():
             output_path = f"stories/{slug}.html"
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write(story_html)
-            print(f"Generata Web Story: {output_path}")
+            print(f"Generata/Aggiornata Web Story: {output_path}")
 
 if __name__ == "__main__":
     generate_web_stories()
