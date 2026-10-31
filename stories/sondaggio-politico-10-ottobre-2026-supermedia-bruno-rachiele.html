@@ -6,9 +6,11 @@
     <link rel="canonical" href="https://www.brunorachiele.it/2026/10/sondaggio-politico-10-ottobre-2026-supermedia.html">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     
+    <!-- Script obbligatori AMP Web Story -->
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
 
+    <!-- Google Font e Stili Personalizzati -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
     <style amp-custom>
       amp-story {
@@ -18,15 +20,27 @@
       .bg-overlay {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+        background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%);
       }
       .container {
-        padding: 30px 20px;
+        padding: 40px 20px 30px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Logo in alto, contenuto in basso */
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .logo-box {
+        align-self: flex-start;
+      }
+      .logo-box amp-img {
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      }
+      .content-box {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        height: 100%;
-        box-sizing: border-box;
       }
       .tag {
         background-color: #e63946;
@@ -45,7 +59,7 @@
         line-height: 1.3;
         margin: 0 0 10px 0;
         font-weight: 800;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        text-shadow: 0 2px 4px rgba(0,0,0,0.6);
       }
       p {
         font-size: 15px;
@@ -55,7 +69,7 @@
       }
       .date {
         font-size: 12px;
-        opacity: 0.7;
+        opacity: 0.75;
       }
     </style>
   </head>
@@ -63,39 +77,56 @@
     <amp-story 
       standalone
       title="Sondaggio Politico 10 ottobre 2026 – Supermedia Bruno Rachiele"
-      publisher="Bruno Rachiele"
+      publisher="brunorachiele.it"
       publisher-logo-src="https://www.brunorachiele.it/favicon.ico"
-      poster-portrait-src="https://TUO_LINK_STATICO/bg-sondaggi.jpg">
+      poster-portrait-src="https://static.brunorachiele.it/st-sondaggi.png">
 
       <!-- SLIDE 1: COPERTINA -->
       <amp-story-page id="page1">
         <amp-story-grid-layer template="fill">
-          <amp-img src="https://TUO_LINK_STATICO/bg-sondaggi.jpg" width="720" height="1280" layout="responsive" alt="Copertina"></amp-img>
+          <amp-img src="https://static.brunorachiele.it/st-sondaggi.png" width="720" height="1280" layout="responsive" alt="Copertina"></amp-img>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical">
           <div class="bg-overlay"></div>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical" class="container">
-          <span class="tag">Sondaggi</span>
-          <h1>Sondaggio Politico 10 ottobre 2026 – Supermedia Bruno Rachiele</h1>
-          <span class="date">31 October 2026</span>
+          <!-- Logo Quadrato del Sito in Alto -->
+          <div class="logo-box">
+            <amp-img src="https://static.brunorachiele.it/logo.png" width="44" height="44" layout="fixed" alt="Logo Bruno Rachiele"></amp-img>
+          </div>
+          
+          <!-- Testo e Tag in Basso -->
+          <div class="content-box">
+            <span class="tag">Sondaggi</span>
+            <h1>Sondaggio Politico 10 ottobre 2026 – Supermedia Bruno Rachiele</h1>
+            <span class="date">31 October 2026</span>
+          </div>
         </amp-story-grid-layer>
       </amp-story-page>
 
       <!-- SLIDE 2: CALL TO ACTION (SWIPE-UP) -->
       <amp-story-page id="page2">
         <amp-story-grid-layer template="fill">
-          <amp-img src="https://TUO_LINK_STATICO/bg-sondaggi.jpg" width="720" height="1280" layout="responsive" alt="Sfondo Finale"></amp-img>
+          <amp-img src="https://static.brunorachiele.it/st-sondaggi.png" width="720" height="1280" layout="responsive" alt="Sfondo Finale"></amp-img>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical">
           <div class="bg-overlay"></div>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical" class="container">
-          <span class="tag">Leggi Tutto</span>
-          <h1>Scopri la notizia completa sul blog</h1>
-          <p>Scorri verso l'alto per leggere l'articolo integrale su brunorachiele.it</p>
+          <!-- Logo Quadrato in Alto -->
+          <div class="logo-box">
+            <amp-img src="https://www.brunorachiele.it/favicon.ico" width="44" height="44" layout="fixed" alt="Logo Bruno Rachiele"></amp-img>
+          </div>
+          
+          <!-- Call To Action in Basso -->
+          <div class="content-box">
+            <span class="tag">Leggi Tutto</span>
+            <h1>Scopri la notizia completa sul blog</h1>
+            <p>Scorri verso l'alto per leggere l'articolo integrale su brunorachiele.it</p>
+          </div>
         </amp-story-grid-layer>
         
+        <!-- Pulsante di reindirizzamento (Swipe-Up) -->
         <amp-story-page-outlink layout="nodisplay">
           <a href="https://www.brunorachiele.it/2026/10/sondaggio-politico-10-ottobre-2026-supermedia.html">Leggi l'articolo completo</a>
         </amp-story-page-outlink>
