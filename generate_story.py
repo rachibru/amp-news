@@ -8,11 +8,10 @@ FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
 
 # Mappa delle immagini di sfondo statiche
 BG_MAP = {
-    "sondaggi": "https://amp.brunorachiele.it/assets/bg-sondaggi.jpg",
-    "rassegna": "https://amp.brunorachiele.it/assets/bg-rassegna.jpg",
-    "prima pagina": "https://amp.brunorachiele.it/assets/bg-primepagine.jpg",
-    "prime pagine": "https://amp.brunorachiele.it/assets/bg-primepagine.jpg",
-    "generico": "https://amp.brunorachiele.it/assets/bg-generico.jpg"
+    "sondaggi": "https://static.brunorachiele.it/st-sondaggi.png",
+    "rassegna": "https://static.brunorachiele.it/st-rassegna.png",
+    "primepagine": "https://static.brunorachiele.it/st-primepagine.png",
+    "generico": "https://static.brunorachiele.it/st-generico.png"
 }
 
 def clean_slug(title):
@@ -26,7 +25,7 @@ def get_bg_and_tag(title):
     elif "rassegna" in t_lower:
         return BG_MAP["rassegna"], "Rassegna Stampa"
     elif "prima pagina" in t_lower or "prime pagine" in t_lower:
-        return BG_MAP["prima pagina"], "Prime Pagine"
+        return BG_MAP["primepagine"], "Prime Pagine"
     else:
         return BG_MAP["generico"], "Notizie"
 
@@ -43,7 +42,7 @@ def generate_web_stories():
     # ----------------------------------------------------
     title_pp = "Prime Pagine dei Giornali di Oggi"
     link_pp = "https://www.brunorachiele.it/p/prime-pagine-dei-giornali.html"
-    bg_pp = BG_MAP["prime pagina"]
+    bg_pp = BG_MAP["primepagine"]
 
     story_pp_html = template.replace("{{TITOLO_POST}}", title_pp)\
                             .replace("{{LINK_POST}}", link_pp)\
