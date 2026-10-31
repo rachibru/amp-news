@@ -8,11 +8,11 @@ FEED_URL = "https://www.brunorachiele.it/feeds/posts/default?alt=rss"
 
 # Mappa dei tuoi link statici per le immagini di sfondo
 BG_MAP = {
-    "sondaggi": "https://TUO_LINK_STATICO/bg-sondaggi.jpg",
-    "rassegna": "https://TUO_LINK_STATICO/bg-rassegna.jpg",
-    "prima pagina": "https://TUO_LINK_STATICO/bg-primepagine.jpg",
-    "prime pagine": "https://TUO_LINK_STATICO/bg-primepagine.jpg",
-    "generico": "https://TUO_LINK_STATICO/bg-generico.jpg"
+    "sondaggi": "https://static.brunorachiele.it/st-sondaggi.png",
+    "rassegna": "https://static.brunorachiele.it/st-rassegna.png",
+    "prima pagina": "https://static.brunorachiele.it/st-primepagine.png",
+    "prime pagine": "https://static.brunorachiele.it/st-primepagine.png",
+    "generico": "https://static.brunorachiele.it/st-generico.jpg"
 }
 
 def clean_slug(title):
