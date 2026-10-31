@@ -1,0 +1,32 @@
+name: Auto Generate and Deploy Web Stories
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Si esegue ogni 2 ore
+  workflow_dispatch: # Permette l'avvio manuale su GitHub
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configura Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Installa dipendenze
+        run: pip install feedparser
+
+      - name: Esegui generazione Web Stories
+        run: python generate_story.py
+
+      - name: Push delle modifiche su GitHub Pages
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add stories/
+          git commit -m "Auto-generate Web Stories" || exit 0
+          git push
